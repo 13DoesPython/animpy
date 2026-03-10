@@ -1,6 +1,6 @@
 Animpy is a simple animation library for creating cool terminal animations. It gives you everything you need to make text-based animations with colors, movement, and frame-by-frame control. Perfect for CLI projects, games, or just having fun in the terminal!
 
-![particlesim.py](particlesim.gif)
+![particlesim.py](https://github.com/13DoesPython/animpy/blob/main/particlesim.gif)
 
 The particle simulator shown above was made entirely with Animpy.
 
@@ -161,6 +161,8 @@ for i in range(20):
     moving_text.change_frame()  # Next frame
     time.sleep(0.2)  # Wait 200ms
 ```
+
+**NOTE THAT SOME FEATURES MIGHT NOT WORK ON BASH TERMINAL, THIS WILL BE FIXED LATER ON**
 
 ## License
 
