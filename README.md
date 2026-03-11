@@ -1,5 +1,10 @@
 # Animpy
 
+![PyPI - Downloads](https://img.shields.io/pypi/dm/animpy?color=blue&label=downloads)
+![Windows](https://img.shields.io/badge/Windows-yes-green?logo=windows)
+![Linux](https://img.shields.io/badge/Linux-yes-green?logo=linux)
+![MacOS](https://img.shields.io/badge/MacOS-yes-green?logo=apple)
+
 Animpy is a simple animation library for creating cool terminal animations. It gives you everything you need to make text-based animations with colors, movement, and frame-by-frame control. Perfect for CLI projects, games, or just having fun in the terminal!
 
 ![particlesim.py](https://github.com/13DoesPython/animpy/blob/main/particlesim.gif)
