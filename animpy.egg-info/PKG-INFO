@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: animpy
-Version: 1.0.4
+Version: 1.1.0
 Summary: A simple terminal animation library
 Author: Samin Riyaz
 License: MIT License
@@ -33,11 +33,19 @@ Description-Content-Type: text/markdown
 License-File: LICENSE
 Dynamic: license-file
 
+# Animpy
+
 Animpy is a simple animation library for creating cool terminal animations. It gives you everything you need to make text-based animations with colors, movement, and frame-by-frame control. Perfect for CLI projects, games, or just having fun in the terminal!
 
 ![particlesim.py](https://github.com/13DoesPython/animpy/blob/main/particlesim.gif)
 
 The particle simulator shown above was made entirely with Animpy.
+
+## What's New in 1.1.0
+
+- **True Color Support** – Use RGB values for millions of color combinations instead of just 16 colors
+- **Centering Methods** – New `centerX()` and `centerY()` methods to easily center text on screen
+- **Dynamic RGB Changes** – Change RGB colors on-the-fly with `change_rgb_values()` method
 
 ## What Can You Do?
 
@@ -120,6 +128,9 @@ text = animpy.Text("Hello", 10, 5)
 
 # Or create animation frames with a list of strings
 animation = animpy.Text(["Frame 1", "Frame 2", "Frame 3"], 10, 5)
+
+# Create text with custom RGB colors (v1.1.0+)
+colored_text = animpy.Text("Colorful!", 10, 5, r=255, g=100, b=50)
 ```
 
 **Methods:**
@@ -134,9 +145,25 @@ animation = animpy.Text(["Frame 1", "Frame 2", "Frame 3"], 10, 5)
   text.moveY(10)  # Move to y=10
   ```
 
+- **`centerX()`** – Center text horizontally on the screen (v1.1.0+)
+  ```python
+  text.centerX()  # Centers text horizontally
+  ```
+
+- **`centerY()`** – Center text vertically on the screen (v1.1.0+)
+  ```python
+  text.centerY()  # Centers text vertically
+  ```
+
 - **`change_frame()`** – Go to the next frame in a frame-by-frame animation (only works if you created it with a list)
   ```python
   animation.change_frame()  # Switch to the next frame
+  ```
+
+- **`change_rgb_values(r, g, b)`** – Change the text color using RGB values (v1.1.0+)
+  ```python
+  text.change_rgb_values(255, 0, 0)  # Change to red
+  text.change_rgb_values(0, 255, 0)  # Change to green
   ```
 
 ### The `Scene` Class
@@ -184,11 +211,15 @@ scene = animpy.Scene()
 frames = ["Moving...", "  Moving...", "    Moving...", "      Moving..."]
 moving_text = animpy.Text(frames, 1, 5)
 
-# Create a title that stays still
-title = animpy.Text(animpy.ANSI['bold'] + animpy.ANSI['cyan'] + "Animation Demo" + animpy.ANSI['reset'], 5, 1)
+# Create a title that stays still (with RGB color - v1.1.0+)
+title = animpy.Text("Animation Demo", 5, 1, r=0, g=255, b=255)
 
-# Add both to the scene
-scene.add(title, moving_text)
+# Create centered text (v1.1.0+)
+centered = animpy.Text("Centered Text", 0, 10, r=255, g=100, b=50)
+centered.centerX()
+
+# Add all to the scene
+scene.add(title, moving_text, centered)
 
 # Animation loop
 for i in range(20):
