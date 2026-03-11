@@ -1,9 +1,9 @@
 [project]
 name = "animpy"
-version = "1.0.3"
+version = "1.0.4"
 description = "A simple terminal animation library"
 authors = [
-  {name = "yourname"}
+  {name = "Samin Riyaz"}
 ]
 readme = "README.md"
 requires-python = ">=3.8"

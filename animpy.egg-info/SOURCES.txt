@@ -1,0 +1,8 @@
+LICENSE
+README.md
+animpy.py
+pyproject.toml
+animpy.egg-info/PKG-INFO
+animpy.egg-info/SOURCES.txt
+animpy.egg-info/dependency_links.txt
+animpy.egg-info/top_level.txt

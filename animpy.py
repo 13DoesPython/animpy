@@ -1,7 +1,8 @@
-import os, sys, time, atexit
+import os, sys, time, atexit, shutil
 
 sys.stdout.write("\033[?25l")
 atexit.register(lambda: (sys.stdout.write("\033[?25h"), sys.stdout.flush()))
+terminal_size = shutil.get_terminal_size()
 
 def addFrame():
     return "\033[2J\033[H"
@@ -65,9 +66,13 @@ sys.stdout.write("\033[?25l")
 atexit.register(lambda: (sys.stdout.write("\033[?25h"), sys.stdout.flush()))
 
 class Text:
-    def __init__(self, text: str | list[str], x: int, y: int) -> None:
+    def __init__(self, text: str | list[str], x: int, y: int, r=255, g=255, b=255) -> None:
         self.x = x
         self.y = y
+
+        self.r = r
+        self.g = g
+        self.b = b
 
         if isinstance(text, list):
             self.text_list = text      # store the list
@@ -83,10 +88,21 @@ class Text:
     def moveY(self, newY: int) -> None:
         self.y = newY
 
+    def centerX(self):
+        self.x = terminal_size.columns // 2
+
+    def centerY(self):
+        self.y = terminal_size.lines // 2
+
     def change_frame(self) -> None:
         if self.text_list:
             self.current_frame = (self.current_frame + 1) % len(self.text_list)
             self.text = self.text_list[self.current_frame]
+
+    def change_rgb_values(self, r, g, b):
+        self.r = r
+        self.g = g
+        self.b = b
 
 class Scene:
     def __init__(self) -> None:
@@ -100,6 +116,10 @@ class Scene:
         buf = []
         buf.append("\033[2J\033[H")
         for item in self.items:
-            buf.append(f"\033[{item.y + 1};{item.x + 1}H{item.text}")
+            color_code = f"\033[38;2;{item.r};{item.g};{item.b}m"
+            reset_code = "\033[0m"
+        
+            colored_text = f"{color_code}{item.text}{reset_code}"
+            buf.append(f"\033[{item.y};{item.x}H{colored_text}")
         sys.stdout.write("".join(buf))
         sys.stdout.flush()
