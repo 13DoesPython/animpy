@@ -1,6 +1,6 @@
 [project]
 name = "animpy"
-version = "1.0.0"
+version = "1.0.3"
 description = "A simple terminal animation library"
 authors = [
   {name = "yourname"}
@@ -12,3 +12,8 @@ license = {file = "LICENSE"}
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://github.com/13DoesPython/animpy"
+Issues = "https://github.com/13DoesPython/animpy/issues"
+Repository = "https://github.com/13DoesPython/animpy.git"
