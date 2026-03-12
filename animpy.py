@@ -104,6 +104,20 @@ class Text:
         self.g = g
         self.b = b
 
+    # Add this to your Text class
+    def type_out(self, full_text, speed=0.1, scene=None):
+        for i in range(len(full_text) + 1):
+            self.text = full_text[:i] # Take the string from start to i
+            if scene:
+                scene.render() # Redraw the scene
+            time.sleep(speed)
+    
+    def fall(self, velocity=1, floor=20):
+        if self.y < floor:
+            self.y += velocity
+        else:
+            self.y = floor
+
 class Scene:
     def __init__(self) -> None:
         self.items = []
@@ -114,12 +128,13 @@ class Scene:
 
     def render(self):
         buf = []
-        buf.append("\033[2J\033[H")
+        buf.append("\033[2J\033[H") 
+        
         for item in self.items:
             color_code = f"\033[38;2;{item.r};{item.g};{item.b}m"
             reset_code = "\033[0m"
-        
-            colored_text = f"{color_code}{item.text}{reset_code}"
-            buf.append(f"\033[{item.y};{item.x}H{colored_text}")
+            # Move cursor to Y, X and print
+            buf.append(f"\033[{item.y+1};{item.x+1}H{color_code}{item.text}{reset_code}")
+            
         sys.stdout.write("".join(buf))
         sys.stdout.flush()
