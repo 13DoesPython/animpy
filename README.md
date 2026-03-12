@@ -6,16 +6,17 @@
 ![MacOS](https://img.shields.io/badge/MacOS-yes-green?logo=apple)
 
 Animpy is a simple animation library for creating cool terminal animations. It gives you everything you need to make text-based animations with colors, movement, and frame-by-frame control. Perfect for CLI projects, games, or just having fun in the terminal!
+**NOTE THAT SOME FEATURES MIGHT NOT WORK ON BASH TERMINAL, THIS WILL BE FIXED LATER ON**
 
 ![particlesim.py](https://github.com/13DoesPython/animpy/blob/main/particlesim.gif)
 
 The particle simulator shown above was made entirely with Animpy.
 
-## What's New in 1.1.0
+## What's New in 1.2
 
-- **True Color Support** – Use RGB values for millions of color combinations instead of just 16 colors
-- **Centering Methods** – New `centerX()` and `centerY()` methods to easily center text on screen
-- **Dynamic RGB Changes** – Change RGB colors on-the-fly with `change_rgb_values()` method
+- **Type Out Effect** – New `type_out()` method for animated text typing effect
+- **Gravity/Fall Effect** – New `fall()` method to create gravity and falling text animations
+- **Improved Render Graphics** – Optimized rendering using buffered output to eliminate ghosting effects and improve animation smoothness; now uses efficient ANSI escape sequences for RGB color rendering
 
 ## What Can You Do?
 
@@ -136,6 +137,16 @@ colored_text = animpy.Text("Colorful!", 10, 5, r=255, g=100, b=50)
   text.change_rgb_values(0, 255, 0)  # Change to green
   ```
 
+- **`type_out(full_text, speed=0.1, scene=None)`** – Create an animated typing effect (v1.2+)
+  ```python
+  text.type_out("Hello World!", speed=0.05, scene=scene)  # Types out text character by character
+  ```
+
+- **`fall(velocity=1, floor=20)`** – Create gravity/falling effect for text (v1.2+)
+  ```python
+  text.fall(velocity=2, floor=10)  # Text falls with velocity until it hits the floor at y=10
+  ```
+
 ### The `Scene` Class
 
 A scene holds all your text elements and renders them to the screen at once.
@@ -168,7 +179,7 @@ scene.render()
 
 ## Full Animation Example
 
-Here's a complete example showing how to create a simple animation:
+Here's a complete example showing how to create animations with the new v1.2 features:
 
 ```python
 import animpy
@@ -177,28 +188,34 @@ import time
 # Create a scene
 scene = animpy.Scene()
 
-# Create animated text (multiple frames)
-frames = ["Moving...", "  Moving...", "    Moving...", "      Moving..."]
+# Create a title with type-out effect (v1.2+)
+title = animpy.Text("", 5, 1, r=0, g=255, b=255)
+scene.add(title)
+
+# Type out the title
+title.type_out("Animation Demo v1.2", speed=0.05, scene=scene)
+
+# Create falling text (v1.2+)
+falling_text = animpy.Text("Falling!", 10, 0, r=255, g=100, b=50)
+scene.add(falling_text)
+
+# Animate falling text
+for i in range(15):
+    falling_text.fall(velocity=1, floor=10)
+    scene.render()
+    time.sleep(0.1)
+
+# Create animated text with frame cycling
+frames = ["Moving...", "  Moving...", "    Moving..."]
 moving_text = animpy.Text(frames, 1, 5)
-
-# Create a title that stays still (with RGB color - v1.1.0+)
-title = animpy.Text("Animation Demo", 5, 1, r=0, g=255, b=255)
-
-# Create centered text (v1.1.0+)
-centered = animpy.Text("Centered Text", 0, 10, r=255, g=100, b=50)
-centered.centerX()
-
-# Add all to the scene
-scene.add(title, moving_text, centered)
+scene.add(moving_text)
 
 # Animation loop
 for i in range(20):
     scene.render()
-    moving_text.change_frame()  # Next frame
-    time.sleep(0.2)  # Wait 200ms
+    moving_text.change_frame()
+    time.sleep(0.2)
 ```
-
-**NOTE THAT SOME FEATURES MIGHT NOT WORK ON BASH TERMINAL, THIS WILL BE FIXED LATER ON**
 
 ## License
 
