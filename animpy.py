@@ -3,6 +3,7 @@ import os, sys, time, atexit, shutil
 sys.stdout.write("\033[?25l")
 atexit.register(lambda: (sys.stdout.write("\033[?25h"), sys.stdout.flush()))
 terminal_size = shutil.get_terminal_size()
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
 def addFrame():
     return "\033[2J\033[H"
@@ -65,6 +66,23 @@ ANSI = {
 sys.stdout.write("\033[?25l")
 atexit.register(lambda: (sys.stdout.write("\033[?25h"), sys.stdout.flush()))
 
+from pygame import mixer
+
+class Audio:
+    def __init__(self):
+        mixer.init()
+        self.sounds = {}
+
+    def load(self, name, file_path):
+        self.sounds[name] = mixer.Sound(file_path)
+
+    def play(self, name, loop=0):
+        if name in self.sounds:
+            self.sounds[name].play(loops=loop)
+
+    def stop_all(self):
+        mixer.stop()
+
 class Text:
     def __init__(self, text, x, y, r=255, g=255, b=255):
         # If 'text' is a list, we store it for frames; otherwise, it's just a string
@@ -120,15 +138,18 @@ class Scene:
             self.items.append(item)
 
     def render(self):
-        buf = []
-        buf.append("\033[H") 
-        buf.append("\033[J") 
+        try:
+            buf = []
+            buf.append("\033[H") 
+            buf.append("\033[J") 
 
-        for item in self.items:
-            color = f"\033[38;2;{item.r};{item.g};{item.b}m"
-            # Standard X, Y positioning
-            pos = f"\033[{int(item.y)+1};{int(item.x)+1}H"
-            buf.append(f"{pos}{color}{item.text}\033[0m")
-            
-        sys.stdout.write("".join(buf))
-        sys.stdout.flush()
+            for item in self.items:
+                color = f"\033[38;2;{item.r};{item.g};{item.b}m"
+                # Standard X, Y positioning
+                pos = f"\033[{int(item.y)+1};{int(item.x)+1}H"
+                buf.append(f"{pos}{color}{item.text}\033[0m")
+                
+            sys.stdout.write("".join(buf))
+            sys.stdout.flush()
+        except KeyboardInterrupt:
+            sys.exit()

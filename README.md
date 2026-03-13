@@ -12,8 +12,11 @@ Animpy is a simple animation library for creating cool terminal animations. It g
 
 The particle simulator shown above was made entirely with Animpy.
 
-## What's New in 1.2.1
-- **Reduced Terminal Footprint** – Animations now only occupy a few lines instead of consuming the entire terminal, making output much cleaner and more efficient
+## What's New in 1.3
+
+- **Enhanced RGB Color Effects** – Improved support for vibrant RGB color animations; new examples show how to create gradient and rainbow text effects
+- **Audio Support** – New Audio class for loading and playing sound effects with pygame mixer integration
+- **Clean Ctrl+C Exit** – Graceful interrupt handling that cleanly exits without showing messy error messages
 
 ## What Can You Do?
 
@@ -174,6 +177,44 @@ scene.render()
   scene.render()  # Shows everything on screen
   ```
 
+### The `Audio` Class
+
+The Audio class lets you load and play sound effects in your animations using pygame mixer.
+
+**Creating and using:**
+```python
+audio = animpy.Audio()
+
+# Load sound files
+audio.load("jump", "sounds/jump.wav")
+audio.load("background", "sounds/music.mp3")
+
+# Play sounds
+audio.play("jump")  # Play once
+audio.play("background", loop=-1)  # Loop infinitely
+
+# Stop all sounds
+audio.stop_all()
+```
+
+**Methods:**
+
+- **`load(name, file_path)`** – Load a sound file and give it a name
+  ```python
+  audio.load("explosion", "sounds/boom.wav")
+  ```
+
+- **`play(name, loop=0)`** – Play a loaded sound (loop=0 plays once, loop=-1 loops infinitely)
+  ```python
+  audio.play("explosion")  # Play once
+  audio.play("background", loop=-1)  # Loop infinitely
+  ```
+
+- **`stop_all()`** – Stop all currently playing sounds
+  ```python
+  audio.stop_all()
+  ```
+
 ## Full Animation Example
 
 Here's a complete example showing how to create animations with the new v1.2 features:
@@ -212,6 +253,39 @@ for i in range(20):
     scene.render()
     moving_text.change_frame()
     time.sleep(0.2)
+```
+
+## Rainbow Text Example
+
+Here's a fun example creating rainbow-colored text using RGB values:
+
+```python
+import animpy
+import time
+
+scene = animpy.Scene()
+
+# Rainbow colors (RGB)
+rainbow_colors = [
+    (255, 0, 0),      # Red
+    (255, 127, 0),    # Orange
+    (255, 255, 0),    # Yellow
+    (0, 255, 0),      # Green
+    (0, 0, 255),      # Blue
+    (75, 0, 130),     # Indigo
+    (148, 0, 211),    # Violet
+]
+
+# Create rainbow text - each character in a different color
+text_str = "Rainbow!!!!!"
+for i, char in enumerate(text_str):
+    color = rainbow_colors[i % len(rainbow_colors)]
+    char_text = animpy.Text(char, i, 0, r=color[0], g=color[1], b=color[2])
+    scene.add(char_text)
+
+# Render the rainbow text
+scene.render()
+time.sleep(2)
 ```
 
 ## License
