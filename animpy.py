@@ -66,21 +66,19 @@ sys.stdout.write("\033[?25l")
 atexit.register(lambda: (sys.stdout.write("\033[?25h"), sys.stdout.flush()))
 
 class Text:
-    def __init__(self, text: str | list[str], x: int, y: int, r=255, g=255, b=255) -> None:
-        self.x = x
-        self.y = y
+    def __init__(self, text, x, y, r=255, g=255, b=255):
+        # If 'text' is a list, we store it for frames; otherwise, it's just a string
+        self.frames = text if isinstance(text, list) else [text]
+        self.current_frame_idx = 0
+        self.text = self.frames[0] # The current string for the renderer
+        
+        self.x, self.y = x, y
+        self.r, self.g, self.b = r, g, b
 
-        self.r = r
-        self.g = g
-        self.b = b
-
-        if isinstance(text, list):
-            self.text_list = text      # store the list
-            self.current_frame = 0
-            self.text = text[0]        # current visible text
-        else:
-            self.text_list = None
-            self.text = text
+    def change_frame(self):
+        """Cycles through the list of frames"""
+        self.current_frame_idx = (self.current_frame_idx + 1) % len(self.frames)
+        self.text = self.frames[self.current_frame_idx]
 
     def moveX(self, newX: int) -> None:
         self.x = newX
@@ -93,11 +91,6 @@ class Text:
 
     def centerY(self):
         self.y = terminal_size.lines // 2
-
-    def change_frame(self) -> None:
-        if self.text_list:
-            self.current_frame = (self.current_frame + 1) % len(self.text_list)
-            self.text = self.text_list[self.current_frame]
 
     def change_rgb_values(self, r, g, b):
         self.r = r
@@ -128,13 +121,14 @@ class Scene:
 
     def render(self):
         buf = []
-        buf.append("\033[2J\033[H") 
-        
+        buf.append("\033[H") 
+        buf.append("\033[J") 
+
         for item in self.items:
-            color_code = f"\033[38;2;{item.r};{item.g};{item.b}m"
-            reset_code = "\033[0m"
-            # Move cursor to Y, X and print
-            buf.append(f"\033[{item.y+1};{item.x+1}H{color_code}{item.text}{reset_code}")
+            color = f"\033[38;2;{item.r};{item.g};{item.b}m"
+            # Standard X, Y positioning
+            pos = f"\033[{int(item.y)+1};{int(item.x)+1}H"
+            buf.append(f"{pos}{color}{item.text}\033[0m")
             
         sys.stdout.write("".join(buf))
         sys.stdout.flush()

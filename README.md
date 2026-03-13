@@ -12,11 +12,8 @@ Animpy is a simple animation library for creating cool terminal animations. It g
 
 The particle simulator shown above was made entirely with Animpy.
 
-## What's New in 1.2
-
-- **Type Out Effect** – New `type_out()` method for animated text typing effect
-- **Gravity/Fall Effect** – New `fall()` method to create gravity and falling text animations
-- **Improved Render Graphics** – Optimized rendering using buffered output to eliminate ghosting effects and improve animation smoothness; now uses efficient ANSI escape sequences for RGB color rendering
+## What's New in 1.2.1
+- **Reduced Terminal Footprint** – Animations now only occupy a few lines instead of consuming the entire terminal, making output much cleaner and more efficient
 
 ## What Can You Do?
 
