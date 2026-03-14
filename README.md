@@ -36,6 +36,7 @@ text.change_frame()  # Cycle through frames (if you used a list)
 scene = animpy.Scene()
 scene.add(text1, text2, text3)
 scene.render()
+scene.clear()
 ```
 
 **Audio** – Play sounds:
@@ -46,11 +47,9 @@ audio.play("bg", loop=-1)
 audio.stop_all()
 ```
 
-## What's New (v1.3)
-- **Cleaner output** – Animations only take a few lines
-- **Audio** – Play MP3s and WAVs without freezing
-- **Better colors** – Smooth RGB effects
-- **No ugly errors** – Clean exit on Ctrl+C
-- **Rainbow effects** – Character-by-character color cycling
+## Version History
+
+### v1.3.5
+- Added `scene.clear` method to clear the scene
 
 Made with ❤️ by a human.

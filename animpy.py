@@ -153,3 +153,6 @@ class Scene:
             sys.stdout.flush()
         except KeyboardInterrupt:
             sys.exit()
+
+    def clear(self):
+        print("\033[2J\033[H")
