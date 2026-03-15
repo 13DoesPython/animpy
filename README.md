@@ -2,6 +2,12 @@
 
 Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Works great on modern terminals.
 
+## Examples
+- [Particle simulation](examples/particlesim.py)
+- [The zen of python](examples/zenofpython.py)
+- [Audio example](examples/audio.py)
+- [Loading screen](examples/loading.py)
+
 ## Install
 ```bash
 pip install animpy
@@ -45,11 +51,17 @@ audio = animpy.Audio()
 audio.load("bg", "music.mp3")
 audio.play("bg", loop=-1)
 audio.stop_all()
+audio.is_playing("track")
 ```
 
 ## Version History
 
+### v1.3.6
+- Added `audio.is_playing()` method to check if audio is currently playing
+- Added two more examples to Github example folder
+
 ### v1.3.5
 - Added `scene.clear` method to clear the scene
+- Added version history to README
 
 Made with ❤️ by a human.

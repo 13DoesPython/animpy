@@ -72,16 +72,24 @@ class Audio:
     def __init__(self):
         mixer.init()
         self.sounds = {}
+        self.channels = {}
 
     def load(self, name, file_path):
         self.sounds[name] = mixer.Sound(file_path)
 
     def play(self, name, loop=0):
         if name in self.sounds:
-            self.sounds[name].play(loops=loop)
+            self.channels[name] = self.sounds[name].play(loops=loop)
 
     def stop_all(self):
         mixer.stop()
+    
+    def is_playing(self, name=None):
+        if name is None:
+            return mixer.get_busy()
+        if name in self.channels:
+            return self.channels[name].get_busy()
+        return False
 
 class Text:
     def __init__(self, text, x, y, r=255, g=255, b=255):
