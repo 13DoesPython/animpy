@@ -46,6 +46,7 @@ text.change_frame()  # Cycle through frames (if you used a list)
 ```python
 scene = animpy.Scene()
 scene.add(text1, text2, text3)
+scene.remove(text2)  # Remove text2 from the scene
 scene.render()
 scene.clear()
 ```
@@ -68,14 +69,17 @@ audio.stop_all()
 audio.is_playing("track")
 ```
 
-## Version History
+## Version Histor
+
+## v1.4.1
+- Added `scene.remove` method to remove items from the scene
 
 ### v1.4.0
 - Added three new examples to Github example folder
 - Added new class `InteractiveScene` that allows for real-time keyboard input
 - Added collision detection method `collides_with` to `Text` class
 
-### v1.3.6
+### v1.3.8
 - Added `audio.is_playing()` method to check if audio is currently playing
 - Added two more examples to Github example folder
 

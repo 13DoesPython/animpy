@@ -175,6 +175,11 @@ class Scene:
     def add(self, *items: Text) -> None:
         for item in items:
             self.items.append(item)
+    
+    def remove(self, *items: Text) -> None:
+        for item in items:
+            if item in self.items:
+                self.items.remove(item)
 
     def render(self):
         try:
