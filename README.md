@@ -69,7 +69,7 @@ audio.stop_all()
 audio.is_playing("track")
 ```
 
-## Version Histor
+## Version History
 
 ## v1.4.1
 - Added `scene.remove` method to remove items from the scene
