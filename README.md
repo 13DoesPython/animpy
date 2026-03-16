@@ -3,10 +3,13 @@
 Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Works great on modern terminals.
 
 ## Examples
-- [Particle simulation](examples/particlesim.py)
-- [The zen of python](examples/zenofpython.py)
-- [Audio example](examples/audio.py)
-- [Loading screen](examples/loading.py)
+- [Particle simulation](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/particlesim.py)
+- [The zen of python](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/zenofpython.py)
+- [Audio example](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/audio.py)
+- [Loading screen](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/loading.py)
+- [Tag game](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/taggame.py)
+- [Collision example](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/collision.py)
+- [Player Controls](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/playercontrol.py)
 
 ## Install
 ```bash
@@ -32,6 +35,8 @@ text.moveX(10)  # Move right
 text.moveY(5)   # Move down
 text.centerX()  # Center horizontally
 text.change_rgb_values(0, 255, 0)  # Change color
+text.collides_with(other_text)  # Check collision with another text
+text.width, text.height  # Get dimensions
 text.type_out("Type me!", speed=0.05, scene=scene)  # Type effect
 text.fall(velocity=2, floor=15)  # Falling effect
 text.change_frame()  # Cycle through frames (if you used a list)
@@ -45,6 +50,15 @@ scene.render()
 scene.clear()
 ```
 
+**Interactive Scene** – Handle real-time input:
+```python
+scene = animpy.InteractiveScene()
+scene.add(text1, text2, text3)
+scene.render()
+scene.clear()
+scene.key_pressed("w")  # Check if 'w' is pressed
+```
+
 **Audio** – Play sounds:
 ```python
 audio = animpy.Audio()
@@ -55,6 +69,11 @@ audio.is_playing("track")
 ```
 
 ## Version History
+
+### v1.4.0
+- Added three new examples to Github example folder
+- Added new class `InteractiveScene` that allows for real-time keyboard input
+- Added collision detection method `collides_with` to `Text` class
 
 ### v1.3.6
 - Added `audio.is_playing()` method to check if audio is currently playing

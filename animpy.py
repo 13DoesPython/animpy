@@ -1,4 +1,4 @@
-import os, sys, time, atexit, shutil
+import os, sys, time, atexit, shutil, keyboard
 
 sys.stdout.write("\033[?25l")
 atexit.register(lambda: (sys.stdout.write("\033[?25h"), sys.stdout.flush()))
@@ -123,6 +123,37 @@ class Text:
         self.g = g
         self.b = b
 
+    @property
+    def width(self):
+        if isinstance(self.text, list):
+            return len(self.text[self.current_frame])
+        return len(self.text)
+    
+    @property
+    def height(self):
+        if isinstance(self.text, list):
+            return len(self.text[self.current_frame].split("\n"))
+        return len(self.text.split("\n"))
+
+    def collides_with(self, other):
+        # Get bounding box of self
+        self_left = self.x
+        self_right = self.x + self.width
+        self_top = self.y
+        self_bottom = self.y + self.height
+
+        # Get bounding box of other
+        other_left = other.x
+        other_right = other.x + other.width
+        other_top = other.y
+        other_bottom = other.y + other.height
+
+        # Check for overlap
+        return not (self_right <= other_left or 
+                    self_left >= other_right or 
+                    self_bottom <= other_top or 
+                    self_top >= other_bottom)
+
     # Add this to your Text class
     def type_out(self, full_text, speed=0.1, scene=None):
         for i in range(len(full_text) + 1):
@@ -160,7 +191,18 @@ class Scene:
             sys.stdout.write("".join(buf))
             sys.stdout.flush()
         except KeyboardInterrupt:
+            self.clear()
             sys.exit()
 
     def clear(self):
         print("\033[2J\033[H")
+
+class InteractiveScene(Scene):
+    def __init__(self):
+        super().__init__()
+
+    def key_pressed(self, key):
+        try:
+            return keyboard.is_pressed(key)
+        except:
+            return False
