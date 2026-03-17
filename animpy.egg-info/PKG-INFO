@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: animpy
-Version: 1.4.1
+Version: 1.4.2
 Summary: A simple terminal animation library
 Author: Samin Riyaz
 License: MIT License
@@ -104,7 +104,7 @@ audio.stop_all()
 audio.is_playing("track")
 ```
 
-## Version Histor
+## Version History
 
 ## v1.4.1
 - Added `scene.remove` method to remove items from the scene
