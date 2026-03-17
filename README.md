@@ -1,7 +1,7 @@
 # Animpy 🎬
 
 ![PyPI - Version](https://img.shields.io/pypi/v/animpy?color=orange)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/animpy?color=blue)
+![[PyPI Downloads](https://static.pepy.tech/personalized-badge/animpy?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/animpy)
 ![GitHub License](https://img.shields.io/github/license/13DoesPython/animpy)
 
 
