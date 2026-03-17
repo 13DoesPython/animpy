@@ -2,7 +2,7 @@
 
 ![PyPI - Version](https://img.shields.io/pypi/v/animpy?color=orange)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/animpy?color=blue)
-![GitHub License](https://img.shields.io/github/license/YOUR_USERNAME/animpy)
+![GitHub License](https://img.shields.io/github/license/13DoesPython/animpy)
 
 
 Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Works great on modern terminals.
