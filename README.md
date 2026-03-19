@@ -53,6 +53,7 @@ scene = animpy.Scene()
 scene.add(text1, text2, text3)
 scene.remove(text2)  # Remove text2 from the scene
 scene.render()
+scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
 scene.clear()
 ```
 
@@ -61,6 +62,7 @@ scene.clear()
 scene = animpy.InteractiveScene()
 scene.add(text1, text2, text3)
 scene.render()
+scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
 scene.clear()
 scene.key_pressed("w")  # Check if 'w' is pressed
 ```
@@ -75,6 +77,9 @@ audio.is_playing("track")
 ```
 
 ## Version History
+
+### v1.4.5
+- Added background color support to `Scene` with `set_bg_rgb` method
 
 ## v1.4.1
 - Added `scene.remove` method to remove items from the scene

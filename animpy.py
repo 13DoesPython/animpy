@@ -171,6 +171,12 @@ class Text:
 class Scene:
     def __init__(self) -> None:
         self.items = []
+        self.bg_color_str = ""
+
+    def set_bg_rgb(self, r, g, b):
+        self.bg_color_str = f"\033[48;2;{r};{g};{b}m"
+        sys.stdout.write(self.bg_color_str)
+        sys.stdout.flush()
 
     def add(self, *items: Text) -> None:
         for item in items:
@@ -184,19 +190,28 @@ class Scene:
     def render(self):
         try:
             buf = []
-            buf.append("\033[H") 
-            buf.append("\033[J") 
+            buf.append("\033[H")
+            
+            if self.bg_color_str:
+                buf.append(self.bg_color_str)
+                
+            buf.append("\033[J")
 
             for item in self.items:
-                color = f"\033[38;2;{item.r};{item.g};{item.b}m"
-                # Standard X, Y positioning
+                # Foreground text color
+                fg_color = f"\033[38;2;{item.r};{item.g};{item.b}m"
                 pos = f"\033[{int(item.y)+1};{int(item.x)+1}H"
-                buf.append(f"{pos}{color}{item.text}\033[0m")
                 
+                buf.append(f"{pos}{fg_color}{item.text}")
+                
+            buf.append("\033[0m")
+            
             sys.stdout.write("".join(buf))
             sys.stdout.flush()
+
         except KeyboardInterrupt:
-            self.clear()
+            sys.stdout.write("\033[0m")
+            sys.stdout.flush()
             sys.exit()
 
     def clear(self):
