@@ -1,22 +1,25 @@
 import animpy
 import time
 
-x, y = 10, 10
+speed = 30 
+x, y = 10.0, 10.0
+
 scene = animpy.InteractiveScene()
 player = animpy.Text("P", x, y, r=255, g=255, b=0)
 scene.add(player)
-scene.render()
 
-while True:
+while True:    
     if scene.key_pressed("w"):
-        y -= 1
-    elif scene.key_pressed("s"):
-        y += 1
-    elif scene.key_pressed("a"):
-        x -= 1
-    elif scene.key_pressed("d"):
-        x += 1
+        y -= speed * scene.dt
+    if scene.key_pressed("s"):
+        y += speed * scene.dt
+    if scene.key_pressed("a"):
+        x -= speed * scene.dt
+    if scene.key_pressed("d"):
+        x += speed * scene.dt
 
-    player.moveX(x), player.moveY(y)
+    player.moveX(x)
+    player.moveY(y)
     scene.render()
-    time.sleep(0.03)
+
+    time.sleep(0.01)

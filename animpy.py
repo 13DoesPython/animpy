@@ -1,4 +1,10 @@
+import random
 import os, sys, time, atexit, shutil, keyboard
+
+def lerp(start, end, t):
+    t = max(0.0, min(1.0, t)) 
+    
+    return start + (end - start) * t
 
 sys.stdout.write("\033[?25l")
 atexit.register(lambda: (sys.stdout.write("\033[?25h"), sys.stdout.flush()))
@@ -92,7 +98,7 @@ class Audio:
         return False
 
 class Text:
-    def __init__(self, text, x, y, r=255, g=255, b=255):
+    def __init__(self, text, x, y, r=255, g=255, b=255, z_index=0):
         # If 'text' is a list, we store it for frames; otherwise, it's just a string
         self.frames = text if isinstance(text, list) else [text]
         self.current_frame_idx = 0
@@ -100,6 +106,7 @@ class Text:
         
         self.x, self.y = x, y
         self.r, self.g, self.b = r, g, b
+        self.z_index = z_index
 
     def change_frame(self):
         """Cycles through the list of frames"""
@@ -172,6 +179,9 @@ class Scene:
     def __init__(self) -> None:
         self.items = []
         self.bg_color_str = ""
+        self.last_frame_time = time.perf_counter()
+        self.offset_x = 0
+        self.offset_y = 0
 
     def set_bg_rgb(self, r, g, b):
         self.bg_color_str = f"\033[48;2;{r};{g};{b}m"
@@ -187,32 +197,32 @@ class Scene:
             if item in self.items:
                 self.items.remove(item)
 
+    @property
+    def dt(self):
+        current_time = time.perf_counter()
+        delta_time = current_time - self.last_frame_time
+        self.last_frame_time = current_time
+        return delta_time
+
     def render(self):
-        try:
-            buf = []
-            buf.append("\033[H")
-            
-            if self.bg_color_str:
-                buf.append(self.bg_color_str)
-                
-            buf.append("\033[J")
+        buf = ["\033[H\033[J"]
+        sorted_items = sorted(self.items, key=lambda i: getattr(i, 'z_index', 0))
 
-            for item in self.items:
-                # Foreground text color
-                fg_color = f"\033[38;2;{item.r};{item.g};{item.b}m"
-                pos = f"\033[{int(item.y)+1};{int(item.x)+1}H"
-                
-                buf.append(f"{pos}{fg_color}{item.text}")
-                
-            buf.append("\033[0m")
+        for item in sorted_items:
+            ry = int(item.y) + 1 + self.offset_y
+            rx = int(item.x) + 1 + self.offset_x
             
-            sys.stdout.write("".join(buf))
-            sys.stdout.flush()
+            pos = f"\033[{ry};{rx}H"
+            color = f"\033[38;2;{item.r};{item.g};{item.b}m"
+            buf.append(f"{pos}{color}{item.text}")
 
-        except KeyboardInterrupt:
-            sys.stdout.write("\033[0m")
-            sys.stdout.flush()
-            sys.exit()
+        buf.append("\033[0m")
+        sys.stdout.write("".join(buf))
+        sys.stdout.flush()
+
+    def shake(self, intensity=1):
+        self.offset_x = int((os.urandom(1)[0] / 255.0 - 0.5) * 2 * intensity)
+        self.offset_y = int((os.urandom(1)[0] / 255.0 - 0.5) * 2 * intensity)
 
     def clear(self):
         print("\033[2J\033[H")
@@ -220,9 +230,17 @@ class Scene:
 class InteractiveScene(Scene):
     def __init__(self):
         super().__init__()
+        self.last_frame_time = time.perf_counter()
 
     def key_pressed(self, key):
         try:
             return keyboard.is_pressed(key)
         except:
             return False
+    
+    @property
+    def dt(self):
+        current_time = time.perf_counter()
+        delta_time = current_time - self.last_frame_time
+        self.last_frame_time = current_time
+        return delta_time
