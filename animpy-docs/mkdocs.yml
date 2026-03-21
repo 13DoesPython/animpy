@@ -1,0 +1,13 @@
+site_name: Animpy Official documentation
+theme:
+  name: material
+  palette:
+    scheme: slate # Dark mode by default (fits the terminal vibe)
+    primary: deep orange
+
+nav:
+  - Home: index.md
+  - Features: features.md
+  - API Reference: api.md
+
+repo_url: https://github.com/13DoesPython/animpy

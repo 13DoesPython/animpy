@@ -89,6 +89,9 @@ animpy.lerp(start, end, t)  # Linear interpolation between start and end
 
 ## Version History
 
+### v1.5.1
+- Added full guide to project folder
+
 ### v1.5.0
 - Added linear interpolation function `lerp` to `animpy` for smooth animations
 - Added `dt` property to `Scene` for easy frame timing and smooth movement

@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: animpy
-Version: 1.4.5
+Version: 1.5.0
 Summary: A simple terminal animation library
 Author: Samin Riyaz
 License: MIT License
@@ -50,6 +50,7 @@ Make cool terminal animations without the pain. Move text around, use RGB colors
 - [Tag game](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/taggame.py)
 - [Collision example](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/collision.py)
 - [Player Controls](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/playercontrol.py)
+- [Linear interpolation](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/lerp.py)
 
 ## Install
 ```bash
@@ -67,7 +68,6 @@ scene.render()
 ```
 
 ## How It Works
-
 **Text** – Create animated text:
 ```python
 text = animpy.Text("Hi", 0, 0, r=255, g=0, b=0)
@@ -90,16 +90,21 @@ scene.remove(text2)  # Remove text2 from the scene
 scene.render()
 scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
 scene.clear()
+scene.shake(intensity=2)  # Shake the scene
+scene.dt  # Get time since last frame (for smooth movement)
 ```
 
 **Interactive Scene** – Handle real-time input:
 ```python
-scene = animpy.InteractiveScene()
+scene = animpy.Scene()
 scene.add(text1, text2, text3)
+scene.remove(text2)  # Remove text2 from the scene
 scene.render()
 scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
 scene.clear()
+scene.shake(intensity=2)  # Shake the scene
 scene.key_pressed("w")  # Check if 'w' is pressed
+scene.dt  # Get time since last frame (for smooth movement)
 ```
 
 **Audio** – Play sounds:
@@ -111,7 +116,19 @@ audio.stop_all()
 audio.is_playing("track")
 ```
 
+**Animpy (extras)** – Some extra methods for animations:
+```python
+animpy.lerp(start, end, t)  # Linear interpolation between start and end
+```
+
+
 ## Version History
+
+### v1.5.0
+- Added linear interpolation function `lerp` to `animpy` for smooth animations
+- Added `dt` property to `Scene` for easy frame timing and smooth movement
+- Added z-index support to `Text` for layering items in the scene
+- Added scene shaking effect with `shake` method for dramatic animations
 
 ### v1.4.5
 - Added background color support to `Scene` with `set_bg_rgb` method
