@@ -1,0 +1,703 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Animpy Official documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#animpy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Animpy Official documentation" class="md-header__button md-logo" aria-label="Animpy Official documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Animpy Official documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/13DoesPython/animpy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Animpy Official documentation" class="md-nav__button md-logo" aria-label="Animpy Official documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Animpy Official documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/13DoesPython/animpy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="features.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="animpy">Animpy 🎬</h1>
+<p><img alt="PyPI - Version" src="https://img.shields.io/pypi/v/animpy?color=orange" />
+<a href="https://pepy.tech/projects/animpy"><img alt="Downloads" src="https://static.pepy.tech/personalized-badge/animpy?period=total&amp;units=INTERNATIONAL_SYSTEM&amp;left_color=black&amp;right_color=green&amp;left_text=downloads" /></a>
+<img alt="GitHub License" src="https://img.shields.io/github/license/13DoesPython/animpy" /></p>
+<h1 id="introduction">Introduction</h1>
+<p>Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Works great on modern terminals.</p>
+<h2 id="examples">Examples</h2>
+<ul>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/particlesim.py">Particle simulation</a></li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/zenofpython.py">The zen of python</a></li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/audio.py">Audio example</a></li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/loading.py">Loading screen</a></li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/taggame.py">Tag game</a></li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/collision.py">Collision example</a></li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/playercontrol.py">Player Controls</a></li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/lerp.py">Linear interpolation</a></li>
+</ul>
+<h2 id="install">Install</h2>
+<pre><code class="language-bash">pip install animpy
+</code></pre>
+<h2 id="quick-start">Quick Start</h2>
+<pre><code class="language-python">import animpy
+
+scene = animpy.Scene()
+text = animpy.Text(&quot;Hello!&quot;, 10, 5, r=255, g=100, b=50)
+scene.add(text)
+scene.render()
+</code></pre>
+<h2 id="comparison-to-other-libraries">Comparison to other libraries</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Animpy</th>
+<th>Curses</th>
+<th>Blessings</th>
+<th>Rich</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Animated text</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>RGB color support</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Audio playback</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Easy to use</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples-of-other-libraries">Examples of other libraries</h3>
+<ul>
+<li>Curses: A low-level library for terminal handling, but it doesn't support animations or RGB colors.</li>
+<li>Blessings: A wrapper around curses that makes it easier to use, but still lacks animation and audio features.</li>
+<li>Rich: A modern library for rich text and formatting in the terminal, but it doesn't support animations or audio.</li>
+<li>Animpy: A high-level library designed specifically for creating terminal animations with RGB colors and audio support, making it easy to create dynamic and engaging terminal applications.</li>
+</ul>
+<h3 id="curses-example">Curses example</h3>
+<pre><code class="language-python">import curses
+def main(stdscr):
+    curses.curs_set(0)  # Hide cursor
+    stdscr.addstr(5, 10, &quot;Hello, Curses!&quot;, curses.color_pair(1))
+    stdscr.refresh()
+    stdscr.getch()  # Wait for key press
+curses.wrapper(main)
+</code></pre>
+<h3 id="blessings-example">Blessings example</h3>
+<pre><code class="language-python">from blessings import Terminal
+term = Terminal()
+
+print(term.move(5, 10) + term.red(&quot;Hello, Blessings!&quot;))
+</code></pre>
+<h3 id="rich-example">Rich example</h3>
+<pre><code class="language-python">from rich import print
+print(&quot;[red]Hello, Rich![/red]&quot;)
+</code></pre>
+<h3 id="animpy-example">Animpy example</h3>
+<pre><code class="language-python">import animpy
+scene = animpy.Scene()
+text = animpy.Text(&quot;Hello, Animpy!&quot;, 10, 5, r=255, g=100, b=50)
+scene.add(text)
+scene.render()
+</code></pre>
+<h2 id="pros-and-cons">Pros and Cons</h2>
+<h3 id="pros">Pros</h3>
+<ul>
+<li>Easy to create animated text with RGB colors</li>
+<li>Built-in audio support for adding sound effects and music</li>
+<li>Simple API for moving text and creating animations</li>
+<li>Works well on modern terminals with good performance</li>
+</ul>
+<h3 id="cons">Cons</h3>
+<ul>
+<li>May not work properly on older terminals that lack RGB support</li>
+<li>Limited to text-based animations (no images or graphics)</li>
+<li>Performance may degrade with a large number of animated objects</li>
+<li>Still in early development, so some features may be missing or buggy</li>
+</ul>
+<h2 id="performance">Performance</h2>
+<p>Animpy is designed to be efficient and runs smoothly on modern terminals. The performance will depend on the complexity of the animation and the capabilities of the terminal, but in general, it should be able to handle multiple animated text objects without significant lag. For best performance, it's recommended to keep the number of animated objects reasonable and to use the <code>dt</code> property for smooth movement based on frame timing. Future improvements could include optimizing the rendering loop and adding support for more complex animations while maintaining good performance. </p>
+<h2 id="todo-list-for-future-improvements">Todo list for future improvements</h2>
+<ul>
+<li>Add support for more complex animations (e.g., sprite sheets, particle systems)</li>
+<li>Implement a more robust audio system with volume control and multiple channels</li>
+<li>Optimize rendering for better performance with many animated objects</li>
+<li>Add more built-in animation effects (e.g., fade in/out, bounce)</li>
+</ul>
+<h1 id="usage">Usage</h1>
+<h2 id="methods-list">Methods list</h2>
+<p><strong>Text</strong> – Create animated text:</p>
+<pre><code class="language-python">text = animpy.Text(&quot;Hi&quot;, 0, 0, r=255, g=0, b=0)
+text.moveX(10)  # Move right
+text.moveY(5)   # Move down
+text.centerX()  # Center horizontally
+text.change_rgb_values(0, 255, 0)  # Change color
+text.collides_with(other_text)  # Check collision with another text
+text.width, text.height  # Get dimensions
+text.type_out(&quot;Type me!&quot;, speed=0.05, scene=scene)  # Type effect
+text.fall(velocity=2, floor=15)  # Falling effect
+text.change_frame()  # Cycle through frames (if you used a list)
+</code></pre>
+<p><strong>Scene</strong> – Render everything:</p>
+<pre><code class="language-python">scene = animpy.Scene()
+scene.add(text1, text2, text3)
+scene.remove(text2)  # Remove text2 from the scene
+scene.render()
+scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
+scene.clear()
+scene.shake(intensity=2)  # Shake the scene
+scene.dt  # Get time since last frame (for smooth movement)
+</code></pre>
+<p><strong>Interactive Scene</strong> – Handle real-time input:</p>
+<pre><code class="language-python">scene = animpy.Scene()
+scene.add(text1, text2, text3)
+scene.remove(text2)  # Remove text2 from the scene
+scene.render()
+scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
+scene.clear()
+scene.shake(intensity=2)  # Shake the scene
+scene.key_pressed(&quot;w&quot;)  # Check if 'w' is pressed
+scene.dt  # Get time since last frame (for smooth movement)
+</code></pre>
+<p><strong>Audio</strong> – Play sounds:</p>
+<pre><code class="language-python">audio = animpy.Audio()
+audio.load(&quot;bg&quot;, &quot;music.mp3&quot;)
+audio.play(&quot;bg&quot;, loop=-1)
+audio.stop_all()
+audio.is_playing(&quot;track&quot;)
+</code></pre>
+<p><strong>Animpy (extras)</strong> – Some extra methods for animations:</p>
+<pre><code class="language-python">animpy.lerp(start, end, t)  # Linear interpolation between start and end
+</code></pre>
+<h2 id="method-instructions">Method instructions</h2>
+<p>Here are the instructions for all the methods in animpy, with code examples.</p>
+<h3 id="text-create-animated-text"><strong>Text</strong> – Create animated text:</h3>
+<h4 id="animpytext-create-a-text-object-with-optional-rgb-color-and-z-index-for-layering"><code>animpy.Text()</code> - Create a text object with optional RGB color and z-index for layering:</h4>
+<pre><code class="language-python">text = animpy.Text(&quot;Hi&quot;, 0, 0, r=255, g=0, b=0, z_index=1)
+</code></pre>
+<h4 id="movex-and-movey-move-text-horizontally-or-vertically"><code>moveX</code> and <code>moveY</code> - Move text horizontally or vertically:</h4>
+<pre><code class="language-python">text.moveX(10)  # Move right
+text.moveY(5)   # Move down
+</code></pre>
+<h4 id="centerx-center-text-horizontally-on-the-scene"><code>centerX</code> - Center text horizontally on the scene:</h4>
+<pre><code class="language-python">text.centerX()
+</code></pre>
+<h4 id="change_rgb_values-change-the-text-color"><code>change_rgb_values</code> - Change the text color:</h4>
+<pre><code class="language-python">text.change_rgb_values(0, 255, 0)  # Change color to green
+</code></pre>
+<h4 id="collides_with-check-if-this-text-collides-with-another-text"><code>collides_with</code> - Check if this text collides with another text:</h4>
+<pre><code class="language-python">text.collides_with(other_text)
+</code></pre>
+<h4 id="width-and-height-get-the-dimensions-of-the-text"><code>width</code> and <code>height</code> - Get the dimensions of the text:</h4>
+<pre><code class="language-python">text.width, text.height
+</code></pre>
+<h4 id="type_out-create-a-typewriter-effect-for-the-text"><code>type_out</code> - Create a typewriter effect for the text:</h4>
+<pre><code class="language-python">text.type_out(&quot;Type me!&quot;, speed=0.05, scene=scene)
+</code></pre>
+<h4 id="fall-make-the-text-fall-with-gravity"><code>fall</code> - Make the text fall with gravity:</h4>
+<pre><code class="language-python">text.fall(velocity=2, floor=15)
+</code></pre>
+<h4 id="change_frame-cycle-through-frames-if-the-text-was-created-with-a-list-of-strings"><code>change_frame</code> - Cycle through frames if the text was created with a list of strings:</h4>
+<pre><code class="language-python">text.change_frame()
+</code></pre>
+<p><strong>Scene</strong> – Render everything:</p>
+<h4 id="animpyscene-create-a-new-scene"><code>animpy.Scene()</code> - Create a new scene:</h4>
+<pre><code class="language-python">scene = animpy.Scene()
+</code></pre>
+<h4 id="add-and-remove-add-or-remove-items-from-the-scene"><code>add</code> and <code>remove</code> - Add or remove items from the scene:</h4>
+<pre><code class="language-python">scene.add(text1, text2, text3)
+scene.remove(text2)
+</code></pre>
+<h4 id="render-render-the-scene-to-the-terminal"><code>render</code> - Render the scene to the terminal:</h4>
+<pre><code class="language-python">scene.render()
+</code></pre>
+<h4 id="set_bg_rgb-set-the-background-color-of-the-scene"><code>set_bg_rgb</code> - Set the background color of the scene:</h4>
+<pre><code class="language-python">scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
+</code></pre>
+<h4 id="clear-clear-the-scene"><code>clear</code> - Clear the scene:</h4>
+<pre><code class="language-python">scene.clear()
+</code></pre>
+<h4 id="shake-shake-the-scene-for-a-dramatic-effect"><code>shake</code> - Shake the scene for a dramatic effect:</h4>
+<pre><code class="language-python">scene.shake(intensity=2)
+</code></pre>
+<h4 id="dt-get-the-time-since-the-last-frame-useful-for-smooth-movement"><code>dt</code> - Get the time since the last frame (useful for smooth movement):</h4>
+<pre><code class="language-python">scene.dt
+</code></pre>
+<p><strong>Interactive Scene</strong> – Handle real-time input:</p>
+<h4 id="animpyinteractivescene-create-a-new-interactive-scene"><code>animpy.InteractiveScene()</code> - Create a new interactive scene:</h4>
+<pre><code class="language-python">scene = animpy.InteractiveScene()
+</code></pre>
+<h4 id="key_pressed-check-if-a-specific-key-is-currently-pressed"><code>key_pressed</code> - Check if a specific key is currently pressed:</h4>
+<pre><code class="language-python">scene.key_pressed(&quot;w&quot;)  # Check if 'w' is pressed
+</code></pre>
+<p><strong>Audio</strong> – Play sounds:</p>
+<h4 id="animpyaudio-create-a-new-audio-manager"><code>animpy.Audio()</code> - Create a new audio manager:</h4>
+<pre><code class="language-python">audio = animpy.Audio()
+</code></pre>
+<h4 id="load-load-an-audio-file-with-a-specific-name"><code>load</code> - Load an audio file with a specific name:</h4>
+<pre><code class="language-python">audio.load(&quot;bg&quot;, &quot;music.mp3&quot;)
+</code></pre>
+<h4 id="play-play-a-loaded-audio-track-with-optional-looping"><code>play</code> - Play a loaded audio track, with optional looping:</h4>
+<pre><code class="language-python">audio.play(&quot;bg&quot;, loop=-1)
+</code></pre>
+<h4 id="stop_all-stop-all-currently-playing-audio"><code>stop_all</code> - Stop all currently playing audio:</h4>
+<pre><code class="language-python">audio.stop_all()
+</code></pre>
+<h4 id="is_playing-check-if-a-specific-track-is-currently-playing"><code>is_playing</code> - Check if a specific track is currently playing:</h4>
+<pre><code class="language-python">audio.is_playing(&quot;track&quot;)
+</code></pre>
+<p><strong>Animpy (extras)</strong> – Some extra methods for animations:</p>
+<h4 id="lerp-linear-interpolation-between-two-values"><code>lerp</code> - Linear interpolation between two values:</h4>
+<pre><code class="language-python">animpy.lerp(start, end, t)  # Returns a value between start and end based on t (0 to 1)
+</code></pre>
+<h1 id="simple-animation-example">Simple animation example:</h1>
+<pre><code class="language-python">import animpy
+scene = animpy.Scene()
+text = animpy.Text(&quot;Hello, Animpy!&quot;, 10, 5, r=255, g=100, b=50)
+scene.add(text)
+for _ in range(20):
+    text.moveX(1)  # Move right
+    text.moveY(0.5)  # Move down
+    scene.render()
+</code></pre>
+<h1 id="conclusion">Conclusion</h1>
+<p>Animpy is a powerful and easy-to-use library for creating terminal animations with RGB colors and audio support. It provides a simple API for moving text, creating animations, and handling real-time input, making it a great choice for anyone looking to add some flair to their terminal applications. With good performance on modern terminals and a growing list of features, animpy is a fantastic tool for both beginners and experienced developers alike.</p>
+<h2 id="version-history">Version History</h2>
+<h3 id="v150">v1.5.0</h3>
+<ul>
+<li>Added linear interpolation function <code>lerp</code> to <code>animpy</code> for smooth animations</li>
+<li>Added <code>dt</code> property to <code>Scene</code> for easy frame timing and smooth movement</li>
+<li>Added z-index support to <code>Text</code> for layering items in the scene</li>
+<li>Added scene shaking effect with <code>shake</code> method for dramatic animations</li>
+</ul>
+<h3 id="v145">v1.4.5</h3>
+<ul>
+<li>Added background color support to <code>Scene</code> with <code>set_bg_rgb</code> method</li>
+</ul>
+<h3 id="v141">v1.4.1</h3>
+<ul>
+<li>Added <code>scene.remove</code> method to remove items from the scene</li>
+</ul>
+<h3 id="v140">v1.4.0</h3>
+<ul>
+<li>Added three new examples to Github example folder</li>
+<li>Added new class <code>InteractiveScene</code> that allows for real-time keyboard input</li>
+<li>Added collision detection method <code>collides_with</code> to <code>Text</code> class</li>
+</ul>
+<h3 id="v138">v1.3.8</h3>
+<ul>
+<li>Added <code>audio.is_playing()</code> method to check if audio is currently playing</li>
+<li>Added two more examples to Github example folder</li>
+</ul>
+<h3 id="v135">v1.3.5</h3>
+<ul>
+<li>Added <code>scene.clear</code> method to clear the scene</li>
+<li>Added version history to README</li>
+</ul>
+<p>Made with ❤️ by a human.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": [], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
