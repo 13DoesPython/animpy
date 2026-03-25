@@ -40,6 +40,13 @@ scene.render()
 | RGB color support      | ✅              | ❌               | ❌               | ✅               |
 | Audio playback         | ✅              | ❌               | ❌               | ❌               |
 | Easy to use            | ✅              | ❌               | ❌               | ✅               |
+| Performance on modern terminals | ✅              | ✅               | ✅               | ✅               |
+| Interactive input handling | ✅              | ✅               | ✅               | ✅               |
+| Open source            | ✅              | ✅               | ✅               | ✅               |
+| Actively maintained       | ✅              | ❌               | ❌               | ✅               |
+| Python 3 support       | ✅              | ✅               | ✅               | ✅               |
+| Cross-platform support   | ✅              | ✅               | ✅               | ✅               |
+| Animation effects       | ✅              | ❌               | ❌               | ❌               |
 
 ### Examples of other libraries
 - Curses: A low-level library for terminal handling, but it doesn't support animations or RGB colors.
@@ -115,10 +122,19 @@ text.moveY(5)   # Move down
 text.centerX()  # Center horizontally
 text.change_rgb_values(0, 255, 0)  # Change color
 text.collides_with(other_text)  # Check collision with another text
+text.on_collide_callback(other_text, callback)  # Set a callback for when it collides with another text
 text.width, text.height  # Get dimensions
 text.type_out("Type me!", speed=0.05, scene=scene)  # Type effect
 text.fall(velocity=2, floor=15)  # Falling effect
 text.change_frame()  # Cycle through frames (if you used a list)
+```
+
+**Group** – Group multiple texts together:
+```python
+group = animpy.Group(text1, text2, text3)
+group.add(text4)  # Add another text to the group
+group.remove(text2)  # Remove text2 from the group
+group.position(5, 0)  # Move the entire group right by 5
 ```
 
 **Scene** – Render everything:
@@ -159,6 +175,7 @@ audio.is_playing("track")
 ```python
 animpy.lerp(start, end, t)  # Linear interpolation between start and end
 ```
+
 ## Method instructions
 Here are the instructions for all the methods in animpy, with code examples.
 
@@ -190,6 +207,11 @@ text.change_rgb_values(0, 255, 0)  # Change color to green
 text.collides_with(other_text)
 ```
 
+#### `on_collide_callback` - Set a callback function to be called when this text collides with another text:
+```python
+text.on_collide_callback(other_text, callback)
+```
+
 #### `width` and `height` - Get the dimensions of the text:
 ```python
 text.width, text.height
@@ -210,7 +232,24 @@ text.fall(velocity=2, floor=15)
 text.change_frame()
 ```
 
-**Scene** – Render everything:
+### **Group** – Group multiple texts together:
+
+#### `animpy.Group()` - Create a new group of text objects:
+```python
+group = animpy.Group(text1, text2, text3)
+```
+#### `add` and `remove` - Add or remove text objects from the group:
+```python
+group.add(text4)  # Add another text to the group
+group.remove(text2)  # Remove text2 from the group
+```
+#### `position` - Move the entire group by a certain amount:
+```python
+group.position(5, 0)  # Move the entire group right by 5
+```
+
+### **Scene** – Render everything:
+
 #### `animpy.Scene()` - Create a new scene:
 ```python
 scene = animpy.Scene()
@@ -247,7 +286,8 @@ scene.shake(intensity=2)
 scene.dt
 ```
 
-**Interactive Scene** – Handle real-time input:
+### **Interactive Scene** – Handle real-time input:
+
 #### `animpy.InteractiveScene()` - Create a new interactive scene:
 ```python
 scene = animpy.InteractiveScene()
@@ -258,7 +298,8 @@ scene = animpy.InteractiveScene()
 scene.key_pressed("w")  # Check if 'w' is pressed
 ```
 
-**Audio** – Play sounds:
+### **Audio** – Play sounds:
+
 #### `animpy.Audio()` - Create a new audio manager:
 ```python
 audio = animpy.Audio()
@@ -284,7 +325,8 @@ audio.stop_all()
 audio.is_playing("track")
 ```
 
-**Animpy (extras)** – Some extra methods for animations:
+### **Animpy (extras)** – Some extra methods for animations:
+
 #### `lerp` - Linear interpolation between two values:
 ```python
 animpy.lerp(start, end, t)  # Returns a value between start and end based on t (0 to 1)
@@ -307,6 +349,10 @@ for _ in range(20):
 Animpy is a powerful and easy-to-use library for creating terminal animations with RGB colors and audio support. It provides a simple API for moving text, creating animations, and handling real-time input, making it a great choice for anyone looking to add some flair to their terminal applications. With good performance on modern terminals and a growing list of features, animpy is a fantastic tool for both beginners and experienced developers alike.
 
 ## Version History
+
+## v1.5.5
+- Added new Group class for grouping multiple Text objects together and moving them as a unit
+- Added collision detection method `on_collide_callback` to Text class for triggering callbacks when two Text objects collide
 
 ### v1.5.0
 - Added linear interpolation function `lerp` to `animpy` for smooth animations

@@ -96,6 +96,23 @@ class Audio:
         if name in self.channels:
             return self.channels[name].get_busy()
         return False
+    
+class Group:
+    def __init__(self, *items):
+        self.items = list(items)
+
+    def add(self, *items):
+        self.items.extend(items)
+
+    def remove(self, *items):
+        for item in items:
+            if item in self.items:
+                self.items.remove(item)
+
+    def position(self, newx, newy):
+        for item in self.items:
+            item.x += newx
+            item.y += newy
 
 class Text:
     def __init__(self, text, x, y, r=255, g=255, b=255, z_index=0):
@@ -161,7 +178,10 @@ class Text:
                     self_bottom <= other_top or 
                     self_top >= other_bottom)
 
-    # Add this to your Text class
+    def on_collide_callback(self, other, callback):
+        if self.collides_with(other):
+            callback()
+
     def type_out(self, full_text, speed=0.1, scene=None):
         for i in range(len(full_text) + 1):
             self.text = full_text[:i] # Take the string from start to i
@@ -190,8 +210,11 @@ class Scene:
 
     def add(self, *items: Text) -> None:
         for item in items:
-            self.items.append(item)
-    
+            if isinstance(item, Group):
+                self.items.extend(item.items)
+            else:
+                self.items.append(item)
+
     def remove(self, *items: Text) -> None:
         for item in items:
             if item in self.items:
@@ -209,12 +232,20 @@ class Scene:
         sorted_items = sorted(self.items, key=lambda i: getattr(i, 'z_index', 0))
 
         for item in sorted_items:
-            ry = int(item.y) + 1 + self.offset_y
-            rx = int(item.x) + 1 + self.offset_x
-            
-            pos = f"\033[{ry};{rx}H"
-            color = f"\033[38;2;{item.r};{item.g};{item.b}m"
-            buf.append(f"{pos}{color}{item.text}")
+            if isinstance(item, Group):
+                for sub_item in item.items:
+                    ry = int(sub_item.y) + 1 + self.offset_y
+                    rx = int(sub_item.x) + 1 + self.offset_x
+                    pos = f"\033[{ry};{rx}H"
+                    color = f"\033[38;2;{sub_item.r};{sub_item.g};{sub_item.b}m"
+                    buf.append(f"{pos}{color}{sub_item.text}")
+            else:
+                ry = int(item.y) + 1 + self.offset_y
+                rx = int(item.x) + 1 + self.offset_x
+
+                pos = f"\033[{ry};{rx}H"
+                color = f"\033[38;2;{item.r};{item.g};{item.b}m"
+                buf.append(f"{pos}{color}{item.text}")
 
         buf.append("\033[0m")
         sys.stdout.write("".join(buf))
