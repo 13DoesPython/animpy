@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: animpy
-Version: 1.5.11
+Version: 1.5.5
 Summary: A simple terminal animation library
 Author: Samin Riyaz
 License: MIT License
@@ -77,10 +77,19 @@ text.moveY(5)   # Move down
 text.centerX()  # Center horizontally
 text.change_rgb_values(0, 255, 0)  # Change color
 text.collides_with(other_text)  # Check collision with another text
+text.on_collide_callback(other_text, callback)  # Set a callback for when it collides with another text
 text.width, text.height  # Get dimensions
 text.type_out("Type me!", speed=0.05, scene=scene)  # Type effect
 text.fall(velocity=2, floor=15)  # Falling effect
 text.change_frame()  # Cycle through frames (if you used a list)
+```
+
+**Group** – Group multiple texts together:
+```python
+group = animpy.Group(text1, text2, text3)
+group.add(text4)  # Add another text to the group
+group.remove(text2)  # Remove text2 from the group
+group.position(5, 0)  # Move the entire group right by 5
 ```
 
 **Scene** – Render everything:
@@ -124,6 +133,10 @@ animpy.lerp(start, end, t)  # Linear interpolation between start and end
 
 
 ## Version History
+
+## v1.5.5
+- Added new Group class for grouping multiple Text objects together and moving them as a unit
+- Added collision detection method `on_collide_callback` to Text class for triggering callbacks when two Text objects collide
 
 ### v1.5.1
 - Added full guide to project folder

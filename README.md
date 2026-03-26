@@ -95,6 +95,8 @@ audio.is_playing("track")
 animpy.lerp(start, end, t)  # Linear interpolation between start and end
 ```
 
+# Support the project
+[![Sponsor 13DoesPython](https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/13DoesPython)
 
 ## Version History
 

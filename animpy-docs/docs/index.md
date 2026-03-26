@@ -348,6 +348,9 @@ for _ in range(20):
 # Conclusion
 Animpy is a powerful and easy-to-use library for creating terminal animations with RGB colors and audio support. It provides a simple API for moving text, creating animations, and handling real-time input, making it a great choice for anyone looking to add some flair to their terminal applications. With good performance on modern terminals and a growing list of features, animpy is a fantastic tool for both beginners and experienced developers alike.
 
+# Support the project
+[![Sponsor 13DoesPython](https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/13DoesPython)
+
 ## Version History
 
 ## v1.5.5
