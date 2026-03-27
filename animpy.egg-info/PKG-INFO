@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: animpy
-Version: 1.5.5
+Version: 1.5.5.1
 Summary: A simple terminal animation library
 Author: Samin Riyaz
 License: MIT License
@@ -131,6 +131,8 @@ audio.is_playing("track")
 animpy.lerp(start, end, t)  # Linear interpolation between start and end
 ```
 
+# Support the project
+[![Sponsor 13DoesPython](https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/13DoesPython)
 
 ## Version History
 
