@@ -6,10 +6,10 @@ You can use all of the versions for now.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | ✅:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | ✅:                |
+| 1.5.x   | :white_check_mark: |
+| 1.4.x   | ✅:                |
+| 1.3.x   | :white_check_mark: |
+| < 1.3   | ✅:                |
 
 ## Reporting a Vulnerability
 
