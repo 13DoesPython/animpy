@@ -79,6 +79,8 @@ scene.clear()
 scene.shake(intensity=2)  # Shake the scene
 scene.key_pressed("w")  # Check if 'w' is pressed
 scene.dt  # Get time since last frame (for smooth movement)
+scene.wall  # Get the x-coordinate of the right/left wall
+scene.floor_ceiling  # Get the y-coordinate of the floor/ceiling
 ```
 
 **Audio** – Play sounds:
@@ -99,6 +101,9 @@ animpy.lerp(start, end, t)  # Linear interpolation between start and end
 [![Sponsor 13DoesPython](https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/13DoesPython)
 
 ## Version History
+
+## v1.5.8
+- Added exclusive floor, wall, and ceiling properties to InteractiveScene for better control over movement boundaries
 
 ## v1.5.5
 - Added new Group class for grouping multiple Text objects together and moving them as a unit

@@ -11,9 +11,6 @@ atexit.register(lambda: (sys.stdout.write("\033[?25h"), sys.stdout.flush()))
 terminal_size = shutil.get_terminal_size()
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
-def addFrame():
-    return "\033[2J\033[H"
-
 ANSI = {
     # Reset
     "reset": "\033[0m",
@@ -116,17 +113,15 @@ class Group:
 
 class Text:
     def __init__(self, text, x, y, r=255, g=255, b=255, z_index=0):
-        # If 'text' is a list, we store it for frames; otherwise, it's just a string
         self.frames = text if isinstance(text, list) else [text]
         self.current_frame_idx = 0
-        self.text = self.frames[0] # The current string for the renderer
+        self.text = self.frames[0]
         
         self.x, self.y = x, y
         self.r, self.g, self.b = r, g, b
         self.z_index = z_index
 
     def change_frame(self):
-        """Cycles through the list of frames"""
         self.current_frame_idx = (self.current_frame_idx + 1) % len(self.frames)
         self.text = self.frames[self.current_frame_idx]
 
@@ -208,7 +203,7 @@ class Scene:
         sys.stdout.write(self.bg_color_str)
         sys.stdout.flush()
 
-    def add(self, *items: Text) -> None:
+    def add(self, *items) -> None:
         for item in items:
             if isinstance(item, Group):
                 self.items.extend(item.items)
@@ -262,6 +257,8 @@ class InteractiveScene(Scene):
     def __init__(self):
         super().__init__()
         self.last_frame_time = time.perf_counter()
+        self.wall = 0 or terminal_size.columns - 1
+        self.floor_ceiling = 0 or terminal_size.lines - 1
 
     def key_pressed(self, key):
         try:
