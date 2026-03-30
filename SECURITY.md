@@ -13,4 +13,4 @@ You can use all of the versions for now.
 
 ## Reporting a Vulnerability
 
-I update pretty often in animpy, maybe between 1 day and 1 week. If you wanna see more info on animpy and how to use it go to PyPI and see my official documentation.
+I update pretty often in animpy, maybe between 1 day and 1 week. If you wanna see more info on animpy and how to use it go to PyPI and see my official documentation or click the docs link in the repo.
