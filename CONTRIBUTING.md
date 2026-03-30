@@ -1,1 +1,1 @@
-If you wanna contribute you are always able to. Hewever, you must keep me updated on any feature or change you want to add. You can tell via my email riyazsamin@gmail.com. 
+If you wanna contribute you are always able to. Hewever, you must keep me updated on any feature or change you want to add. You can tell via my email riyazsamin@gmail.com, or you an go to my Bluesky account @13doespython.bsky.social. 
