@@ -1,10 +1,18 @@
-import random
+import random, math
 import os, sys, time, atexit, shutil, keyboard
 
 def lerp(start, end, t):
     t = max(0.0, min(1.0, t)) 
     
     return start + (end - start) * t
+
+def hide_cursor():
+    sys.stdout.write("\033[?25l")
+    sys.stdout.flush()
+
+def show_cursor():
+    sys.stdout.write("\033[?25h")
+    sys.stdout.flush()
 
 sys.stdout.write("\033[?25l")
 atexit.register(lambda: (sys.stdout.write("\033[?25h"), sys.stdout.flush()))
@@ -93,10 +101,80 @@ class Audio:
         if name in self.channels:
             return self.channels[name].get_busy()
         return False
+
+    def set_volume(self, name, volume):
+        if name in self.sounds:
+            self.sounds[name].set_volume(volume)
+
+    def stop(self, name):
+        if name in self.channels:
+            self.channels[name].stop()
     
+    def play_for_time(self, name, duration):
+        if name in self.sounds:
+            self.sounds[name].play()
+            time.sleep(duration)
+            self.sounds[name].stop()
+
+class Particle:
+    def __init__(self, char, x, y, r=255, g=255, b=255, lifetime=1.0):
+        self.char = char
+        self.x = x
+        self.y = y
+        self.r = r
+        self.g = g
+        self.b = b
+        self.lifetime = lifetime
+        self.age = 0.0
+        self.particles = []
+        self.velocity_x = 0.0
+        self.velocity_y = 0.0
+    
+    def update(self, delta_time):
+        self.age += delta_time
+        self.x += self.velocity_x * delta_time
+        self.y += self.velocity_y * delta_time
+        if self.age >= self.lifetime:
+            return False
+        return True
+
+    def emit(self, scene):
+        if self.age < self.lifetime:
+            particle = Particle(self.char, self.x, self.y, self.r, self.g, self.b, lifetime=self.lifetime)
+            scene.add(particle)
+            self.particles.append(particle)
+        else:
+            scene.remove(self)
+
+    def burst(self, scene, count=10, speed=1.0):
+        for _ in range(count):
+            angle = random.uniform(0, 360)
+            velocity_x = speed * random.uniform(0.5, 1.0) * math.cos(math.radians(angle))
+            velocity_y = speed * random.uniform(0.5, 1.0) * math.sin(math.radians(angle))
+            particle = Particle(self.char, self.x, self.y, self.r, self.g, self.b, lifetime=self.lifetime)
+            particle.velocity_x = velocity_x
+            particle.velocity_y = velocity_y
+            scene.add(particle)
+            self.particles.append(particle) 
+
+    def change_rgb_values(self, r, g, b):
+        self.r = r
+        self.g = g
+        self.b = b
+
+    def update_all(self, delta_time):
+        for particle in self.particles[:]:
+            if not particle.update(delta_time):
+                self.particles.remove(particle)
+
+    def is_dead(self):
+        self.particles = [p for p in self.particles if p.age < p.lifetime]
+        return len(self.particles) == 0
+
+                
 class Group:
-    def __init__(self, *items):
-        self.items = list(items)
+    def __init__(self): 
+        self.items = []
 
     def add(self, *items):
         self.items.extend(items)
@@ -110,6 +188,14 @@ class Group:
         for item in self.items:
             item.x += newx
             item.y += newy
+
+    def change_rgb_values(self, r, g, b):
+        for item in self.items:
+            item.change_rgb_values(r, g, b)
+
+    def change_rgb_values_one(self, item, r, g, b):
+        if item in self.items:
+            item.change_rgb_values(r, g, b)
 
 class Text:
     def __init__(self, text, x, y, r=255, g=255, b=255, z_index=0):
@@ -222,6 +308,15 @@ class Scene:
         self.last_frame_time = current_time
         return delta_time
 
+    def update(self, delta_time):
+        items_to_remove = []
+        for item in self.items[:]:
+            if isinstance(item, Particle):
+                if not item.update(delta_time):
+                    items_to_remove.append(item)
+        for item in items_to_remove:
+            self.remove(item)
+
     def render(self):
         buf = ["\033[H\033[J"]
         sorted_items = sorted(self.items, key=lambda i: getattr(i, 'z_index', 0))
@@ -234,6 +329,14 @@ class Scene:
                     pos = f"\033[{ry};{rx}H"
                     color = f"\033[38;2;{sub_item.r};{sub_item.g};{sub_item.b}m"
                     buf.append(f"{pos}{color}{sub_item.text}")
+            elif isinstance(item, Particle):
+                if item.age < item.lifetime:
+                    ry = int(item.y) + 1 + self.offset_y
+                    rx = int(item.x) + 1 + self.offset_x
+
+                    pos = f"\033[{ry};{rx}H"
+                    color = f"\033[38;2;{item.r};{item.g};{item.b}m"
+                    buf.append(f"{pos}{color}{item.char}")
             else:
                 ry = int(item.y) + 1 + self.offset_y
                 rx = int(item.x) + 1 + self.offset_x

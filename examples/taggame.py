@@ -35,5 +35,14 @@ while True:
         print("💥 COLLISION! Game Over.")
         break
 
+    if x > scene.wall:
+        x = scene.wall
+    if y > scene.floor_ceiling:
+        y = scene.floor_ceiling
+    if x2 > scene.wall:
+        x2 = scene.wall
+    if y2 > scene.floor_ceiling:
+        y2 = scene.floor_ceiling
+
     scene.render()
     time.sleep(0.01) 
