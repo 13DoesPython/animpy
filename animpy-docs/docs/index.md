@@ -5,7 +5,7 @@
 ![GitHub License](https://img.shields.io/github/license/13DoesPython/animpy)
 
 # Introduction
-Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Works great on modern terminals.
+Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Works great on modern terminals. Perfect for spicing up your terminal apps, creating fun loading screens, or just goofing around with text effects.
 
 ## Examples
 
