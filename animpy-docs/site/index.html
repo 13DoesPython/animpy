@@ -346,22 +346,82 @@
   
 
 
-<h1 id="animpy">Animpy 🎬</h1>
+<h1 id="animpy">Animpy</h1>
 <p><img alt="PyPI - Version" src="https://img.shields.io/pypi/v/animpy?color=orange" />
 <a href="https://pepy.tech/projects/animpy"><img alt="Downloads" src="https://static.pepy.tech/personalized-badge/animpy?period=total&amp;units=INTERNATIONAL_SYSTEM&amp;left_color=black&amp;right_color=green&amp;left_text=downloads" /></a>
 <img alt="GitHub License" src="https://img.shields.io/github/license/13DoesPython/animpy" /></p>
 <h1 id="introduction">Introduction</h1>
 <p>Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Works great on modern terminals.</p>
 <h2 id="examples">Examples</h2>
+<h3 id="basic-beginner">Basic &amp; Beginner</h3>
+<pre><code class="language-python"># Spinning loading indicator
+scene = animpy.Scene()
+text = animpy.Text([&quot;|&quot;, &quot;/&quot;, &quot;-&quot;, &quot;\\&quot;], 0, 0)
+scene.add(text)
+
+for i in range(20):
+    scene.render()
+    text.change_frame()
+    time.sleep(0.1)
+</code></pre>
 <ul>
-<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/particlesim.py">Particle simulation</a></li>
-<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/zenofpython.py">The zen of python</a></li>
-<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/audio.py">Audio example</a></li>
-<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/loading.py">Loading screen</a></li>
-<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/taggame.py">Tag game</a></li>
-<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/collision.py">Collision example</a></li>
-<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/playercontrol.py">Player Controls</a></li>
-<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/lerp.py">Linear interpolation</a></li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/lerp.py">Linear interpolation</a> - Learn smooth value transitions with the lerp function</li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/loading.py">Loading screen</a> - Create a simple loading animation</li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/zenofpython.py">The zen of python</a> - Animated text display with color effects</li>
+</ul>
+<h3 id="visual-effects-particles">Visual Effects &amp; Particles</h3>
+<pre><code class="language-python"># Random particle simulation
+scene = animpy.Scene()
+terminal_size = shutil.get_terminal_size()
+
+while True:
+    particle_color_set = [&quot;*&quot;, &quot;+&quot;, &quot;.&quot;]
+    particle_text = random.choice(particle_color_set)
+    particle_x = random.randint(0, terminal_size.columns)
+    particle_y = random.randint(0, terminal_size.lines)
+
+    particle = animpy.Text(particle_text, particle_x, particle_y)
+    scene.add(particle)
+    scene.render()
+    time.sleep(0.1)
+    vx = random.choice([-1, 0, 1])
+    vy = random.choice([-1, 0, 1])
+    particle.moveX((particle_x + vx) % terminal_size.columns)
+    particle.moveY((particle.y + vy) % terminal_size.lines)
+</code></pre>
+<p><strong>This dates back to version 1.0.0, this method of creating particles is still valid but the new Particle class provides a more robust and efficient way to create particle effects with velocity and lifetime management. The above code is a simple example of how you could create a particle simulation using just Text objects, but for more complex effects, the Particle class is recommended.</strong></p>
+<ul>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/particlesim.py">Particle simulation</a> - Advanced particle system with bursts and velocity</li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/collision.py">Collision example</a> - Detect and handle text collisions</li>
+</ul>
+<h3 id="interactive-games">Interactive &amp; Games</h3>
+<pre><code class="language-python"># Two-player tag game with collision detection
+scene = animpy.InteractiveScene()
+player1 = animpy.Text(&quot;P1&quot;, 10, 10, r=255, g=255, b=0)
+player2 = animpy.Text(&quot;P2&quot;, 30, 10, r=0, g=255, b=255)
+scene.add(player1)
+scene.add(player2)
+
+while True:
+    if scene.key_pressed(&quot;w&quot;): y -= speed * scene.dt
+    if scene.key_pressed(&quot;s&quot;): y += speed * scene.dt
+    if scene.key_pressed(&quot;a&quot;): x -= speed * scene.dt
+    if scene.key_pressed(&quot;d&quot;): x += speed * scene.dt
+
+    player1.moveX(x), player1.moveY(y)
+    player2.moveX(x2), player2.moveY(y2)
+
+    if player1.collides_with(player2):
+        print(&quot;💥 COLLISION! Game Over.&quot;)
+        break
+
+    scene.render()
+    time.sleep(0.01)
+</code></pre>
+<ul>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/playercontrol.py">Player Controls</a> - Real-time keyboard input with movement and boundaries</li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/taggame.py">Tag game</a> - Interactive tag game with collision detection</li>
+<li><a href="https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/audio.py">Audio example</a> - Load and play background music with effects</li>
 </ul>
 <h2 id="install">Install</h2>
 <pre><code class="language-bash">pip install animpy
@@ -413,6 +473,55 @@ scene.render()
 <td>❌</td>
 <td>❌</td>
 <td>✅</td>
+</tr>
+<tr>
+<td>Performance on modern terminals</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Interactive input handling</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Open source</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Actively maintained</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Python 3 support</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Cross-platform support</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Animation effects</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
 </tr>
 </tbody>
 </table>
@@ -468,12 +577,19 @@ scene.render()
 <p>Animpy is designed to be efficient and runs smoothly on modern terminals. The performance will depend on the complexity of the animation and the capabilities of the terminal, but in general, it should be able to handle multiple animated text objects without significant lag. For best performance, it's recommended to keep the number of animated objects reasonable and to use the <code>dt</code> property for smooth movement based on frame timing. Future improvements could include optimizing the rendering loop and adding support for more complex animations while maintaining good performance. </p>
 <h2 id="todo-list-for-future-improvements">Todo list for future improvements</h2>
 <ul>
-<li>Add support for more complex animations (e.g., sprite sheets, particle systems)</li>
-<li>Implement a more robust audio system with volume control and multiple channels</li>
+<li>Add support for sprite sheets and more complex animations</li>
 <li>Optimize rendering for better performance with many animated objects</li>
 <li>Add more built-in animation effects (e.g., fade in/out, bounce)</li>
 </ul>
 <h1 id="usage">Usage</h1>
+<h2 id="extended-info-for-all-features">Extended info for all features</h2>
+<p><strong>Text Class</strong> – The foundation of Animpy's animation capabilities. Create animated text objects with full RGB color support, position control, and collision detection. Move text horizontally (<code>moveX</code>) or vertically (<code>moveY</code>), center it on screen (<code>centerX</code>), change colors dynamically (<code>change_rgb_values</code>), and detect collisions with other text objects (<code>collides_with</code>). Create typewriter effects (<code>type_out</code>), make text fall with gravity (<code>fall</code>), and cycle through multiple frames for sprite-like animations (<code>change_frame</code>). Each text object supports z-index layering for depth control and callback functions for collision events.</p>
+<p><strong>Particle Class</strong> – A complete particle effects system for creating dynamic visual effects. Each particle has a configurable lifetime, RGB color, and velocity properties for realistic motion. The <code>burst()</code> method creates multiple particles that scatter in all directions with random angles and configurable speed - perfect for explosion effects. The <code>emit()</code> method creates single particles with parent properties. Particles move based on velocity_x and velocity_y properties, automatically updating their position each frame. The <code>update_all()</code> method advances all particle animations, and <code>is_dead()</code> checks when all particles have expired. Particles support all the color manipulation methods like regular text objects.</p>
+<p><strong>Group Class</strong> – Organize multiple text objects and manage them as a single unit. Add (<code>add</code>) or remove (<code>remove</code>) text objects from groups at any time. Move the entire group with <code>position()</code> to shift all members together. Change the color of all group members simultaneously with <code>change_rgb_values()</code>, or change individual items with <code>change_rgb_values_one()</code>. This is useful for creating menus, UI elements, or any cohesive visual arrangements that need to move or change appearance together.</p>
+<p><strong>Scene Class</strong> – The core rendering engine that displays all content to the terminal. Add multiple items (<code>add</code>) to the scene including text, particles, and groups. Remove items when they're no longer needed (<code>remove</code>). Call <code>render()</code> every frame to draw everything to the terminal with proper z-index layering. The <code>update()</code> method automatically updates all particles in the scene and removes expired ones. Set background colors with <code>set_bg_rgb()</code> for immersive visuals. Create dramatic effects with <code>shake()</code>, clear the screen with <code>clear()</code>, and use the <code>dt</code> property for frame-time-based smooth animations.</p>
+<p><strong>Interactive Scene Class</strong> – An extended scene with real-time keyboard input handling. Inherits all Scene functionality and adds <code>key_pressed()</code> method to detect which keys the user is currently pressing. Provides <code>wall</code> and <code>floor_ceiling</code> properties that return the terminal boundaries for collision detection and movement constraints. Perfect for games, interactive applications, and real-time responsive animations that react to user input.</p>
+<p><strong>Audio Class</strong> – Complete audio management system for sound effects and music. Load audio files with <code>load()</code>, giving each track a unique name for reference. Play tracks with optional looping using <code>play()</code>. Control audio playback with <code>stop()</code> for specific tracks and <code>stop_all()</code> for everything. Adjust volume with <code>set_volume()</code> to create dynamic audio mixing. Check if tracks are playing with <code>is_playing()</code>, and play sounds for specific durations with <code>play_for_time()</code> for timed effects.</p>
+<p><strong>Utility Functions</strong> – <code>lerp()</code> provides linear interpolation for smooth value transitions between start and end points based on a time parameter (0 to 1). <code>hide_cursor()</code> hides the terminal cursor for cleaner animations, and <code>show_cursor()</code> shows it again when needed.</p>
 <h2 id="methods-list">Methods list</h2>
 <p><strong>Text</strong> – Create animated text:</p>
 <pre><code class="language-python">text = animpy.Text(&quot;Hi&quot;, 0, 0, r=255, g=0, b=0)
@@ -482,16 +598,35 @@ text.moveY(5)   # Move down
 text.centerX()  # Center horizontally
 text.change_rgb_values(0, 255, 0)  # Change color
 text.collides_with(other_text)  # Check collision with another text
+text.on_collide_callback(other_text, callback)  # Set a callback for when it collides with another text
 text.width, text.height  # Get dimensions
 text.type_out(&quot;Type me!&quot;, speed=0.05, scene=scene)  # Type effect
 text.fall(velocity=2, floor=15)  # Falling effect
 text.change_frame()  # Cycle through frames (if you used a list)
+</code></pre>
+<p><strong>Particle</strong> – Create and manage particles with velocities:</p>
+<pre><code class="language-python">particle = animpy.Particle(&quot;#&quot;, 10, 5, r=255, g=100, b=50, lifetime=3.0)
+particle.burst(scene, count=20, speed=2.0)  # Emit burst of particles in all directions
+particle.emit(scene)  # Emit a single particle
+particle.change_rgb_values(0, 255, 0)  # Change particle color
+particle.update_all(delta_time)  # Update all emitted particles
+particle.is_dead()  # Check if all particles have expired
+particle.velocity_x, particle.velocity_y  # Set particle velocity
+</code></pre>
+<p><strong>Group</strong> – Group multiple texts together:</p>
+<pre><code class="language-python">group = animpy.Group(text1, text2, text3)
+group.add(text4)  # Add another text to the group
+group.remove(text2)  # Remove text2 from the group
+group.position(5, 0)  # Move the entire group right by 5
+group.change_rgb_values(255, 0, 0)  # Change color of all items in group to red
+group.change_rgb_values_one(text1, 0, 255, 0)  # Change color of a single item in group
 </code></pre>
 <p><strong>Scene</strong> – Render everything:</p>
 <pre><code class="language-python">scene = animpy.Scene()
 scene.add(text1, text2, text3)
 scene.remove(text2)  # Remove text2 from the scene
 scene.render()
+scene.update(delta_time)  # Update all particles in the scene
 scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
 scene.clear()
 scene.shake(intensity=2)  # Shake the scene
@@ -507,16 +642,29 @@ scene.clear()
 scene.shake(intensity=2)  # Shake the scene
 scene.key_pressed(&quot;w&quot;)  # Check if 'w' is pressed
 scene.dt  # Get time since last frame (for smooth movement)
+scene.wall  # Get the x-coordinate of the right/left wall
+scene.floor_ceiling  # Get the y-coordinate of the floor/ceiling
+scene.mouse_pressed(&quot;left&quot;)  # Check if left mouse button is pressed
+scene.mouse_position()  # Get current mouse position
+scene.key_released(&quot;w&quot;)  # Check if 'w' was released since last update
+scene.on_key_press_callback(&quot;w&quot;, callback)  # Set a callback for when 'w' is pressed
+scene.on_key_release_callback(&quot;w&quot;, callback)  # Set a callback for when 'w' is released
+scene.on_mouse_press_callback(&quot;left&quot;, callback)  # Set a callback for when left mouse button is pressed
 </code></pre>
 <p><strong>Audio</strong> – Play sounds:</p>
 <pre><code class="language-python">audio = animpy.Audio()
 audio.load(&quot;bg&quot;, &quot;music.mp3&quot;)
 audio.play(&quot;bg&quot;, loop=-1)
-audio.stop_all()
-audio.is_playing(&quot;track&quot;)
+audio.set_volume(&quot;bg&quot;, 0.5)  # Set volume to 50%
+audio.stop(&quot;bg&quot;)  # Stop a specific audio track
+audio.stop_all()  # Stop all audio
+audio.is_playing(&quot;track&quot;)  # Check if audio is playing
+audio.play_for_time(&quot;bg&quot;, duration=5.0)  # Play audio for a specific duration
 </code></pre>
 <p><strong>Animpy (extras)</strong> – Some extra methods for animations:</p>
 <pre><code class="language-python">animpy.lerp(start, end, t)  # Linear interpolation between start and end
+animpy.hide_cursor()  # Hide the terminal cursor
+animpy.show_cursor()  # Show the terminal cursor
 </code></pre>
 <h2 id="method-instructions">Method instructions</h2>
 <p>Here are the instructions for all the methods in animpy, with code examples.</p>
@@ -537,6 +685,9 @@ text.moveY(5)   # Move down
 <h4 id="collides_with-check-if-this-text-collides-with-another-text"><code>collides_with</code> - Check if this text collides with another text:</h4>
 <pre><code class="language-python">text.collides_with(other_text)
 </code></pre>
+<h4 id="on_collide_callback-set-a-callback-function-to-be-called-when-this-text-collides-with-another-text"><code>on_collide_callback</code> - Set a callback function to be called when this text collides with another text:</h4>
+<pre><code class="language-python">text.on_collide_callback(other_text, callback)
+</code></pre>
 <h4 id="width-and-height-get-the-dimensions-of-the-text"><code>width</code> and <code>height</code> - Get the dimensions of the text:</h4>
 <pre><code class="language-python">text.width, text.height
 </code></pre>
@@ -549,7 +700,53 @@ text.moveY(5)   # Move down
 <h4 id="change_frame-cycle-through-frames-if-the-text-was-created-with-a-list-of-strings"><code>change_frame</code> - Cycle through frames if the text was created with a list of strings:</h4>
 <pre><code class="language-python">text.change_frame()
 </code></pre>
-<p><strong>Scene</strong> – Render everything:</p>
+<h3 id="particle-create-and-manage-particles-with-velocities"><strong>Particle</strong> – Create and manage particles with velocities:</h3>
+<h4 id="animpyparticle-create-a-new-particle-object-with-position-color-and-lifetime"><code>animpy.Particle()</code> - Create a new particle object with position, color, and lifetime:</h4>
+<pre><code class="language-python">particle = animpy.Particle(&quot;💥&quot;, 10, 5, r=255, g=100, b=50, lifetime=3.0)
+</code></pre>
+<h4 id="burst-emit-multiple-particles-that-scatter-in-all-directions-with-random-angles"><code>burst()</code> - Emit multiple particles that scatter in all directions with random angles:</h4>
+<pre><code class="language-python">particle.burst(scene, count=20, speed=2.0)  # Creates 20 particles spreading outward at speed 2.0
+</code></pre>
+<h4 id="emit-emit-a-single-particle-with-the-same-properties-as-the-parent"><code>emit()</code> - Emit a single particle with the same properties as the parent:</h4>
+<pre><code class="language-python">particle.emit(scene)  # Creates one particle at the parent's position
+</code></pre>
+<h4 id="update_all-update-all-emitted-particles-advancing-their-age-and-position"><code>update_all()</code> - Update all emitted particles, advancing their age and position:</h4>
+<pre><code class="language-python">particle.update_all(delta_time)  # Call every frame to update particles
+</code></pre>
+<h4 id="is_dead-check-if-all-emitted-particles-have-expired"><code>is_dead()</code> - Check if all emitted particles have expired:</h4>
+<pre><code class="language-python">if particle.is_dead():
+    print(&quot;All particles have expired&quot;)
+</code></pre>
+<h4 id="change_rgb_values-change-the-particle-color"><code>change_rgb_values</code> - Change the particle color:</h4>
+<pre><code class="language-python">particle.change_rgb_values(0, 255, 0)  # Change to green
+</code></pre>
+<h4 id="velocity_x-and-velocity_y-set-or-get-the-particles-velocity"><code>velocity_x</code> and <code>velocity_y</code> - Set or get the particle's velocity:</h4>
+<pre><code class="language-python">particle.velocity_x = 2.0  # Move 2 units right per second
+particle.velocity_y = -1.5  # Move 1.5 units up per second
+</code></pre>
+<h4 id="update-update-the-particles-age-and-position-called-automatically-by-sceneupdate"><code>update()</code> - Update the particle's age and position (called automatically by Scene.update()):</h4>
+<pre><code class="language-python">if not particle.update(delta_time):
+    # Particle has expired
+    pass
+</code></pre>
+<h3 id="group-group-multiple-texts-together"><strong>Group</strong> – Group multiple texts together:</h3>
+<h4 id="animpygroup-create-a-new-group-of-text-objects"><code>animpy.Group()</code> - Create a new group of text objects:</h4>
+<pre><code class="language-python">group = animpy.Group(text1, text2, text3)
+</code></pre>
+<h4 id="add-and-remove-add-or-remove-text-objects-from-the-group"><code>add</code> and <code>remove</code> - Add or remove text objects from the group:</h4>
+<pre><code class="language-python">group.add(text4)  # Add another text to the group
+group.remove(text2)  # Remove text2 from the group
+</code></pre>
+<h4 id="position-move-the-entire-group-by-a-certain-amount"><code>position</code> - Move the entire group by a certain amount:</h4>
+<pre><code class="language-python">group.position(5, 0)  # Move the entire group right by 5
+</code></pre>
+<h4 id="change_rgb_values-change-the-color-of-all-items-in-the-group"><code>change_rgb_values</code> - Change the color of all items in the group:</h4>
+<pre><code class="language-python">group.change_rgb_values(255, 0, 0)  # Change all items to red
+</code></pre>
+<h4 id="change_rgb_values_one-change-the-color-of-a-single-item-in-the-group"><code>change_rgb_values_one</code> - Change the color of a single item in the group:</h4>
+<pre><code class="language-python">group.change_rgb_values_one(text1, 0, 255, 0)  # Change only text1 to green
+</code></pre>
+<h3 id="scene-render-everything"><strong>Scene</strong> – Render everything:</h3>
 <h4 id="animpyscene-create-a-new-scene"><code>animpy.Scene()</code> - Create a new scene:</h4>
 <pre><code class="language-python">scene = animpy.Scene()
 </code></pre>
@@ -559,6 +756,9 @@ scene.remove(text2)
 </code></pre>
 <h4 id="render-render-the-scene-to-the-terminal"><code>render</code> - Render the scene to the terminal:</h4>
 <pre><code class="language-python">scene.render()
+</code></pre>
+<h4 id="update-update-all-particles-in-the-scene-and-remove-expired-ones"><code>update</code> - Update all particles in the scene and remove expired ones:</h4>
+<pre><code class="language-python">scene.update(delta_time)  # Call every frame to update particles
 </code></pre>
 <h4 id="set_bg_rgb-set-the-background-color-of-the-scene"><code>set_bg_rgb</code> - Set the background color of the scene:</h4>
 <pre><code class="language-python">scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
@@ -572,14 +772,36 @@ scene.remove(text2)
 <h4 id="dt-get-the-time-since-the-last-frame-useful-for-smooth-movement"><code>dt</code> - Get the time since the last frame (useful for smooth movement):</h4>
 <pre><code class="language-python">scene.dt
 </code></pre>
-<p><strong>Interactive Scene</strong> – Handle real-time input:</p>
+<h3 id="interactive-scene-handle-real-time-input"><strong>Interactive Scene</strong> – Handle real-time input:</h3>
 <h4 id="animpyinteractivescene-create-a-new-interactive-scene"><code>animpy.InteractiveScene()</code> - Create a new interactive scene:</h4>
 <pre><code class="language-python">scene = animpy.InteractiveScene()
 </code></pre>
 <h4 id="key_pressed-check-if-a-specific-key-is-currently-pressed"><code>key_pressed</code> - Check if a specific key is currently pressed:</h4>
 <pre><code class="language-python">scene.key_pressed(&quot;w&quot;)  # Check if 'w' is pressed
 </code></pre>
-<p><strong>Audio</strong> – Play sounds:</p>
+<h4 id="wall-and-floor_ceiling-get-the-coordinates-of-the-walls-and-floorceiling-for-movement-boundaries"><code>wall</code> and <code>floor_ceiling</code> - Get the coordinates of the walls and floor/ceiling for movement boundaries:</h4>
+<pre><code class="language-python">scene.wall  # Get the x-coordinate of the right/left wall
+scene.floor_ceiling  # Get the y-coordinate of the floor/ceiling
+</code></pre>
+<h4 id="mouse_pressed-check-if-a-specific-mouse-button-is-currently-pressed"><code>mouse_pressed</code> - Check if a specific mouse button is currently pressed:</h4>
+<pre><code class="language-python">scene.mouse_pressed(&quot;left&quot;)  # Check if left mouse button is pressed
+</code></pre>
+<h4 id="mouse_position-get-the-current-position-of-the-mouse-cursor"><code>mouse_position</code> - Get the current position of the mouse cursor:</h4>
+<pre><code class="language-python">scene.mouse_position()  # Get current mouse position
+</code></pre>
+<h4 id="key_released-check-if-a-specific-key-was-released-since-the-last-update"><code>key_released</code> - Check if a specific key was released since the last update:</h4>
+<pre><code class="language-python">scene.key_released(&quot;w&quot;)  # Check if 'w' was released since last update
+</code></pre>
+<h4 id="on_key_press_callback-set-a-callback-function-that-triggers-when-a-specific-key-is-pressed"><code>on_key_press_callback</code> - Set a callback function that triggers when a specific key is pressed:</h4>
+<pre><code class="language-python">scene.on_key_press_callback(&quot;w&quot;, callback)  # Set a callback for when 'w' is pressed
+</code></pre>
+<h4 id="on_key_release_callback-set-a-callback-function-that-triggers-when-a-specific-key-is-released"><code>on_key_release_callback</code> - Set a callback function that triggers when a specific key is released:</h4>
+<pre><code class="language-python">scene.on_key_release_callback(&quot;w&quot;, callback)  # Set a callback for when 'w' is released
+</code></pre>
+<h4 id="on_mouse_press_callback-set-a-callback-function-that-triggers-when-a-specific-mouse-button-is-pressed"><code>on_mouse_press_callback</code> - Set a callback function that triggers when a specific mouse button is pressed:</h4>
+<pre><code class="language-python">scene.on_mouse_press_callback(&quot;left&quot;, callback)  # Set a callback for when left mouse button is pressed
+</code></pre>
+<h3 id="audio-play-sounds"><strong>Audio</strong> – Play sounds:</h3>
 <h4 id="animpyaudio-create-a-new-audio-manager"><code>animpy.Audio()</code> - Create a new audio manager:</h4>
 <pre><code class="language-python">audio = animpy.Audio()
 </code></pre>
@@ -595,9 +817,24 @@ scene.remove(text2)
 <h4 id="is_playing-check-if-a-specific-track-is-currently-playing"><code>is_playing</code> - Check if a specific track is currently playing:</h4>
 <pre><code class="language-python">audio.is_playing(&quot;track&quot;)
 </code></pre>
-<p><strong>Animpy (extras)</strong> – Some extra methods for animations:</p>
+<h4 id="set_volume-set-the-volume-of-a-specific-audio-track"><code>set_volume</code> - Set the volume of a specific audio track:</h4>
+<pre><code class="language-python">audio.set_volume(&quot;bg&quot;, 0.5)  # Set volume to 50%
+</code></pre>
+<h4 id="stop-stop-a-specific-audio-track"><code>stop</code> - Stop a specific audio track:</h4>
+<pre><code class="language-python">audio.stop(&quot;bg&quot;)  # Stop the background music
+</code></pre>
+<h4 id="play_for_time-play-an-audio-track-for-a-specific-duration"><code>play_for_time</code> - Play an audio track for a specific duration:</h4>
+<pre><code class="language-python">audio.play_for_time(&quot;bg&quot;, duration=5.0)  # Play for 5 seconds
+</code></pre>
+<h3 id="animpy-extras-some-extra-methods-for-animations"><strong>Animpy (extras)</strong> – Some extra methods for animations:</h3>
 <h4 id="lerp-linear-interpolation-between-two-values"><code>lerp</code> - Linear interpolation between two values:</h4>
 <pre><code class="language-python">animpy.lerp(start, end, t)  # Returns a value between start and end based on t (0 to 1)
+</code></pre>
+<h4 id="hide_cursor-hide-the-terminal-cursor"><code>hide_cursor</code> - Hide the terminal cursor:</h4>
+<pre><code class="language-python">animpy.hide_cursor()  # Hides the cursor for cleaner animations
+</code></pre>
+<h4 id="show_cursor-show-the-terminal-cursor"><code>show_cursor</code> - Show the terminal cursor:</h4>
+<pre><code class="language-python">animpy.show_cursor()  # Shows the cursor again (usually called on exit)
 </code></pre>
 <h1 id="simple-animation-example">Simple animation example:</h1>
 <pre><code class="language-python">import animpy
@@ -611,7 +848,45 @@ for _ in range(20):
 </code></pre>
 <h1 id="conclusion">Conclusion</h1>
 <p>Animpy is a powerful and easy-to-use library for creating terminal animations with RGB colors and audio support. It provides a simple API for moving text, creating animations, and handling real-time input, making it a great choice for anyone looking to add some flair to their terminal applications. With good performance on modern terminals and a growing list of features, animpy is a fantastic tool for both beginners and experienced developers alike.</p>
+<h1 id="support-the-project">Support the project</h1>
+<p><a href="https://github.com/sponsors/13DoesPython"><img alt="Sponsor 13DoesPython" src="https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&amp;logo=github-sponsors" /></a></p>
 <h2 id="version-history">Version History</h2>
+<h3 id="v165">v1.6.5</h3>
+<ul>
+<li>Added six new methods to interactive scene:<ul>
+<li><code>mouse_pressed(button="left")</code> to check if a specific mouse button is currently pressed</li>
+<li><code>mouse_position()</code> to get the current position of the mouse cursor</li>
+<li><code>key_released(key)</code> to check if a specific key was released since the last update</li>
+<li><code>on_key_press_callback(key, callback)</code> to set a callback function that triggers when a specific key is pressed</li>
+<li><code>on_key_release_callback(key, callback)</code> to set a callback function that triggers when a specific key is released</li>
+<li><code>on_mouse_press_callback(button, callback)</code> to set a callback function that triggers when a specific mouse button is pressed</li>
+</ul>
+</li>
+</ul>
+<h3 id="v160">v1.6.0</h3>
+<ul>
+<li>Added new <code>Particle</code> class for creating particle effects with velocity and lifetime support</li>
+<li>Added <code>burst()</code> method to create particles that scatter in all directions with configurable speed</li>
+<li>Added <code>emit()</code> method to emit particles from a parent particle</li>
+<li>Added <code>update_all()</code> method to update all emitted particles</li>
+<li>Added <code>is_dead()</code> method to check if all particles have expired</li>
+<li>Added <code>Scene.update()</code> method to automatically update and remove expired particles</li>
+<li>Particles now support RGB color, velocity, and lifetime tracking</li>
+<li>Particles render individually and fade as they reach their lifetime</li>
+<li>Added new example for particle simulation</li>
+<li>Added two new methods to <code>Group</code> class: <code>change_rgb_values_one()</code> for changing color of a single item in the group, and <code>position()</code> for moving the entire group by a certain amount</li>
+<li>Added three new methods to <code>Audio</code> class: <code>is_playing()</code> to check if a specific audio track is currently playing, <code>play_for_time()</code> to play an audio track for a specific duration, and <code>stop_all()</code> to stop all currently playing audio tracks</li>
+<li>Added two new methods for the main namespace: <code>hide_cursor()</code>/<code>show_cursor()</code> for controlling the visibility of the terminal cursor during animations</li>
+</ul>
+<h3 id="v158">v1.5.8</h3>
+<ul>
+<li>Added exclusive floor, wall, and ceiling properties to InteractiveScene for better control over movement boundaries</li>
+</ul>
+<h3 id="v155">v1.5.5</h3>
+<ul>
+<li>Added new Group class for grouping multiple Text objects together and moving them as a unit</li>
+<li>Added collision detection method <code>on_collide_callback</code> to Text class for triggering callbacks when two Text objects collide</li>
+</ul>
 <h3 id="v150">v1.5.0</h3>
 <ul>
 <li>Added linear interpolation function <code>lerp</code> to <code>animpy</code> for smooth animations</li>
