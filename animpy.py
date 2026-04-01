@@ -1,4 +1,4 @@
-import random, math
+import random, math, mouse
 import os, sys, time, atexit, shutil, keyboard
 
 def lerp(start, end, t):
@@ -368,7 +368,37 @@ class InteractiveScene(Scene):
             return keyboard.is_pressed(key)
         except:
             return False
+
+    def mouse_pressed(self, button="left"):
+        try:
+            return mouse.is_pressed(button)
+        except:
+            return False
+        
+    def mouse_position(self):
+        try:
+            return mouse.get_position()
+        except:
+            return (0, 0)
+        
+    def key_released(self, key):
+        try:
+            return keyboard.is_released(key)
+        except:
+            return False
     
+    def on_key_press_callback(self, key, callback):
+        if self.key_pressed(key):
+            callback()
+    
+    def on_key_release_callback(self, key, callback):
+        if self.key_released(key):
+            callback()
+
+    def on_mouse_press_callback(self, button, callback):
+        if self.mouse_pressed(button):
+            callback()
+
     @property
     def dt(self):
         current_time = time.perf_counter()

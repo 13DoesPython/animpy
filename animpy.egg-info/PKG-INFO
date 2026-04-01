@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: animpy
-Version: 1.5.8
+Version: 1.6.0
 Summary: A simple terminal animation library
 Author: Samin Riyaz
 License: MIT License
@@ -34,24 +34,29 @@ Description-Content-Type: text/markdown
 License-File: LICENSE
 Dynamic: license-file
 
-# Animpy 🎬
+# Animpy
 
 ![PyPI - Version](https://img.shields.io/pypi/v/animpy?color=orange)
 [![Downloads](https://static.pepy.tech/personalized-badge/animpy?period=total&units=INTERNATIONAL_SYSTEM&left_color=black&right_color=green&left_text=downloads)](https://pepy.tech/projects/animpy)
 ![GitHub License](https://img.shields.io/github/license/13DoesPython/animpy)
 
-
 Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Works great on modern terminals.
 
 ## Examples
-- [Particle simulation](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/particlesim.py)
-- [The zen of python](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/zenofpython.py)
-- [Audio example](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/audio.py)
-- [Loading screen](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/loading.py)
-- [Tag game](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/taggame.py)
-- [Collision example](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/collision.py)
-- [Player Controls](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/playercontrol.py)
-- [Linear interpolation](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/lerp.py)
+
+### Basic & Beginner
+- [Linear interpolation](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/lerp.py) - Learn smooth value transitions with the lerp function
+- [Loading screen](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/loading.py) - Create a simple loading animation
+- [The zen of python](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/zenofpython.py) - Animated text display with color effects
+
+### Visual Effects & Particles
+- [Particle simulation](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/particlesim.py) - Advanced particle system with bursts and velocity
+- [Collision example](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/collision.py) - Detect and handle text collisions
+
+### Interactive & Games
+- [Player Controls](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/playercontrol.py) - Real-time keyboard input with movement and boundaries
+- [Tag game](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/taggame.py) - Interactive tag game with collision detection
+- [Audio example](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/audio.py) - Load and play background music with effects
 
 ## Install
 ```bash
@@ -84,12 +89,25 @@ text.fall(velocity=2, floor=15)  # Falling effect
 text.change_frame()  # Cycle through frames (if you used a list)
 ```
 
+**Particle** – Create and manage particles with velocities:
+```python
+particle = animpy.Particle("💥", 10, 5, r=255, g=100, b=50, lifetime=3.0)
+particle.burst(scene, count=20, speed=2.0)  # Emit burst of particles in all directions
+particle.emit(scene)  # Emit a single particle
+particle.change_rgb_values(0, 255, 0)  # Change particle color
+particle.update_all(delta_time)  # Update all emitted particles
+particle.is_dead()  # Check if all particles have expired
+particle.velocity_x, particle.velocity_y  # Set particle velocity
+```
+
 **Group** – Group multiple texts together:
 ```python
 group = animpy.Group(text1, text2, text3)
 group.add(text4)  # Add another text to the group
 group.remove(text2)  # Remove text2 from the group
 group.position(5, 0)  # Move the entire group right by 5
+group.change_rgb_values(255, 0, 0)  # Change color of all items in group to red
+group.change_rgb_values_one(text1, 0, 255, 0)  # Change color of a single item in group
 ```
 
 **Scene** – Render everything:
@@ -98,6 +116,7 @@ scene = animpy.Scene()
 scene.add(text1, text2, text3)
 scene.remove(text2)  # Remove text2 from the scene
 scene.render()
+scene.update(delta_time)  # Update all particles in the scene
 scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
 scene.clear()
 scene.shake(intensity=2)  # Shake the scene
@@ -106,10 +125,11 @@ scene.dt  # Get time since last frame (for smooth movement)
 
 **Interactive Scene** – Handle real-time input:
 ```python
-scene = animpy.Scene()
+scene = animpy.InteractiveScene()
 scene.add(text1, text2, text3)
 scene.remove(text2)  # Remove text2 from the scene
 scene.render()
+scene.update(delta_time)  # Update all particles in the scene
 scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
 scene.clear()
 scene.shake(intensity=2)  # Shake the scene
@@ -124,13 +144,18 @@ scene.floor_ceiling  # Get the y-coordinate of the floor/ceiling
 audio = animpy.Audio()
 audio.load("bg", "music.mp3")
 audio.play("bg", loop=-1)
-audio.stop_all()
-audio.is_playing("track")
+audio.set_volume("bg", 0.5)  # Set volume to 50%
+audio.stop("bg")  # Stop a specific audio track
+audio.stop_all()  # Stop all audio
+audio.is_playing("track")  # Check if audio is playing
+audio.play_for_time("bg", duration=5.0)  # Play audio for a specific duration
 ```
 
 **Animpy (extras)** – Some extra methods for animations:
 ```python
 animpy.lerp(start, end, t)  # Linear interpolation between start and end
+animpy.hide_cursor()  # Hide the terminal cursor
+animpy.show_cursor()  # Show the terminal cursor
 ```
 
 # Support the project
@@ -138,10 +163,24 @@ animpy.lerp(start, end, t)  # Linear interpolation between start and end
 
 ## Version History
 
-## v1.5.8
+### v1.6.0
+- Added new `Particle` class for creating particle effects with velocity and lifetime support
+- Added `burst()` method to create particles that scatter in all directions with configurable speed
+- Added `emit()` method to emit particles from a parent particle
+- Added `update_all()` method to update all emitted particles
+- Added `is_dead()` method to check if all particles have expired
+- Added `Scene.update()` method to automatically update and remove expired particles
+- Particles now support RGB color, velocity, and lifetime tracking
+- Particles render individually and fade as they reach their lifetime
+- Added new example for particle simulation
+- Added two new methods to `Group` class: `change_rgb_values_one()` for changing color of a single item in the group, and `position()` for moving the entire group by a certain amount
+- Added three new methods to `Audio` class: `is_playing()` to check if a specific audio track is currently playing, `play_for_time()` to play an audio track for a specific duration, and `stop_all()` to stop all currently playing audio tracks
+- Added two new methods for the main namespace: `hide_cursor()`/`show_cursor()` for controlling the visibility of the terminal cursor during animations
+
+### v1.5.8
 - Added exclusive floor, wall, and ceiling properties to InteractiveScene for better control over movement boundaries
 
-## v1.5.5
+### v1.5.5
 - Added new Group class for grouping multiple Text objects together and moving them as a unit
 - Added collision detection method `on_collide_callback` to Text class for triggering callbacks when two Text objects collide
 
@@ -157,7 +196,7 @@ animpy.lerp(start, end, t)  # Linear interpolation between start and end
 ### v1.4.5
 - Added background color support to `Scene` with `set_bg_rgb` method
 
-## v1.4.1
+### v1.4.1
 - Added `scene.remove` method to remove items from the scene
 
 ### v1.4.0

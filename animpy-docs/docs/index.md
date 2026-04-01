@@ -256,6 +256,12 @@ scene.key_pressed("w")  # Check if 'w' is pressed
 scene.dt  # Get time since last frame (for smooth movement)
 scene.wall  # Get the x-coordinate of the right/left wall
 scene.floor_ceiling  # Get the y-coordinate of the floor/ceiling
+scene.mouse_pressed("left")  # Check if left mouse button is pressed
+scene.mouse_position()  # Get current mouse position
+scene.key_released("w")  # Check if 'w' was released since last update
+scene.on_key_press_callback("w", callback)  # Set a callback for when 'w' is pressed
+scene.on_key_release_callback("w", callback)  # Set a callback for when 'w' is released
+scene.on_mouse_press_callback("left", callback)  # Set a callback for when left mouse button is pressed
 ```
 
 **Audio** – Play sounds:
@@ -545,6 +551,15 @@ Animpy is a powerful and easy-to-use library for creating terminal animations wi
 [![Sponsor 13DoesPython](https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/13DoesPython)
 
 ## Version History
+
+### v1.6.5
+- Added six new methods to interactive scene:
+    - `mouse_pressed(button="left")` to check if a specific mouse button is currently pressed
+    - `mouse_position()` to get the current position of the mouse cursor
+    - `key_released(key)` to check if a specific key was released since the last update
+    - `on_key_press_callback(key, callback)` to set a callback function that triggers when a specific key is pressed
+    - `on_key_release_callback(key, callback)` to set a callback function that triggers when a specific key is released
+    - `on_mouse_press_callback(button, callback)` to set a callback function that triggers when a specific mouse button is pressed
 
 ### v1.6.0
 - Added new `Particle` class for creating particle effects with velocity and lifetime support
