@@ -471,6 +471,35 @@ scene.key_pressed("w")  # Check if 'w' is pressed
 scene.wall  # Get the x-coordinate of the right/left wall
 scene.floor_ceiling  # Get the y-coordinate of the floor/ceiling
 ```
+#### `mouse_pressed` - Check if a specific mouse button is currently pressed:
+```python
+scene.mouse_pressed("left")  # Check if left mouse button is pressed
+```
+
+#### `mouse_position` - Get the current position of the mouse cursor:
+```python
+scene.mouse_position()  # Get current mouse position
+```
+
+#### `key_released` - Check if a specific key was released since the last update:
+```python
+scene.key_released("w")  # Check if 'w' was released since last update
+```
+
+#### `on_key_press_callback` - Set a callback function that triggers when a specific key is pressed:
+```python
+scene.on_key_press_callback("w", callback)  # Set a callback for when 'w' is pressed
+```
+
+#### `on_key_release_callback` - Set a callback function that triggers when a specific key is released:
+```python
+scene.on_key_release_callback("w", callback)  # Set a callback for when 'w' is released
+```
+
+#### `on_mouse_press_callback` - Set a callback function that triggers when a specific mouse button is pressed:
+```python
+scene.on_mouse_press_callback("left", callback)  # Set a callback for when left mouse button is pressed
+```
 
 ### **Audio** – Play sounds:
 
