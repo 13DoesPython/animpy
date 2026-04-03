@@ -64,6 +64,14 @@ particle.is_dead()  # Check if all particles have expired
 particle.velocity_x, particle.velocity_y  # Set particle velocity
 ```
 
+**EffectText** – Text with built-in effects:
+```python
+effect_text = animpy.EffectText("Shaky!", 10, 5)
+effect_text.shake_text(intensity=1)  # Shake the text
+effect_text.gravity_text(floor=15, gravity=0.5)  # Simulate gravity
+effect_text.decaying_text(time=3.0, decay_rate=0.5)
+```
+
 **Group** – Group multiple texts together:
 ```python
 group = animpy.Group(text1, text2, text3)
@@ -132,6 +140,13 @@ animpy.show_cursor()  # Show the terminal cursor
 [![Sponsor 13DoesPython](https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/13DoesPython)
 
 ## Version History
+
+## v1.7.0
+- Added new `EffectText` class that extends `Text` with built-in support for various text effects like shaking, methods include:
+    - `gravity_text(floor, gravity)` for simulating gravity with velocity and floor collision
+    - `shake_text(intensity)` for shaking the text randomly within a certain intensity
+    - `decaying_text(time, decay_rate)` for creating a text that fades out and disappears after a certain lifetime
+- Added more mouse controls such as `mouse_released(button)` to check if a specific mouse button was released since the last update, and `mouse_release_callback(button, callback)` to set a callback function that triggers when a specific mouse button is released
 
 ### v1.6.5
 - Added six new methods to interactive scene:

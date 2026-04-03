@@ -263,19 +263,6 @@ class Text:
         if self.collides_with(other):
             callback()
 
-    def type_out(self, full_text, speed=0.1, scene=None):
-        for i in range(len(full_text) + 1):
-            self.text = full_text[:i] # Take the string from start to i
-            if scene:
-                scene.render() # Redraw the scene
-            time.sleep(speed)
-    
-    def fall(self, velocity=1, floor=20):
-        if self.y < floor:
-            self.y += velocity
-        else:
-            self.y = floor
-
 class Scene:
     def __init__(self) -> None:
         self.items = []
@@ -356,6 +343,28 @@ class Scene:
     def clear(self):
         print("\033[2J\033[H")
 
+class EffectText(Text):
+    def __init__(self, text, x, y, r=255, g=255, b=255, z_index=0):
+        super().__init__(text, x, y, r, g, b, z_index)
+        self.velocity_x = 0.0
+        self.velocity_y = 0.0
+
+    def gravity_text(self, floor=20, gravity=0.5):
+        if self.y < floor:
+            self.velocity_y += gravity
+            self.y += self.velocity_y
+        else:
+            self.y = floor
+            self.velocity_y = 0.0
+    
+    def shaking_text(self, intensity=1):
+        self.x += int((os.urandom(1)[0] / 255.0 - 0.5) * 2 * intensity)
+        self.y += int((os.urandom(1)[0] / 255.0 - 0.5) * 2 * intensity)
+
+    def decaying_text(self, time, decay_rate=0.1):
+        if time > decay_rate:
+            self.text = self.text[:-1] if self.text else ""
+
 class InteractiveScene(Scene):
     def __init__(self):
         super().__init__()
@@ -397,6 +406,14 @@ class InteractiveScene(Scene):
 
     def on_mouse_press_callback(self, button, callback):
         if self.mouse_pressed(button):
+            callback()
+    
+    def mouse_release(self, button, callback):
+        if not self.mouse_pressed(button):
+            callback()
+
+    def mouse_release_callback(self, button, callback):
+        if not self.mouse_pressed(button):
             callback()
 
     @property

@@ -183,6 +183,8 @@ Animpy is designed to be efficient and runs smoothly on modern terminals. The pe
 
 **Particle Class** – A complete particle effects system for creating dynamic visual effects. Each particle has a configurable lifetime, RGB color, and velocity properties for realistic motion. The `burst()` method creates multiple particles that scatter in all directions with random angles and configurable speed - perfect for explosion effects. The `emit()` method creates single particles with parent properties. Particles move based on velocity_x and velocity_y properties, automatically updating their position each frame. The `update_all()` method advances all particle animations, and `is_dead()` checks when all particles have expired. Particles support all the color manipulation methods like regular text objects.
 
+**EffectText Class** – An extension of the Text class that includes built-in support for various text effects. Use `shake_text()` to randomly shake the text within a certain intensity, `gravity_text()` to simulate gravity with velocity and floor collision, and `decaying_text()` to create a text that fades out and disappears after a certain lifetime. This class is ideal for adding dynamic effects to your text animations without needing to manually implement the logic for each effect.
+
 **Group Class** – Organize multiple text objects and manage them as a single unit. Add (`add`) or remove (`remove`) text objects from groups at any time. Move the entire group with `position()` to shift all members together. Change the color of all group members simultaneously with `change_rgb_values()`, or change individual items with `change_rgb_values_one()`. This is useful for creating menus, UI elements, or any cohesive visual arrangements that need to move or change appearance together.
 
 **Scene Class** – The core rendering engine that displays all content to the terminal. Add multiple items (`add`) to the scene including text, particles, and groups. Remove items when they're no longer needed (`remove`). Call `render()` every frame to draw everything to the terminal with proper z-index layering. The `update()` method automatically updates all particles in the scene and removes expired ones. Set background colors with `set_bg_rgb()` for immersive visuals. Create dramatic effects with `shake()`, clear the screen with `clear()`, and use the `dt` property for frame-time-based smooth animations.
@@ -218,6 +220,14 @@ particle.change_rgb_values(0, 255, 0)  # Change particle color
 particle.update_all(delta_time)  # Update all emitted particles
 particle.is_dead()  # Check if all particles have expired
 particle.velocity_x, particle.velocity_y  # Set particle velocity
+```
+
+**EffectText** – Text with built-in effects:
+```python
+effect_text = animpy.EffectText("Shaky!", 10, 5)
+effect_text.shake_text(intensity=1)  # Shake the text
+effect_text.gravity_text(floor=15, gravity=0.5)  # Simulate gravity
+effect_text.decaying_text(time=3.0, decay_rate=0.5)
 ```
 
 **Group** – Group multiple texts together:
@@ -383,6 +393,25 @@ particle.velocity_y = -1.5  # Move 1.5 units up per second
 if not particle.update(delta_time):
     # Particle has expired
     pass
+```
+
+### **EffectText** – Text with built-in effects:
+
+#### `animpy.EffectText()` - Create a new EffectText object that extends Text with built-in effects:
+```python
+effect_text = animpy.EffectText("Shaky!", 10, 5)
+```
+#### `shake_text` - Shake the text randomly within a certain intensity:
+```python
+effect_text.shake_text(intensity=1)  # Shake the text with intensity 1
+```
+#### `gravity_text` - Simulate gravity with velocity and floor collision:
+```python
+effect_text.gravity_text(floor=15, gravity=0.5)  # Text will fall with gravity and stop at floor level 15
+```
+#### `decaying_text` - Create a text that fades out and disappears after a certain lifetime:
+```python
+effect_text.decaying_text(time=3.0, decay_rate=0.5)  # Text will fade out over 3 seconds
 ```
 
 ### **Group** – Group multiple texts together:
@@ -580,6 +609,12 @@ Animpy is a powerful and easy-to-use library for creating terminal animations wi
 [![Sponsor 13DoesPython](https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/13DoesPython)
 
 ## Version History
+## v1.7.0
+- Added new `EffectText` class that extends `Text` with built-in support for various text effects like shaking, methods include:
+    - `gravity_text(floor, gravity)` for simulating gravity with velocity and floor collision
+    - `shake_text(intensity)` for shaking the text randomly within a certain intensity
+    - `decaying_text(time, decay_rate)` for creating a text that fades out and disappears after a certain lifetime
+- Added more mouse controls such as `mouse_released(button)` to check if a specific mouse button was released since the last update, and `mouse_release_callback(button, callback)` to set a callback function that triggers when a specific mouse button is released
 
 ### v1.6.5
 - Added six new methods to interactive scene:

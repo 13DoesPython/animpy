@@ -1,5 +1,5 @@
 site_name: Animpy Official documentation
-docs_dir: 'animpy-docs/docs'
+docs_dir: 'docs'
 theme:
   name: material
   palette:
@@ -18,6 +18,5 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          setup_commands:
-            - import sys
-            - sys.path.append('.')
+          options:
+            paths: ["."]
