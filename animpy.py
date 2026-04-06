@@ -117,9 +117,8 @@ class Audio:
             self.sounds[name].stop()
 
 class Particle:
-    def __init__(self, char, x, y, r=255, g=255, b=255, lifetime=1.0):
-        self.char = char
-        self.x = x
+    def __init__(self, text, x, y, r=255, g=255, b=255, lifetime=1.0):
+        self.text = text
         self.y = y
         self.r = r
         self.g = g
@@ -140,7 +139,7 @@ class Particle:
 
     def emit(self, scene):
         if self.age < self.lifetime:
-            particle = Particle(self.char, self.x, self.y, self.r, self.g, self.b, lifetime=self.lifetime)
+            particle = Particle(self.text, self.x, self.y, self.r, self.g, self.b, lifetime=self.lifetime)
             scene.add(particle)
             self.particles.append(particle)
         else:
@@ -151,7 +150,7 @@ class Particle:
             angle = random.uniform(0, 360)
             velocity_x = speed * random.uniform(0.5, 1.0) * math.cos(math.radians(angle))
             velocity_y = speed * random.uniform(0.5, 1.0) * math.sin(math.radians(angle))
-            particle = Particle(self.char, self.x, self.y, self.r, self.g, self.b, lifetime=self.lifetime)
+            particle = Particle(self.text, self.x, self.y, self.r, self.g, self.b, lifetime=self.lifetime)
             particle.velocity_x = velocity_x
             particle.velocity_y = velocity_y
             scene.add(particle)
@@ -273,8 +272,6 @@ class Scene:
 
     def set_bg_rgb(self, r, g, b):
         self.bg_color_str = f"\033[48;2;{r};{g};{b}m"
-        sys.stdout.write(self.bg_color_str)
-        sys.stdout.flush()
 
     def add(self, *items) -> None:
         for item in items:
@@ -305,37 +302,65 @@ class Scene:
             self.remove(item)
 
     def render(self):
-        buf = ["\033[H\033[J"]
+        try:
+            columns, lines = os.get_terminal_size()
+        except OSError:
+            columns, lines = 80, 24
+
+        grid = [[f"{self.bg_color_str} " for _ in range(columns)] for _ in range(lines)]
         sorted_items = sorted(self.items, key=lambda i: getattr(i, 'z_index', 0))
 
         for item in sorted_items:
             if isinstance(item, Group):
                 for sub_item in item.items:
-                    ry = int(sub_item.y) + 1 + self.offset_y
-                    rx = int(sub_item.x) + 1 + self.offset_x
-                    pos = f"\033[{ry};{rx}H"
-                    color = f"\033[38;2;{sub_item.r};{sub_item.g};{sub_item.b}m"
-                    buf.append(f"{pos}{color}{sub_item.text}")
+                    ry = int(sub_item.y) + self.offset_y
+                    rx = int(sub_item.x) + self.offset_x
+
+                    if 0 <= ry < lines and 0 <= rx < columns:
+                        fg_color = f"\033[38;2;{sub_item.r};{sub_item.g};{sub_item.b}m"
+                        
+                        for i, char in enumerate(sub_item.text):
+                            if rx + i < columns:
+                                grid[ry][rx + i] = f"{self.bg_color_str}{fg_color}{char}"
+
             elif isinstance(item, Particle):
                 if item.age < item.lifetime:
-                    ry = int(item.y) + 1 + self.offset_y
-                    rx = int(item.x) + 1 + self.offset_x
+                    ry = int(item.y) + self.offset_y
+                    rx = int(item.x) + self.offset_x
 
-                    pos = f"\033[{ry};{rx}H"
-                    color = f"\033[38;2;{item.r};{item.g};{item.b}m"
-                    buf.append(f"{pos}{color}{item.char}")
+                    # Only draw if the item is inside the grid
+                    if 0 <= ry < lines and 0 <= rx < columns:
+                        # Foreground color + the text
+                        fg_color = f"\033[38;2;{item.r};{item.g};{item.b}m"
+                        
+                        # If the item.text is multiple characters, we place them one by one
+                        for i, char in enumerate(item.text):
+                            if rx + i < columns:
+                                # We combine the BG color and FG color for this cell
+                                grid[ry][rx + i] = f"{self.bg_color_str}{fg_color}{char}"
             else:
-                ry = int(item.y) + 1 + self.offset_y
-                rx = int(item.x) + 1 + self.offset_x
+                ry = int(item.y) + self.offset_y
+                rx = int(item.x) + self.offset_x
 
-                pos = f"\033[{ry};{rx}H"
-                color = f"\033[38;2;{item.r};{item.g};{item.b}m"
-                buf.append(f"{pos}{color}{item.text}")
+                # Only draw if the item is inside the grid
+                if 0 <= ry < lines and 0 <= rx < columns:
+                    # Foreground color + the text
+                    fg_color = f"\033[38;2;{item.r};{item.g};{item.b}m"
+                    
+                    # If the item.text is multiple characters, we place them one by one
+                    for i, char in enumerate(item.text):
+                        if rx + i < columns:
+                            # We combine the BG color and FG color for this cell
+                            grid[ry][rx + i] = f"{self.bg_color_str}{fg_color}{char}"
 
+        buf = ["\033[H"]
+        for row in grid:
+            buf.append("".join(row))
         buf.append("\033[0m")
-        sys.stdout.write("".join(buf))
+        
+        sys.stdout.write("".join(buf) + "\033[0m")
         sys.stdout.flush()
-
+        
     def shake(self, intensity=1):
         self.offset_x = int((os.urandom(1)[0] / 255.0 - 0.5) * 2 * intensity)
         self.offset_y = int((os.urandom(1)[0] / 255.0 - 0.5) * 2 * intensity)

@@ -587,6 +587,7 @@ scene.render()
 <h2 id="extended-info-for-all-features">Extended info for all features</h2>
 <p><strong>Text Class</strong> – The foundation of Animpy's animation capabilities. Create animated text objects with full RGB color support, position control, and collision detection. Move text horizontally (<code>moveX</code>) or vertically (<code>moveY</code>), center it on screen (<code>centerX</code>), change colors dynamically (<code>change_rgb_values</code>), and detect collisions with other text objects (<code>collides_with</code>). Create typewriter effects (<code>type_out</code>), make text fall with gravity (<code>fall</code>), and cycle through multiple frames for sprite-like animations (<code>change_frame</code>). Each text object supports z-index layering for depth control and callback functions for collision events.</p>
 <p><strong>Particle Class</strong> – A complete particle effects system for creating dynamic visual effects. Each particle has a configurable lifetime, RGB color, and velocity properties for realistic motion. The <code>burst()</code> method creates multiple particles that scatter in all directions with random angles and configurable speed - perfect for explosion effects. The <code>emit()</code> method creates single particles with parent properties. Particles move based on velocity_x and velocity_y properties, automatically updating their position each frame. The <code>update_all()</code> method advances all particle animations, and <code>is_dead()</code> checks when all particles have expired. Particles support all the color manipulation methods like regular text objects.</p>
+<p><strong>EffectText Class</strong> – An extension of the Text class that includes built-in support for various text effects. Use <code>shake_text()</code> to randomly shake the text within a certain intensity, <code>gravity_text()</code> to simulate gravity with velocity and floor collision, and <code>decaying_text()</code> to create a text that fades out and disappears after a certain lifetime. This class is ideal for adding dynamic effects to your text animations without needing to manually implement the logic for each effect.</p>
 <p><strong>Group Class</strong> – Organize multiple text objects and manage them as a single unit. Add (<code>add</code>) or remove (<code>remove</code>) text objects from groups at any time. Move the entire group with <code>position()</code> to shift all members together. Change the color of all group members simultaneously with <code>change_rgb_values()</code>, or change individual items with <code>change_rgb_values_one()</code>. This is useful for creating menus, UI elements, or any cohesive visual arrangements that need to move or change appearance together.</p>
 <p><strong>Scene Class</strong> – The core rendering engine that displays all content to the terminal. Add multiple items (<code>add</code>) to the scene including text, particles, and groups. Remove items when they're no longer needed (<code>remove</code>). Call <code>render()</code> every frame to draw everything to the terminal with proper z-index layering. The <code>update()</code> method automatically updates all particles in the scene and removes expired ones. Set background colors with <code>set_bg_rgb()</code> for immersive visuals. Create dramatic effects with <code>shake()</code>, clear the screen with <code>clear()</code>, and use the <code>dt</code> property for frame-time-based smooth animations.</p>
 <p><strong>Interactive Scene Class</strong> – An extended scene with real-time keyboard input handling. Inherits all Scene functionality and adds <code>key_pressed()</code> method to detect which keys the user is currently pressing. Provides <code>wall</code> and <code>floor_ceiling</code> properties that return the terminal boundaries for collision detection and movement constraints. Perfect for games, interactive applications, and real-time responsive animations that react to user input.</p>
@@ -614,6 +615,12 @@ particle.change_rgb_values(0, 255, 0)  # Change particle color
 particle.update_all(delta_time)  # Update all emitted particles
 particle.is_dead()  # Check if all particles have expired
 particle.velocity_x, particle.velocity_y  # Set particle velocity
+</code></pre>
+<p><strong>EffectText</strong> – Text with built-in effects:</p>
+<pre><code class="language-python">effect_text = animpy.EffectText(&quot;Shaky!&quot;, 10, 5)
+effect_text.shake_text(intensity=1)  # Shake the text
+effect_text.gravity_text(floor=15, gravity=0.5)  # Simulate gravity
+effect_text.decaying_text(time=3.0, decay_rate=0.5)
 </code></pre>
 <p><strong>Group</strong> – Group multiple texts together:</p>
 <pre><code class="language-python">group = animpy.Group(text1, text2, text3)
@@ -730,6 +737,19 @@ particle.velocity_y = -1.5  # Move 1.5 units up per second
 <pre><code class="language-python">if not particle.update(delta_time):
     # Particle has expired
     pass
+</code></pre>
+<h3 id="effecttext-text-with-built-in-effects"><strong>EffectText</strong> – Text with built-in effects:</h3>
+<h4 id="animpyeffecttext-create-a-new-effecttext-object-that-extends-text-with-built-in-effects"><code>animpy.EffectText()</code> - Create a new EffectText object that extends Text with built-in effects:</h4>
+<pre><code class="language-python">effect_text = animpy.EffectText(&quot;Shaky!&quot;, 10, 5)
+</code></pre>
+<h4 id="shake_text-shake-the-text-randomly-within-a-certain-intensity"><code>shake_text</code> - Shake the text randomly within a certain intensity:</h4>
+<pre><code class="language-python">effect_text.shake_text(intensity=1)  # Shake the text with intensity 1
+</code></pre>
+<h4 id="gravity_text-simulate-gravity-with-velocity-and-floor-collision"><code>gravity_text</code> - Simulate gravity with velocity and floor collision:</h4>
+<pre><code class="language-python">effect_text.gravity_text(floor=15, gravity=0.5)  # Text will fall with gravity and stop at floor level 15
+</code></pre>
+<h4 id="decaying_text-create-a-text-that-fades-out-and-disappears-after-a-certain-lifetime"><code>decaying_text</code> - Create a text that fades out and disappears after a certain lifetime:</h4>
+<pre><code class="language-python">effect_text.decaying_text(time=3.0, decay_rate=0.5)  # Text will fade out over 3 seconds
 </code></pre>
 <h3 id="group-group-multiple-texts-together"><strong>Group</strong> – Group multiple texts together:</h3>
 <h4 id="animpygroup-create-a-new-group-of-text-objects"><code>animpy.Group()</code> - Create a new group of text objects:</h4>
@@ -853,6 +873,16 @@ for _ in range(20):
 <h1 id="support-the-project">Support the project</h1>
 <p><a href="https://github.com/sponsors/13DoesPython"><img alt="Sponsor 13DoesPython" src="https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&amp;logo=github-sponsors" /></a></p>
 <h2 id="version-history">Version History</h2>
+<h2 id="v170">v1.7.0</h2>
+<ul>
+<li>Added new <code>EffectText</code> class that extends <code>Text</code> with built-in support for various text effects like shaking, methods include:<ul>
+<li><code>gravity_text(floor, gravity)</code> for simulating gravity with velocity and floor collision</li>
+<li><code>shake_text(intensity)</code> for shaking the text randomly within a certain intensity</li>
+<li><code>decaying_text(time, decay_rate)</code> for creating a text that fades out and disappears after a certain lifetime</li>
+</ul>
+</li>
+<li>Added more mouse controls such as <code>mouse_released(button)</code> to check if a specific mouse button was released since the last update, and <code>mouse_release_callback(button, callback)</code> to set a callback function that triggers when a specific mouse button is released</li>
+</ul>
 <h3 id="v165">v1.6.5</h3>
 <ul>
 <li>Added six new methods to interactive scene:<ul>
