@@ -22,6 +22,8 @@ Make cool terminal animations without the pain. Move text around, use RGB colors
 - [Tag game](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/taggame.py) - Interactive tag game with collision detection
 - [Audio example](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/audio.py) - Load and play background music with effects
 
+And many more!
+
 ## Install
 ```bash
 pip install animpy
@@ -82,6 +84,16 @@ group.change_rgb_values(255, 0, 0)  # Change color of all items in group to red
 group.change_rgb_values_one(text1, 0, 255, 0)  # Change color of a single item in group
 ```
 
+**Coords** - Helper class 1 for `Keychains`
+
+**Keyframe** - Helper class 2 for `Keychains`
+
+**Keychains** - Making text follow a path:
+```python
+path = animpy.Keychains(*keyframes)
+path.follow_path(obj, speed=1)
+```
+
 **Scene** – Render everything:
 ```python
 scene = animpy.Scene()
@@ -140,6 +152,13 @@ animpy.show_cursor()  # Show the terminal cursor
 [![Sponsor 13DoesPython](https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/13DoesPython)
 
 ## Version History
+
+## v1.8.0
+- Added new `Coords` and `Keyframe` as helper classes for `Keychains` class
+- Added brand new `Keychains` class for animating with keyframes, methods include:
+    - `follow_path` for making text follow a keyframe path
+- Added new method `slide_to_pos` for `Text` as a helper function for `follow_path`
+- Added one new example to examples folder (keyframes.py)
 
 ## v1.7.0
 - Added new `EffectText` class that extends `Text` with built-in support for various text effects like shaking, methods include:

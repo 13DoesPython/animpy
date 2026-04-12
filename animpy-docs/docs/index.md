@@ -5,7 +5,7 @@
 ![GitHub License](https://img.shields.io/github/license/13DoesPython/animpy)
 
 # Introduction
-Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Works great on modern terminals. Perfect for spicing up your terminal apps, creating fun loading screens, or just goofing around with text effects.
+Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Works great on modern terminals. Perfect for spicing up your terminal apps, creating fun loading screens, or just goofing around with text effects. If you like animpy please give me a star, it helps out a ton!
 
 ## Examples
 
@@ -174,6 +174,7 @@ Animpy is designed to be efficient and runs smoothly on modern terminals. The pe
 - Add support for sprite sheets and more complex animations
 - Optimize rendering for better performance with many animated objects
 - Add more built-in animation effects (e.g., fade in/out, bounce)
+- Add more types of terminal items (e.g: loading bars, panels, etc)
 
 # Usage
 
@@ -186,6 +187,8 @@ Animpy is designed to be efficient and runs smoothly on modern terminals. The pe
 **EffectText Class** – An extension of the Text class that includes built-in support for various text effects. Use `shake_text()` to randomly shake the text within a certain intensity, `gravity_text()` to simulate gravity with velocity and floor collision, and `decaying_text()` to create a text that fades out and disappears after a certain lifetime. This class is ideal for adding dynamic effects to your text animations without needing to manually implement the logic for each effect.
 
 **Group Class** – Organize multiple text objects and manage them as a single unit. Add (`add`) or remove (`remove`) text objects from groups at any time. Move the entire group with `position()` to shift all members together. Change the color of all group members simultaneously with `change_rgb_values()`, or change individual items with `change_rgb_values_one()`. This is useful for creating menus, UI elements, or any cohesive visual arrangements that need to move or change appearance together.
+
+**Coords, Keyframe, and Keychains** - Help in making a text obj follow a specific path. Only one method is there and its `follow_path` for making text follow a path and controlling speed of path movement
 
 **Scene Class** – The core rendering engine that displays all content to the terminal. Add multiple items (`add`) to the scene including text, particles, and groups. Remove items when they're no longer needed (`remove`). Call `render()` every frame to draw everything to the terminal with proper z-index layering. The `update()` method automatically updates all particles in the scene and removes expired ones. Set background colors with `set_bg_rgb()` for immersive visuals. Create dramatic effects with `shake()`, clear the screen with `clear()`, and use the `dt` property for frame-time-based smooth animations.
 
@@ -238,6 +241,16 @@ group.remove(text2)  # Remove text2 from the group
 group.position(5, 0)  # Move the entire group right by 5
 group.change_rgb_values(255, 0, 0)  # Change color of all items in group to red
 group.change_rgb_values_one(text1, 0, 255, 0)  # Change color of a single item in group
+```
+
+**Coords** - Helper class 1 for `Keychains`
+
+**Keyframe** - Helper class 2 for `Keychains`
+
+**Keychains** - Making text follow a path:
+```python
+path = animpy.Keychains(*keyframes)
+path.follow_path(obj, speed=1)
 ```
 
 **Scene** – Render everything:
@@ -440,6 +453,17 @@ group.change_rgb_values(255, 0, 0)  # Change all items to red
 group.change_rgb_values_one(text1, 0, 255, 0)  # Change only text1 to green
 ```
 
+### `Coords` - Helper class 1 for `Keychains`
+
+### `Keyframe` - Helper class 2 for `Keychains`
+
+### `Keychains` - Making text follow a path:
+
+#### `follow_path` - make a text obj follow a path:
+```python
+path.follow_path(obj, speed=1)
+```
+
 ### **Scene** – Render everything:
 
 #### `animpy.Scene()` - Create a new scene:
@@ -609,7 +633,15 @@ Animpy is a powerful and easy-to-use library for creating terminal animations wi
 [![Sponsor 13DoesPython](https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/13DoesPython)
 
 ## Version History
-## v1.7.0
+
+### v1.8.0
+- Added new `Coords` and `Keyframe` as helper classes for `Keychains` class
+- Added brand new `Keychains` class for animating with keyframes, methods include:
+    - `follow_path` for making text follow a keyframe path
+- Added new method `slide_to_pos` for `Text` as a helper function for `follow_path`
+- Added one new example to examples folder (keyframes.py)
+
+### v1.7.0
 - Added new `EffectText` class that extends `Text` with built-in support for various text effects like shaking, methods include:
     - `gravity_text(floor, gravity)` for simulating gravity with velocity and floor collision
     - `shake_text(intensity)` for shaking the text randomly within a certain intensity

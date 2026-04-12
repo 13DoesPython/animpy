@@ -1,5 +1,6 @@
 import random, math, mouse
 import os, sys, time, atexit, shutil, keyboard
+from typing import NamedTuple
 
 def lerp(start, end, t):
     t = max(0.0, min(1.0, t)) 
@@ -211,10 +212,21 @@ class Text:
         self.text = self.frames[self.current_frame_idx]
 
     def moveX(self, newX: int) -> None:
-        self.x = newX
+        self.x += newX
 
     def moveY(self, newY: int) -> None:
-        self.y = newY
+        self.y += newY
+
+    def slide_to_pos(self, new_pos, speed=1):
+        if self.x < new_pos.x:
+            self.x += speed
+        elif self.x > new_pos.x:
+            self.x -= speed
+
+        if self.y < new_pos.y:
+            self.y += speed
+        elif self.y > new_pos.y:
+            self.y -= speed
 
     def centerX(self):
         self.x = terminal_size.columns // 2
@@ -261,6 +273,27 @@ class Text:
     def on_collide_callback(self, other, callback):
         if self.collides_with(other):
             callback()
+
+class Coords(NamedTuple):
+    x: int
+    y: int
+
+class Keyframe:
+    def __init__(self, pos: Coords):
+        self.pos = pos
+
+class KeyChains:
+    def __init__(self, *keyframes):
+        self.keyframe_list = list(keyframes)
+
+    def follow_path(self, obj, speed=1):
+        if self.keyframe_list:
+            target = self.keyframe_list[0].pos # Get the FIRST one
+            obj.slide_to_pos(target, speed)
+            
+            # If we reached the target, remove it to start moving to the next
+            if int(obj.x) == target.x and int(obj.y) == target.y:
+                self.keyframe_list.pop(0)
 
 class Scene:
     def __init__(self) -> None:
