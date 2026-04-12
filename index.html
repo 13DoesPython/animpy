@@ -590,6 +590,7 @@ scene.render()
 <p><strong>Particle Class</strong> – A complete particle effects system for creating dynamic visual effects. Each particle has a configurable lifetime, RGB color, and velocity properties for realistic motion. The <code>burst()</code> method creates multiple particles that scatter in all directions with random angles and configurable speed - perfect for explosion effects. The <code>emit()</code> method creates single particles with parent properties. Particles move based on velocity_x and velocity_y properties, automatically updating their position each frame. The <code>update_all()</code> method advances all particle animations, and <code>is_dead()</code> checks when all particles have expired. Particles support all the color manipulation methods like regular text objects.</p>
 <p><strong>EffectText Class</strong> – An extension of the Text class that includes built-in support for various text effects. Use <code>shake_text()</code> to randomly shake the text within a certain intensity, <code>gravity_text()</code> to simulate gravity with velocity and floor collision, and <code>decaying_text()</code> to create a text that fades out and disappears after a certain lifetime. This class is ideal for adding dynamic effects to your text animations without needing to manually implement the logic for each effect.</p>
 <p><strong>Group Class</strong> – Organize multiple text objects and manage them as a single unit. Add (<code>add</code>) or remove (<code>remove</code>) text objects from groups at any time. Move the entire group with <code>position()</code> to shift all members together. Change the color of all group members simultaneously with <code>change_rgb_values()</code>, or change individual items with <code>change_rgb_values_one()</code>. This is useful for creating menus, UI elements, or any cohesive visual arrangements that need to move or change appearance together.</p>
+<p><strong>Coords, Keyframe, and Keychains</strong> - Help in making a text obj follow a specific path. Only one method is there and its <code>follow_path</code> for making text follow a path and controlling speed of path movement</p>
 <p><strong>Scene Class</strong> – The core rendering engine that displays all content to the terminal. Add multiple items (<code>add</code>) to the scene including text, particles, and groups. Remove items when they're no longer needed (<code>remove</code>). Call <code>render()</code> every frame to draw everything to the terminal with proper z-index layering. The <code>update()</code> method automatically updates all particles in the scene and removes expired ones. Set background colors with <code>set_bg_rgb()</code> for immersive visuals. Create dramatic effects with <code>shake()</code>, clear the screen with <code>clear()</code>, and use the <code>dt</code> property for frame-time-based smooth animations.</p>
 <p><strong>Interactive Scene Class</strong> – An extended scene with real-time keyboard input handling. Inherits all Scene functionality and adds <code>key_pressed()</code> method to detect which keys the user is currently pressing. Provides <code>wall</code> and <code>floor_ceiling</code> properties that return the terminal boundaries for collision detection and movement constraints. Perfect for games, interactive applications, and real-time responsive animations that react to user input.</p>
 <p><strong>Audio Class</strong> – Complete audio management system for sound effects and music. Load audio files with <code>load()</code>, giving each track a unique name for reference. Play tracks with optional looping using <code>play()</code>. Control audio playback with <code>stop()</code> for specific tracks and <code>stop_all()</code> for everything. Adjust volume with <code>set_volume()</code> to create dynamic audio mixing. Check if tracks are playing with <code>is_playing()</code>, and play sounds for specific durations with <code>play_for_time()</code> for timed effects.</p>
@@ -630,6 +631,12 @@ group.remove(text2)  # Remove text2 from the group
 group.position(5, 0)  # Move the entire group right by 5
 group.change_rgb_values(255, 0, 0)  # Change color of all items in group to red
 group.change_rgb_values_one(text1, 0, 255, 0)  # Change color of a single item in group
+</code></pre>
+<p><strong>Coords</strong> - Helper class 1 for <code>Keychains</code></p>
+<p><strong>Keyframe</strong> - Helper class 2 for <code>Keychains</code></p>
+<p><strong>Keychains</strong> - Making text follow a path:</p>
+<pre><code class="language-python">path = animpy.Keychains(*keyframes)
+path.follow_path(obj, speed=1)
 </code></pre>
 <p><strong>Scene</strong> – Render everything:</p>
 <pre><code class="language-python">scene = animpy.Scene()
@@ -769,6 +776,12 @@ group.remove(text2)  # Remove text2 from the group
 <h4 id="change_rgb_values_one-change-the-color-of-a-single-item-in-the-group"><code>change_rgb_values_one</code> - Change the color of a single item in the group:</h4>
 <pre><code class="language-python">group.change_rgb_values_one(text1, 0, 255, 0)  # Change only text1 to green
 </code></pre>
+<h3 id="coords-helper-class-1-for-keychains"><code>Coords</code> - Helper class 1 for <code>Keychains</code></h3>
+<h3 id="keyframe-helper-class-2-for-keychains"><code>Keyframe</code> - Helper class 2 for <code>Keychains</code></h3>
+<h3 id="keychains-making-text-follow-a-path"><code>Keychains</code> - Making text follow a path:</h3>
+<h4 id="follow_path-make-a-text-obj-follow-a-path"><code>follow_path</code> - make a text obj follow a path:</h4>
+<pre><code class="language-python">path.follow_path(obj, speed=1)
+</code></pre>
 <h3 id="scene-render-everything"><strong>Scene</strong> – Render everything:</h3>
 <h4 id="animpyscene-create-a-new-scene"><code>animpy.Scene()</code> - Create a new scene:</h4>
 <pre><code class="language-python">scene = animpy.Scene()
@@ -874,7 +887,17 @@ for _ in range(20):
 <h1 id="support-the-project">Support the project</h1>
 <p><a href="https://github.com/sponsors/13DoesPython"><img alt="Sponsor 13DoesPython" src="https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&amp;logo=github-sponsors" /></a></p>
 <h2 id="version-history">Version History</h2>
-<h2 id="v170">v1.7.0</h2>
+<h3 id="v180">v1.8.0</h3>
+<ul>
+<li>Added new <code>Coords</code> and <code>Keyframe</code> as helper classes for <code>Keychains</code> class</li>
+<li>Added brand new <code>Keychains</code> class for animating with keyframes, methods include:<ul>
+<li><code>follow_path</code> for making text follow a keyframe path</li>
+</ul>
+</li>
+<li>Added new method <code>slide_to_pos</code> for <code>Text</code> as a helper function for <code>follow_path</code></li>
+<li>Added one new example to examples folder (keyframes.py)</li>
+</ul>
+<h3 id="v170">v1.7.0</h3>
 <ul>
 <li>Added new <code>EffectText</code> class that extends <code>Text</code> with built-in support for various text effects like shaking, methods include:<ul>
 <li><code>gravity_text(floor, gravity)</code> for simulating gravity with velocity and floor collision</li>
