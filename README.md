@@ -4,7 +4,7 @@
 [![Downloads](https://static.pepy.tech/personalized-badge/animpy?period=total&units=INTERNATIONAL_SYSTEM&left_color=black&right_color=green&left_text=downloads)](https://pepy.tech/projects/animpy)
 ![GitHub License](https://img.shields.io/github/license/13DoesPython/animpy)
 
-Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Works great on modern terminals.
+Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Works great on modern terminals. If you like this please star my project, it helps out a ton!
 
 ## Examples
 
