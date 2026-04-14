@@ -634,7 +634,7 @@ Animpy is a powerful and easy-to-use library for creating terminal animations wi
 
 ## Version History
 
-### v1.8.0
+### v1.8.0erm
 - Added new `Coords` and `Keyframe` as helper classes for `Keychains` class
 - Added brand new `Keychains` class for animating with keyframes, methods include:
     - `follow_path` for making text follow a keyframe path
