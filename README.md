@@ -73,6 +73,17 @@ effect_text.gravity_text(floor=15, gravity=0.5)  # Simulate gravity
 effect_text.decaying_text(time=3.0, decay_rate=0.5)
 ```
 
+**Shapes** – Create basic shapes as text:
+```python
+rect = animpy.Shapes.rectangle(20, 5, "#")
+circle = animpy.Shapes.circle(4, "*")
+box = animpy.Text(rect, 5, 3, r=100, g=200, b=255)
+ball = animpy.Text(circle, 40, 10, r=255, g=120, b=120)
+
+polygon = animpy.Shapes.polygon([(0,0), (5,0), (3,4)], "*")
+triangle = animpy.Text(polygon, 20, 10, r=200, g=200, b=0)
+```
+
 **Group** – Group multiple texts together:
 ```python
 group = animpy.Group(text1, text2, text3)
@@ -151,6 +162,13 @@ animpy.show_cursor()  # Show the terminal cursor
 [![Sponsor 13DoesPython](https://img.shields.io/badge/Sponsor-13DoesPython-ea4aaa?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/13DoesPython)
 
 ## Version History
+
+## v1.8.5
+- Added new `Shapes` class for creating basic shapes like rectangles and circles as text objects,
+    - `rectangle(width, height, char)` for creating a rectangle shape
+    - `circle(radius, char)` for creating a circle shape
+    - `polygon(points, char)` for creating a polygon shape from a list of (x, y) points
+- Changed rendering logic to support shapes as text objects, allowing you to use them like regular `Text` with position, color, and effects
 
 ## v1.8.0
 - Added new `Coords` and `Keyframe` as helper classes for `Keychains` class

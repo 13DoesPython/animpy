@@ -233,6 +233,17 @@ effect_text.gravity_text(floor=15, gravity=0.5)  # Simulate gravity
 effect_text.decaying_text(time=3.0, decay_rate=0.5)
 ```
 
+**Shapes** – Create basic shapes as text:
+```python
+rect = animpy.Shapes.rectangle(20, 5, "#")
+circle = animpy.Shapes.circle(4, "*")
+box = animpy.Text(rect, 5, 3, r=100, g=200, b=255)
+ball = animpy.Text(circle, 40, 10, r=255, g=120, b=120)
+
+polygon = animpy.Shapes.polygon([(0,0), (5,0), (3,4)], "*")
+triangle = animpy.Text(polygon, 20, 10, r=200, g=200, b=0)
+```
+
 **Group** – Group multiple texts together:
 ```python
 group = animpy.Group(text1, text2, text3)
@@ -425,6 +436,21 @@ effect_text.gravity_text(floor=15, gravity=0.5)  # Text will fall with gravity a
 #### `decaying_text` - Create a text that fades out and disappears after a certain lifetime:
 ```python
 effect_text.decaying_text(time=3.0, decay_rate=0.5)  # Text will fade out over 3 seconds
+```
+
+### **Shapes** – Create basic shapes as text:
+
+#### `animpy.Shapes.rectangle()` - Create a rectangle shape as a string:
+```python
+rect = animpy.Shapes.rectangle(20, 5, "#")  # Create a rectangle 20 wide and 5 high using '#'
+```
+#### `animpy.Shapes.circle()` - Create a circle shape as a string:
+```python
+circle = animpy.Shapes.circle(4, "*")  # Create a circle with radius 4 using '*'
+```
+#### `animpy.Shapes.polygon()` - Create a polygon shape from a list of (x, y) points:
+```python
+polygon = animpy.Shapes.polygon([(0,0), (5,0), (3,4)], "*")  # Create a triangle polygon using '*'
 ```
 
 ### **Group** – Group multiple texts together:
@@ -634,7 +660,14 @@ Animpy is a powerful and easy-to-use library for creating terminal animations wi
 
 ## Version History
 
-### v1.8.0erm
+### 1.8.5
+- Added new `Shapes` class for creating basic shapes like rectangles and circles using text characters, methods include:
+    - `rectangle(width, height, char)` for creating a rectangle shape
+    - `circle(radius, char)` for creating a circle shape
+    - `polygon(points, char)` for creating a polygon shape from a list of (x, y) points
+- Changed rendering method to render each particle individually for better performance and visual quality
+
+### v1.8.0
 - Added new `Coords` and `Keyframe` as helper classes for `Keychains` class
 - Added brand new `Keychains` class for animating with keyframes, methods include:
     - `follow_path` for making text follow a keyframe path

@@ -277,7 +277,7 @@ class Text:
     def on_collide_callback(self, other, callback):
         if self.collides_with(other):
             callback()
-            
+
 class Coords(NamedTuple):
     x: int
     y: int
@@ -298,12 +298,12 @@ class KeyChains:
             # If we reached the target, remove it to start moving to the next
             if int(obj.x) == target.x and int(obj.y) == target.y:
                 self.keyframe_list.pop(0)
-
 class Shapes:
     @staticmethod
     def rectangle(width, height, char="#"):
         return "\n".join([char * width for _ in range(height)])
     
+    @staticmethod
     def circle(radius, char="#"):
         result = []
         for y in range(-radius, radius + 1):
@@ -316,6 +316,7 @@ class Shapes:
             result.append(row)
         return "\n".join(result)
     
+    @staticmethod
     def polygon(points, char="#"):
         if not points:
             return ""
