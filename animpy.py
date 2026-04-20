@@ -1,6 +1,7 @@
 import random, math, mouse
 import os, sys, time, atexit, shutil, keyboard
 from typing import NamedTuple
+from rich.panel import Panel
 
 def lerp(start, end, t):
     t = max(0.0, min(1.0, t)) 
@@ -14,6 +15,8 @@ def hide_cursor():
 def show_cursor():
     sys.stdout.write("\033[?25h")
     sys.stdout.flush()
+
+    os.system("")
 
 sys.stdout.write("\033[?25l")
 atexit.register(lambda: (sys.stdout.write("\033[?25h"), sys.stdout.flush()))
@@ -120,6 +123,7 @@ class Audio:
 class Particle:
     def __init__(self, text, x, y, r=255, g=255, b=255, lifetime=1.0):
         self.text = text
+        self.x = x
         self.y = y
         self.r = r
         self.g = g
@@ -273,7 +277,7 @@ class Text:
     def on_collide_callback(self, other, callback):
         if self.collides_with(other):
             callback()
-
+            
 class Coords(NamedTuple):
     x: int
     y: int
@@ -294,6 +298,45 @@ class KeyChains:
             # If we reached the target, remove it to start moving to the next
             if int(obj.x) == target.x and int(obj.y) == target.y:
                 self.keyframe_list.pop(0)
+
+class Shapes:
+    @staticmethod
+    def rectangle(width, height, char="#"):
+        return "\n".join([char * width for _ in range(height)])
+    
+    def circle(radius, char="#"):
+        result = []
+        for y in range(-radius, radius + 1):
+            row = ""
+            for x in range(-radius, radius + 1):
+                if x**2 + y**2 <= radius**2:
+                    row += char
+                else:
+                    row += " "
+            result.append(row)
+        return "\n".join(result)
+    
+    def polygon(points, char="#"):
+        if not points:
+            return ""
+        
+        min_x = min(p.x for p in points)
+        max_x = max(p.x for p in points)
+        min_y = min(p.y for p in points)
+        max_y = max(p.y for p in points)
+
+        width = max_x - min_x + 1
+        height = max_y - min_y + 1
+
+        grid = [[" " for _ in range(width)] for _ in range(height)]
+
+        for point in points:
+            x = point.x - min_x
+            y = point.y - min_y
+            if 0 <= x < width and 0 <= y < height:
+                grid[y][x] = char
+
+        return "\n".join("".join(row) for row in grid)
 
 class Scene:
     def __init__(self) -> None:
@@ -333,65 +376,65 @@ class Scene:
                     items_to_remove.append(item)
         for item in items_to_remove:
             self.remove(item)
-
+            
     def render(self):
         try:
             columns, lines = os.get_terminal_size()
         except OSError:
             columns, lines = 80, 24
 
-        grid = [[f"{self.bg_color_str} " for _ in range(columns)] for _ in range(lines)]
+        # Clean grid (just characters first)
+        grid = [[" " for _ in range(columns)] for _ in range(lines)]
+        color_grid = [[None for _ in range(columns)] for _ in range(lines)]
+
         sorted_items = sorted(self.items, key=lambda i: getattr(i, 'z_index', 0))
+
+        def draw_item(item):
+            ry = round(item.y) + self.offset_y
+            rx = round(item.x) + self.offset_x
+
+            fg_color = f"\033[38;2;{item.r};{item.g};{item.b}m"
+
+            lines_split = item.text.split("\n")
+
+            for dy, line in enumerate(lines_split):
+                for dx, char in enumerate(line):
+                    draw_y = ry + dy
+                    draw_x = rx + dx
+
+                    if 0 <= draw_y < lines and 0 <= draw_x < columns:
+                        grid[draw_y][draw_x] = char
+                        color_grid[draw_y][draw_x] = fg_color
 
         for item in sorted_items:
             if isinstance(item, Group):
                 for sub_item in item.items:
-                    ry = int(sub_item.y) + self.offset_y
-                    rx = int(sub_item.x) + self.offset_x
-
-                    if 0 <= ry < lines and 0 <= rx < columns:
-                        fg_color = f"\033[38;2;{sub_item.r};{sub_item.g};{sub_item.b}m"
-                        
-                        for i, char in enumerate(sub_item.text):
-                            if rx + i < columns:
-                                grid[ry][rx + i] = f"{self.bg_color_str}{fg_color}{char}"
+                    draw_item(sub_item)
 
             elif isinstance(item, Particle):
                 if item.age < item.lifetime:
-                    ry = int(item.y) + self.offset_y
-                    rx = int(item.x) + self.offset_x
+                    draw_item(item)
 
-                    # Only draw if the item is inside the grid
-                    if 0 <= ry < lines and 0 <= rx < columns:
-                        # Foreground color + the text
-                        fg_color = f"\033[38;2;{item.r};{item.g};{item.b}m"
-                        
-                        # If the item.text is multiple characters, we place them one by one
-                        for i, char in enumerate(item.text):
-                            if rx + i < columns:
-                                # We combine the BG color and FG color for this cell
-                                grid[ry][rx + i] = f"{self.bg_color_str}{fg_color}{char}"
             else:
-                ry = int(item.y) + self.offset_y
-                rx = int(item.x) + self.offset_x
+                draw_item(item)
 
-                # Only draw if the item is inside the grid
-                if 0 <= ry < lines and 0 <= rx < columns:
-                    # Foreground color + the text
-                    fg_color = f"\033[38;2;{item.r};{item.g};{item.b}m"
-                    
-                    # If the item.text is multiple characters, we place them one by one
-                    for i, char in enumerate(item.text):
-                        if rx + i < columns:
-                            # We combine the BG color and FG color for this cell
-                            grid[ry][rx + i] = f"{self.bg_color_str}{fg_color}{char}"
-
+        # 🧼 Build final output CLEANLY
         buf = ["\033[H"]
-        for row in grid:
+
+        for y in range(lines):
+            row = []
+            for x in range(columns):
+                color = color_grid[y][x]
+                char = grid[y][x]
+
+                if color:
+                    row.append(f"{color}{char}\033[0m")
+                else:
+                    row.append(char)
+
             buf.append("".join(row))
-        buf.append("\033[0m")
-        
-        sys.stdout.write("".join(buf) + "\033[0m")
+
+        sys.stdout.write("".join(buf))
         sys.stdout.flush()
         
     def shake(self, intensity=1):

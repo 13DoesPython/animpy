@@ -14,7 +14,6 @@ Make cool terminal animations without the pain. Move text around, use RGB colors
 - [The zen of python](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/zenofpython.py) - Animated text display with color effects
 
 ### Visual Effects & Particles
-- [Particle simulation](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/particlesim.py) - Advanced particle system with bursts and velocity
 - [Collision example](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/collision.py) - Detect and handle text collisions
 
 ### Interactive & Games
