@@ -4,17 +4,18 @@
 [![Downloads](https://static.pepy.tech/personalized-badge/animpy?period=total&units=INTERNATIONAL_SYSTEM&left_color=black&right_color=green&left_text=downloads)](https://pepy.tech/projects/animpy)
 ![GitHub License](https://img.shields.io/github/license/13DoesPython/animpy)
 
-Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Animpy is meant for utilizing the terminal in many many different ways. There is even a feature where you can make your own minigames right in the terminal! Works great on modern terminals. If you like this please star my project, it helps out a ton!
+Make cool terminal animations without the pain. Move text around, use RGB colors, play audio, and build actual animations. Animpy is meant for utilizing the terminal in many different ways. There is even a feature where you can make your own minigames right in the terminal! Works great on modern terminals. If you like this please star my project, it helps out a ton!
 
 ## Examples
 
 ### Basic & Beginner
-- [Linear interpolation](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/lerp.py) - Learn smooth value transitions with the lerp function
+- [Linear interpolation](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/lerp.py) - Learn smooth value transitions with the `lerp` function
 - [Loading screen](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/loading.py) - Create a simple loading animation
 - [The zen of python](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/zenofpython.py) - Animated text display with color effects
 
 ### Visual Effects & Particles
 - [Collision example](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/collision.py) - Detect and handle text collisions
+- [Physics demo](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/physics.py) - Build gravity, bounce, and force-based motion with `PhysicsScene`
 
 ### Interactive & Games
 - [Player Controls](https://raw.githubusercontent.com/13DoesPython/animpy/refs/heads/main/examples/playercontrol.py) - Real-time keyboard input with movement and boundaries
@@ -44,17 +45,17 @@ scene.render()
 text = animpy.Text("Hi", 0, 0, r=255, g=0, b=0)
 text.moveX(10)  # Move right
 text.moveY(5)   # Move down
+text.slide_to_pos(animpy.Coords(20, 10), speed=1)  # Move toward a target position
 text.centerX()  # Center horizontally
+text.centerY()  # Center vertically
 text.change_rgb_values(0, 255, 0)  # Change color
 text.collides_with(other_text)  # Check collision with another text
-text.on_collide_callback(other_text, callback)  # Set a callback for when it collides with another text
+text.on_collide_callback(other_text, callback)  # Run a callback when collision occurs
 text.width, text.height  # Get dimensions
-text.type_out("Type me!", speed=0.05, scene=scene)  # Type effect
-text.fall(velocity=2, floor=15)  # Falling effect
-text.change_frame()  # Cycle through frames (if you used a list)
+text.change_frame()  # Cycle through frames (if text was created from a list)
 ```
 
-**Particle** – Create and manage particles with velocities:
+**Particle** – Create and manage particles with velocity and lifetime:
 ```python
 particle = animpy.Particle("💥", 10, 5, r=255, g=100, b=50, lifetime=3.0)
 particle.burst(scene, count=20, speed=2.0)  # Emit burst of particles in all directions
@@ -62,15 +63,19 @@ particle.emit(scene)  # Emit a single particle
 particle.change_rgb_values(0, 255, 0)  # Change particle color
 particle.update_all(delta_time)  # Update all emitted particles
 particle.is_dead()  # Check if all particles have expired
-particle.velocity_x, particle.velocity_y  # Set particle velocity
+particle.velocity_x = 1.5
+particle.velocity_y = -2.0
 ```
 
-**EffectText** – Text with built-in effects:
+**EffectText** – Text with advanced built-in effects:
 ```python
 effect_text = animpy.EffectText("Shaky!", 10, 5)
-effect_text.shake_text(intensity=1)  # Shake the text
-effect_text.gravity_text(floor=15, gravity=0.5)  # Simulate gravity
-effect_text.decaying_text(time=3.0, decay_rate=0.5)
+effect_text.shaking_text(intensity=2)  # Shake the text horizontally and vertically
+effect_text.gravity_text(floor=15, gravity=0.5)  # Apply gravity toward a floor
+effect_text.decaying_text(time=3.0, decay_rate=0.5)  # Shrink text over time
+effect_text.fade_out_text(time=2.0, fade_rate=0.5)  # Fade text color to black
+effect_text.lerp_text(20, 10, t=0.1)  # Move smoothly toward a target
+effect_text.pulse_text(time=1.2, pulse_rate=0.5)  # Pulse brightness over time
 ```
 
 **Shapes** – Create basic shapes as text:
@@ -80,7 +85,7 @@ circle = animpy.Shapes.circle(4, "*")
 box = animpy.Text(rect, 5, 3, r=100, g=200, b=255)
 ball = animpy.Text(circle, 40, 10, r=255, g=120, b=120)
 
-polygon = animpy.Shapes.polygon([(0,0), (5,0), (3,4)], "*")
+polygon = animpy.Shapes.polygon([animpy.Coords(0, 0), animpy.Coords(5, 0), animpy.Coords(3, 4)], "*")
 triangle = animpy.Text(polygon, 20, 10, r=200, g=200, b=0)
 ```
 
@@ -89,54 +94,69 @@ triangle = animpy.Text(polygon, 20, 10, r=200, g=200, b=0)
 group = animpy.Group(text1, text2, text3)
 group.add(text4)  # Add another text to the group
 group.remove(text2)  # Remove text2 from the group
-group.position(5, 0)  # Move the entire group right by 5
-group.change_rgb_values(255, 0, 0)  # Change color of all items in group to red
-group.change_rgb_values_one(text1, 0, 255, 0)  # Change color of a single item in group
+group.position(5, 0)  # Move the entire group by a vector
+group.change_rgb_values(255, 0, 0)  # Change the color of all items
+group.change_rgb_values_one(text1, 0, 255, 0)  # Change a single item in the group
 ```
 
-**Coords** - Helper class 1 for `Keychains`
-
-**Keyframe** - Helper class 2 for `Keychains`
-
-**Keychains** - Making text follow a path:
+**Coords** - Named tuple helper for keyframe coordinates:
 ```python
-path = animpy.Keychains(*keyframes)
-path.follow_path(obj, speed=1)
+coords = animpy.Coords(10, 5)
+```
+
+**Keyframe** - Helper object for path-based motion:
+```python
+frame = animpy.Keyframe(animpy.Coords(20, 10))
+```
+
+**Keychains** - Follow a path of keyframes:
+```python
+path = animpy.Keychains(frame1, frame2, frame3)
+path.follow_path(text, speed=1)
 ```
 
 **Scene** – Render everything:
 ```python
 scene = animpy.Scene()
 scene.add(text1, text2, text3)
-scene.remove(text2)  # Remove text2 from the scene
+scene.remove(text2)
 scene.render()
-scene.update(delta_time)  # Update all particles in the scene
-scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
+scene.update(delta_time)  # Update particles and clean expired items
+scene.set_bg_rgb(0, 0, 255)
 scene.clear()
-scene.shake(intensity=2)  # Shake the scene
-scene.dt  # Get time since last frame (for smooth movement)
+scene.shake(intensity=2)
+scene.dt  # Get time since last frame
 ```
 
-**Interactive Scene** – Handle real-time input:
+**PhysicsScene** – Add gravity, bounce, and force-based motion:
+```python
+scene = animpy.PhysicsScene()
+scene.add(text)
+scene.apply_gravity(text)
+scene.apply_friction(text, friction=0.1)
+scene.bounce(text, bounce_factor=0.7)
+scene.apply_physics(text)  # Apply gravity, friction, and bounce in one call
+scene.angular_motion(text, angle=45, speed=2.0)
+scene.push(text, force_x=1.0, force_y=-0.5)
+```
+
+**InteractiveScene** – Handle real-time input and callbacks:
 ```python
 scene = animpy.InteractiveScene()
-scene.add(text1, text2, text3)
-scene.remove(text2)  # Remove text2 from the scene
-scene.render()
-scene.update(delta_time)  # Update all particles in the scene
-scene.set_bg_rgb(0, 0, 255)  # Set background color to blue
-scene.clear()
-scene.shake(intensity=2)  # Shake the scene
-scene.key_pressed("w")  # Check if 'w' is pressed
-scene.dt  # Get time since last frame (for smooth movement)
-scene.wall  # Get the x-coordinate of the right/left wall
-scene.floor_ceiling  # Get the y-coordinate of the floor/ceiling
-scene.mouse_pressed("left")  # Check if left mouse button is pressed
-scene.mouse_position()  # Get current mouse position
-scene.key_released("w")  # Check if 'w' was released since last update
-scene.on_key_press_callback("w", callback)  # Set a callback for when 'w' is pressed
-scene.on_key_release_callback("w", callback)  # Set a callback for when 'w' is released
-scene.on_mouse_press_callback("left", callback)  # Set a callback for when left mouse button is pressed
+scene.add(text1, text2)
+scene.key_pressed("w")
+scene.key_released("w")
+scene.on_key_press_callback("w", callback)
+scene.on_key_release_callback("w", callback)
+scene.mouse_pressed("left")
+scene.mouse_position()
+scene.on_mouse_press_callback("left", callback)
+scene.mouse_release("left", callback)
+scene.mouse_release_callback("left", callback)
+scene.quick_exit("esc")
+scene.quick_exit_callback("esc", callback)
+scene.limit_to_bounds(text)
+scene.limit_group_to_bounds(group)
 ```
 
 **Audio** – Play sounds:
@@ -144,18 +164,18 @@ scene.on_mouse_press_callback("left", callback)  # Set a callback for when left 
 audio = animpy.Audio()
 audio.load("bg", "music.mp3")
 audio.play("bg", loop=-1)
-audio.set_volume("bg", 0.5)  # Set volume to 50%
-audio.stop("bg")  # Stop a specific audio track
-audio.stop_all()  # Stop all audio
-audio.is_playing("track")  # Check if audio is playing
-audio.play_for_time("bg", duration=5.0)  # Play audio for a specific duration
+audio.set_volume("bg", 0.5)
+audio.stop("bg")
+audio.stop_all()
+audio.is_playing("bg")
+audio.play_for_time("bg", duration=5.0)
 ```
 
-**Animpy (extras)** – Some extra methods for animations:
+**Animpy (extras)** – Utility helpers:
 ```python
-animpy.lerp(start, end, t)  # Linear interpolation between start and end
-animpy.hide_cursor()  # Hide the terminal cursor
-animpy.show_cursor()  # Show the terminal cursor
+animpy.lerp(start, end, t)
+animpy.hide_cursor()
+animpy.show_cursor()
 ```
 
 # Support the project
@@ -163,56 +183,74 @@ animpy.show_cursor()  # Show the terminal cursor
 
 ## Version History
 
+## v1.9.0
+- Added new `PhysicsScene` class for gravity, friction, bounce, and force-driven motion
+    - `apply_gravity(obj)`
+    - `apply_friction(obj, friction=0.1)`
+    - `bounce(obj, bounce_factor=0.5)`
+    - `apply_physics(obj)`
+    - `angular_motion(obj, angle, speed)`
+    - `push(obj, force_x, force_y)`
+- Expanded `EffectText` with more text motion and visual effects:
+    - `fade_out_text(time, fade_rate)`
+    - `lerp_text(target_x, target_y, t)`
+    - `pulse_text(time, pulse_rate)`
+- Added 4 new `InteractiveScene` helpers and callbacks:
+    - `limit_to_bounds(text)`
+    - `quick_exit(key)`
+    - `quick_exit_callback(key, callback)`
+    - `limit_group_to_bounds(group)`
+- Added a new `physics.py` example for motion, bouncing, and force-driven text animation
+
 ## v1.8.5
-- Added new `Shapes` class for creating basic shapes like rectangles and circles as text objects,
+- Added new `Shapes` class for creating basic shapes like rectangles and circles as text objects
     - `rectangle(width, height, char)` for creating a rectangle shape
     - `circle(radius, char)` for creating a circle shape
-    - `polygon(points, char)` for creating a polygon shape from a list of (x, y) points
+    - `polygon(points, char)` for creating a polygon shape from a list of `Coords`
 - Changed rendering logic to support shapes as text objects, allowing you to use them like regular `Text` with position, color, and effects
 
 ## v1.8.0
-- Added new `Coords` and `Keyframe` as helper classes for `Keychains` class
+- Added new `Coords` and `Keyframe` as helper classes for `Keychains`
 - Added brand new `Keychains` class for animating with keyframes, methods include:
     - `follow_path` for making text follow a keyframe path
 - Added new method `slide_to_pos` for `Text` as a helper function for `follow_path`
-- Added one new example to examples folder (keyframes.py)
+- Added one new example to examples folder (`keyframes.py`)
 
 ## v1.7.0
-- Added new `EffectText` class that extends `Text` with built-in support for various text effects like shaking, methods include:
+- Added new `EffectText` class that extends `Text` with built-in support for various text effects like shaking
     - `gravity_text(floor, gravity)` for simulating gravity with velocity and floor collision
-    - `shake_text(intensity)` for shaking the text randomly within a certain intensity
+    - `shaking_text(intensity)` for shaking the text randomly within a certain intensity
     - `decaying_text(time, decay_rate)` for creating a text that fades out and disappears after a certain lifetime
 - Added more mouse controls such as `mouse_released(button)` to check if a specific mouse button was released since the last update, and `mouse_release_callback(button, callback)` to set a callback function that triggers when a specific mouse button is released
 
 ### v1.6.5
-- Added six new methods to interactive scene:
-    - `mouse_pressed(button="left")` to check if a specific mouse button is currently pressed
-    - `mouse_position()` to get the current position of the mouse cursor
-    - `key_released(key)` to check if a specific key was released since the last update
-    - `on_key_press_callback(key, callback)` to set a callback function that triggers when a specific key is pressed
-    - `on_key_release_callback(key, callback)` to set a callback function that triggers when a specific key is released
-    - `on_mouse_press_callback(button, callback)` to set a callback function that triggers when a specific mouse button is pressed
+- Added six new methods to `InteractiveScene`:
+    - `mouse_pressed(button="left")`
+    - `mouse_position()`
+    - `key_released(key)`
+    - `on_key_press_callback(key, callback)`
+    - `on_key_release_callback(key, callback)`
+    - `on_mouse_press_callback(button, callback)`
 
 ### v1.6.0
 - Added new `Particle` class for creating particle effects with velocity and lifetime support
 - Added `burst()` method to create particles that scatter in all directions with configurable speed
-- Added `emit()` method to emit particles from a parent particle
+- Added `emit()` method to emit a single particle from another particle
 - Added `update_all()` method to update all emitted particles
 - Added `is_dead()` method to check if all particles have expired
 - Added `Scene.update()` method to automatically update and remove expired particles
 - Particles now support RGB color, velocity, and lifetime tracking
-- Particles render individually and fade as they reach their lifetime
 - Added new example for particle simulation
-- Added two new methods to `Group` class: `change_rgb_values_one()` for changing color of a single item in the group, and `position()` for moving the entire group by a certain amount
-- Added three new methods to `Audio` class: `is_playing()` to check if a specific audio track is currently playing, `play_for_time()` to play an audio track for a specific duration, and `stop_all()` to stop all currently playing audio tracks
-- Added two new methods for the main namespace: `hide_cursor()`/`show_cursor()` for controlling the visibility of the terminal cursor during animations
+- Added two new methods to `Group` class: `change_rgb_values_one()` and `position()`
+- Added three new methods to `Audio` class: `is_playing()`, `play_for_time()`, and `stop_all()`
+- Added two new methods for the main namespace: `hide_cursor()`/`show_cursor()`
 
 ### v1.5.8
-- Added exclusive floor, wall, and ceiling properties to InteractiveScene for better control over movement boundaries
+- Added exclusive floor, wall, and ceiling properties to `InteractiveScene` for better control over movement boundaries
 
 ### v1.5.5
-- Added new Group class for grouping multiple Text objects together and moving them as a unit
-- Added collision detection method `on_collide_callback` to Text class for triggering callbacks when two Text objects collide
+- Added new `Group` class for grouping multiple `Text` objects together and moving them as a unit
+- Added collision detection method `on_collide_callback` to `Text` class for triggering callbacks when two `Text` objects collide
 
 ### v1.5.1
 - Added full guide to project folder

@@ -1,6 +1,6 @@
 [project]
 name = "animpy"
-version = "1.8.0.1"
+version = "2.0.0"
 description = "A simple terminal animation library"
 authors = [
   {name = "Samin Riyaz"}
@@ -10,7 +10,7 @@ requires-python = ">=3.8"
 license = {file = "LICENSE"}
 
 [build-system]
-requires = ["setuptools", "wheel", "pygame-ce", "keyboard"]
+requires = ["setuptools", "wheel", "pygame-ce", "keyboard", "mouse", "rich"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]

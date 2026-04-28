@@ -445,6 +445,46 @@ class Scene:
     def clear(self):
         print("\033[2J\033[H")
 
+class PhysicsScene(Scene):
+    def __init__(self):
+        super().__init__()
+        self.gravity = 0.5
+        self.floor = terminal_size.lines - 1
+
+    def apply_gravity(self, obj):
+        if obj.y < self.floor:
+            obj.y += self.gravity
+        else:
+            obj.y = self.floor
+
+    def apply_friction(self, obj, friction=0.1):
+        if hasattr(obj, "velocity_x"):
+            obj.velocity_x *= (1 - friction)
+        if hasattr(obj, "velocity_y"):
+            obj.velocity_y *= (1 - friction)
+
+    def bounce(self, obj, bounce_factor=0.5):
+        if obj.y >= self.floor:
+            obj.y = self.floor
+            if hasattr(obj, "velocity_y"):
+                obj.velocity_y = -obj.velocity_y * bounce_factor
+
+    def apply_physics(self, obj):
+        self.apply_gravity(obj)
+        self.apply_friction(obj)
+        self.bounce(obj)
+
+    def angular_motion(self, obj, angle, speed):
+        radians = math.radians(angle)
+        obj.velocity_x = math.cos(radians) * speed
+        obj.velocity_y = math.sin(radians) * speed
+
+    def push(self, obj, force_x, force_y):
+        if hasattr(obj, "velocity_x"):
+            obj.velocity_x += force_x
+        if hasattr(obj, "velocity_y"):
+            obj.velocity_y += force_y
+
 class EffectText(Text):
     def __init__(self, text, x, y, r=255, g=255, b=255, z_index=0):
         super().__init__(text, x, y, r, g, b, z_index)
@@ -466,6 +506,19 @@ class EffectText(Text):
     def decaying_text(self, time, decay_rate=0.1):
         if time > decay_rate:
             self.text = self.text[:-1] if self.text else ""
+
+    def fade_out_text(self, time, fade_rate=0.1):
+        if time > fade_rate:
+            fade_amount = int(255 * (1 - time / fade_rate))
+            self.change_rgb_values(fade_amount, fade_amount, fade_amount)
+
+    def lerp_text(self, target_x, target_y, t):
+        self.x = lerp(self.x, target_x, t)
+        self.y = lerp(self.y, target_y, t)
+
+    def pulse_text(self, time, pulse_rate=0.5):
+        pulse_amount = int(128 * (1 + math.sin(2 * math.pi * time / pulse_rate)) / 2)
+        self.change_rgb_values(pulse_amount, pulse_amount, pulse_amount)
 
 class InteractiveScene(Scene):
     def __init__(self):
@@ -517,6 +570,29 @@ class InteractiveScene(Scene):
     def mouse_release_callback(self, button, callback):
         if not self.mouse_pressed(button):
             callback()
+
+    def limit_to_bounds(self, obj):
+        if obj.x < self.wall:
+            obj.x = self.wall
+        elif obj.x + obj.width > terminal_size.columns - self.wall:
+            obj.x = terminal_size.columns - self.wall - obj.width
+
+        if obj.y < self.floor_ceiling:
+            obj.y = self.floor_ceiling
+        elif obj.y + obj.height > terminal_size.lines - self.floor_ceiling:
+            obj.y = terminal_size.lines - self.floor_ceiling - obj.height
+
+    def quick_exit(self, key="esc"):
+        if self.key_pressed(key):
+            sys.exit()
+
+    def quick_exit_callback(self, key, callback):
+        if self.key_pressed(key):
+            callback()
+    
+    def limit_group_to_bounds(self, group):
+        for item in group.items:
+            self.limit_to_bounds(item)
 
     @property
     def dt(self):
