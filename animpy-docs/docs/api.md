@@ -59,6 +59,15 @@ Stores target positions for path animation.
 - `Keychains(*keyframes)`
 - `follow_path(obj, speed=1)`
 
+## Shapes
+- `Shapes.rectangle(width, height, char="#")`
+- `Shapes.circle(radius, char="*")`
+- `Shapes.polygon(points, char="*")`
+- `Shapes.line(x1, y1, x2, y2, char="-")`
+- `Shapes.heart(size, char="♥")`
+- `Shapes.triangle(x1, y1, x2, y2, x3, y3, char="^")`
+- `Shapes.ellipse(center_x, center_y, radius_x, radius_y, char="o")`
+
 ### Scene
 
 - `Scene()`
@@ -115,3 +124,6 @@ Stores target positions for path animation.
 - `lerp(start, end, t)`
 - `hide_cursor()`
 - `show_cursor()`
+- `clear_screen()`
+- `print_centered(text)`
+- `print_with_color(text, r, g, b)`

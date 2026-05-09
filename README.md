@@ -82,11 +82,19 @@ effect_text.pulse_text(time=1.2, pulse_rate=0.5)  # Pulse brightness over time
 ```python
 rect = animpy.Shapes.rectangle(20, 5, "#")
 circle = animpy.Shapes.circle(4, "*")
+polygon = animpy.Shapes.polygon([(0,0), (10,0), (5,5)], "@")
+line = animpy.Shapes.line(0, 0, 20, 10, "-")
+heart = animpy.Shapes.heart(5, "♥")
+triangle = animpy.Shapes.triangle(0, 0, 10, 0, 5, 5, "^")
+ellipse = animpy.Shapes.ellipse(10, 5, 8, 4, "o")
+
 box = animpy.Text(rect, 5, 3, r=100, g=200, b=255)
 ball = animpy.Text(circle, 40, 10, r=255, g=120, b=120)
-
-polygon = animpy.Shapes.polygon([animpy.Coords(0, 0), animpy.Coords(5, 0), animpy.Coords(3, 4)], "*")
 triangle = animpy.Text(polygon, 20, 10, r=200, g=200, b=0)
+line_text = animpy.Text(line, 0, 0, r=255, g=255, b=255)
+heart_text = animpy.Text(heart, 30, 15, r=255, g=0, b=255)
+triangle_text = animpy.Text(triangle, 10, 20, r=0, g=255, b=255)
+ellipse_text = animpy.Text(ellipse, 50, 5, r=255, g=255, b=0)
 ```
 
 **Group** – Group multiple texts together:
@@ -176,6 +184,9 @@ audio.play_for_time("bg", duration=5.0)
 animpy.lerp(start, end, t)
 animpy.hide_cursor()
 animpy.show_cursor()
+animpy.clear_screen()
+animpy.print_centered("Hello, World!")
+animpy.print_with_color("Colored Text", r=255, g=0, b=0)
 ```
 
 # Support the project
@@ -183,7 +194,18 @@ animpy.show_cursor()
 
 ## Version History
 
-## v1.9.0
+## v2.1.0
+- Added 4 new shapes to `Shapes` class:
+    - `line(x1, y1, x2, y2, char)` for creating a line shape
+    - `ellipse(center_x, center_y, radius_x, radius_y, char)` for creating an ellipse shape
+    - `heart(size, char)` for creating a heart shape
+    - `triangle(x1, y1, x2, y2, x3, y3, char)` for creating a triangle shape
+- Added 3 new utility functions to the main namespace:
+    - `clear_screen()` for clearing the terminal screen
+    - `print_centered(text)` for printing text centered in the terminal
+    - `print_with_color(text, r, g, b)` for printing text with custom RGB colors
+
+## v2.0.0
 - Added new `PhysicsScene` class for gravity, friction, bounce, and force-driven motion
     - `apply_gravity(obj)`
     - `apply_friction(obj, friction=0.1)`

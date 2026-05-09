@@ -114,6 +114,10 @@ particle.burst(scene, count=20, speed=2.0)
 - `Shapes.rectangle(width, height, char)`
 - `Shapes.circle(radius, char)`
 - `Shapes.polygon(points, char)`
+- `Shapes.line(x1, y1, x2, y2, char)`
+- `Shapes.heart(size, char)`
+- `Shapes.triangle(x1, y1, x2, y2, x3, y3, char)`
+- `Shapes.ellipse(center_x, center_y, radius_x, radius_y, char)
 
 ## Groups
 

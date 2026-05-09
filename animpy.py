@@ -18,6 +18,21 @@ def show_cursor():
 
     os.system("")
 
+def clear_screen():
+    os.system("cls" if os.name == "nt" else "clear")
+
+def print_centered(text):
+    terminal_size = shutil.get_terminal_size()
+    lines = text.split("\n")
+    for line in lines:
+        padding = (terminal_size.columns - len(line)) // 2
+        print(" " * padding + line)
+
+def print_with_color(text, r=255, g=255, b=255):
+    color_code = f"\033[38;2;{r};{g};{b}m"
+    reset_code = "\033[0m"
+    print(f"{color_code}{text}{reset_code}")
+
 sys.stdout.write("\033[?25l")
 atexit.register(lambda: (sys.stdout.write("\033[?25h"), sys.stdout.flush()))
 terminal_size = shutil.get_terminal_size()
@@ -338,6 +353,53 @@ class Shapes:
                 grid[y][x] = char
 
         return "\n".join("".join(row) for row in grid)
+    
+    def line(x1, y1, x2, y2, char="#"):
+        points = []
+        dx = x2 - x1
+        dy = y2 - y1
+        steps = max(abs(dx), abs(dy))
+        if steps == 0:
+            return char
+
+        x_increment = dx / steps
+        y_increment = dy / steps
+
+        x, y = x1, y1
+        for _ in range(steps + 1):
+            points.append(Coords(round(x), round(y)))
+            x += x_increment
+            y += y_increment
+
+        return Shapes.polygon(points, char)
+    
+    def triangle(x1, y1, x2, y2, x3, y3, char="#"):
+        points = [Coords(x1, y1), Coords(x2, y2), Coords(x3, y3)]
+        return Shapes.polygon(points, char)
+    
+    def ellipse(center_x, center_y, radius_x, radius_y, char="#"):
+        result = []
+        for y in range(-radius_y, radius_y + 1):
+            row = ""
+            for x in range(-radius_x, radius_x + 1):
+                if (x**2 / radius_x**2) + (y**2 / radius_y**2) <= 1:
+                    row += char
+                else:
+                    row += " "
+            result.append(row)
+        return "\n".join(result)
+    
+    def heart(size, char="#"):
+        result = []
+        for y in range(-size, size + 1):
+            row = ""
+            for x in range(-size, size + 1):
+                if (x**2 + y**2 - size**2)**3 - x**2 * y**3 <= 0:
+                    row += char
+                else:
+                    row += " "
+            result.append(row)
+        return "\n".join(result)
 
 class Scene:
     def __init__(self) -> None:

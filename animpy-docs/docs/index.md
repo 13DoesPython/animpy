@@ -6,11 +6,7 @@ Animpy is a terminal animation library for Python. It makes it easy to animate t
 
 - **PhysicsScene**: apply gravity, friction, bounce, angular motion, and directional forces.
 - **EffectText**: built-in text effects such as shaking, gravity fall, decay, fade-out, smoothing, and pulsing.
-- **InteractiveScene**: real-time keyboard and mouse input with callbacks, quick exit helpers, and boundary limiting.
-- **Particles**: burst, emit, lifetime, and velocity-based particle effects.
 - **Shapes**: create text-based rectangles, circles, and polygons.
-- **Groups**: group text objects and change them together.
-- **Audio**: load sound, play tracks, stop, volume control, and timed playback.
 
 ## Install
 
@@ -146,6 +142,10 @@ Particle methods:
 rect = animpy.Shapes.rectangle(20, 5, "#")
 circle = animpy.Shapes.circle(4, "*")
 poly = animpy.Shapes.polygon([(0,0), (5,0), (3,4)], "*")
+line = animpy.Shapes.line(0, 0, 20, 10, "-")
+heart = animpy.Shapes.heart(5, "♥")
+triangle = animpy.Shapes.triangle(0, 0, 10, 0, 5, 5, "^")
+ellipse = animpy.Shapes.ellipse(10, 5, 8, 4, "o")
 ```
 
 ### Groups
