@@ -743,11 +743,7 @@
 <ul>
 <li><strong>PhysicsScene</strong>: apply gravity, friction, bounce, angular motion, and directional forces.</li>
 <li><strong>EffectText</strong>: built-in text effects such as shaking, gravity fall, decay, fade-out, smoothing, and pulsing.</li>
-<li><strong>InteractiveScene</strong>: real-time keyboard and mouse input with callbacks, quick exit helpers, and boundary limiting.</li>
-<li><strong>Particles</strong>: burst, emit, lifetime, and velocity-based particle effects.</li>
 <li><strong>Shapes</strong>: create text-based rectangles, circles, and polygons.</li>
-<li><strong>Groups</strong>: group text objects and change them together.</li>
-<li><strong>Audio</strong>: load sound, play tracks, stop, volume control, and timed playback.</li>
 </ul>
 <h2 id="install">Install</h2>
 <pre><code class="language-bash">pip install animpy
@@ -856,6 +852,10 @@ particle.burst(scene, count=20, speed=2.0)
 <pre><code class="language-python">rect = animpy.Shapes.rectangle(20, 5, &quot;#&quot;)
 circle = animpy.Shapes.circle(4, &quot;*&quot;)
 poly = animpy.Shapes.polygon([(0,0), (5,0), (3,4)], &quot;*&quot;)
+line = animpy.Shapes.line(0, 0, 20, 10, &quot;-&quot;)
+heart = animpy.Shapes.heart(5, &quot;♥&quot;)
+triangle = animpy.Shapes.triangle(0, 0, 10, 0, 5, 5, &quot;^&quot;)
+ellipse = animpy.Shapes.ellipse(10, 5, 8, 4, &quot;o&quot;)
 </code></pre>
 <h3 id="groups">Groups</h3>
 <p><code>Group</code> gathers multiple text objects so they can move and change together.</p>

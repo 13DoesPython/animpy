@@ -1,6 +1,6 @@
 import os
 import time
-from animpy.animpy import PhysicsScene, EffectText, Text, Shapes
+from animpy import PhysicsScene, EffectText, Text, Shapes
 
 
 def run_physics_scene_demo(duration_seconds: float = 10.0) -> None:

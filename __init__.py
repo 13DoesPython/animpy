@@ -1,2 +1,2 @@
-from animpy.animpy import *
+from .core import *
 
