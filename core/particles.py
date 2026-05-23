@@ -47,6 +47,28 @@ class Particle:
         self.g = g
         self.b = b
 
+    def set_velocity(self, vx, vy):
+        self.velocity_x = vx
+        self.velocity_y = vy
+
+    def apply_force(self, fx, fy):
+        self.velocity_x += fx
+        self.velocity_y += fy
+
+    def set_color(self, r, g, b):
+        self.change_rgb_values(r, g, b)
+
+    def reset(self, x, y, lifetime=None):
+        self.x = x
+        self.y = y
+        self.age = 0.0
+        if lifetime is not None:
+            self.lifetime = lifetime
+        self.particles.clear()
+
+    def is_alive(self):
+        return self.age < self.lifetime
+
     def update_all(self, delta_time):
         for particle in self.particles[:]:
             if not particle.update(delta_time):

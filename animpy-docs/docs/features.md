@@ -178,3 +178,18 @@ path.follow_path(text, speed=1)
 - [API Reference](api.md)
 - [Home](index.md)
 
+## v2.2.0 - New helper methods
+
+- `Coords.distance_to(other)`, `Coords.offset(dx,dy)`
+- `Keyframe.set_pos(pos)`, `Keyframe.distance_to(other)`
+- `KeyChains.append()`, `KeyChains.clear()`, `KeyChains.reverse_path()`, `KeyChains.is_complete`
+- `Audio.pause(name)`, `Audio.resume(name)`, `Audio.fade_in(name,duration)`, `Audio.fade_out(name,duration)`
+- `Group.clear()`, `Group.contains(item)`, `Group.find_by_color(r,g,b)`
+- `Particle.set_velocity(vx,vy)`, `Particle.apply_force(fx,fy)`, `Particle.set_color(r,g,b)`, `Particle.reset(x,y,lifetime=None)`, `Particle.is_alive()`
+- `Scene.clear_items()`, `Scene.count_items()`, `Scene.find_items_at(x,y)`
+- `PhysicsScene.set_floor(value)`, `PhysicsScene.set_gravity(value)`, `PhysicsScene.apply_wind(obj,wind_x)`
+- `InteractiveScene.bind_key(key,callback)`, `InteractiveScene.bind_mouse(button,callback)`, `InteractiveScene.set_wall(value)`, `InteractiveScene.set_floor_ceiling(value)`, `InteractiveScene.is_inside_bounds(obj)`
+- `Shapes.square(size,char)`, `Shapes.donut(outer,inner,char)`
+- `Text.set_frame()`, `Text.set_text()`, `Text.set_position()`, `Text.move_to()`, `Text.set_color()`, `Text.type_out()`, `Text.fall()`
+- `EffectText.set_velocity()`, `EffectText.reset_velocity()`, `EffectText.apply_force()`, `EffectText.fade_in_text()`
+

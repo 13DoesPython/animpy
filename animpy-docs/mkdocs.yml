@@ -1,4 +1,4 @@
-site_name: Animpy Official documentation
+site_name: Animpy Official documentation (v2.5.0)
 docs_dir: 'docs'
 theme:
   name: material

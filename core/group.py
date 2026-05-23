@@ -10,6 +10,15 @@ class Group:
             if item in self.items:
                 self.items.remove(item)
 
+    def clear(self):
+        self.items.clear()
+
+    def contains(self, item):
+        return item in self.items
+
+    def find_by_color(self, r, g, b):
+        return [item for item in self.items if getattr(item, 'r', None) == r and getattr(item, 'g', None) == g and getattr(item, 'b', None) == b]
+
     def position(self, newx, newy):
         for item in self.items:
             item.x += newx

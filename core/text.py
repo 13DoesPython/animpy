@@ -1,5 +1,6 @@
 import math
 import os
+import time
 from .utils import terminal_size, lerp
 
 class Text:
@@ -15,6 +16,44 @@ class Text:
     def change_frame(self):
         self.current_frame_idx = (self.current_frame_idx + 1) % len(self.frames)
         self.text = self.frames[self.current_frame_idx]
+
+    @property
+    def current_frame(self):
+        return self.current_frame_idx
+
+    def set_frame(self, index: int):
+        if 0 <= index < len(self.frames):
+            self.current_frame_idx = index
+            self.text = self.frames[self.current_frame_idx]
+
+    def set_text(self, text):
+        self.frames = text if isinstance(text, list) else [text]
+        self.current_frame_idx = 0
+        self.text = self.frames[0]
+
+    def set_position(self, x, y):
+        self.x = x
+        self.y = y
+
+    def move_to(self, x, y):
+        self.set_position(x, y)
+
+    def set_color(self, r, g, b):
+        self.change_rgb_values(r, g, b)
+
+    def type_out(self, text, speed=0.05, scene=None):
+        self.text = ""
+        for char in text:
+            self.text += char
+            if scene is not None:
+                scene.render()
+            time.sleep(speed)
+
+    def fall(self, velocity, floor):
+        if self.y < floor:
+            self.y += velocity
+        else:
+            self.y = floor
 
     def moveX(self, newX: int) -> None:
         self.x += newX
@@ -46,14 +85,10 @@ class Text:
 
     @property
     def width(self):
-        if isinstance(self.text, list):
-            return len(self.text[self.current_frame])
         return len(self.text)
 
     @property
     def height(self):
-        if isinstance(self.text, list):
-            return len(self.text[self.current_frame].split("\n"))
         return len(self.text.split("\n"))
 
     def collides_with(self, other):
@@ -113,3 +148,20 @@ class EffectText(Text):
     def pulse_text(self, time, pulse_rate=0.5):
         pulse_amount = int(128 * (1 + math.sin(2 * math.pi * time / pulse_rate)) / 2)
         self.change_rgb_values(pulse_amount, pulse_amount, pulse_amount)
+
+    def set_velocity(self, vx, vy):
+        self.velocity_x = vx
+        self.velocity_y = vy
+
+    def reset_velocity(self):
+        self.velocity_x = 0.0
+        self.velocity_y = 0.0
+
+    def apply_force(self, fx, fy):
+        self.velocity_x += fx
+        self.velocity_y += fy
+
+    def fade_in_text(self, time, fade_rate=0.1):
+        if time < fade_rate:
+            fade_amount = int(255 * (time / fade_rate))
+            self.change_rgb_values(fade_amount, fade_amount, fade_amount)

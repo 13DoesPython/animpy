@@ -113,6 +113,15 @@ class Scene:
     def clear(self):
         print("\033[2J\033[H")
 
+    def clear_items(self):
+        self.items.clear()
+
+    def count_items(self):
+        return len(self.items)
+
+    def find_items_at(self, x, y):
+        return [item for item in self.items if round(item.x) == x and round(item.y) == y]
+
 class PhysicsScene(Scene):
     def __init__(self):
         super().__init__()

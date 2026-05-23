@@ -4,6 +4,7 @@ Animpy is a terminal animation library for Python. It makes it easy to animate t
 
 ## What’s new in Animpy
 
+- **v2.5.0**: small helpers and stability fixes — new `Coords` helpers, audio fade/pause, scene/particle/group utilities, shapes `square` and `donut`, and text convenience setters.
 - **PhysicsScene**: apply gravity, friction, bounce, angular motion, and directional forces.
 - **EffectText**: built-in text effects such as shaking, gravity fall, decay, fade-out, smoothing, and pulsing.
 - **Shapes**: create text-based rectangles, circles, and polygons.

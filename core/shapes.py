@@ -91,3 +91,21 @@ class Shapes:
                     row += " "
             result.append(row)
         return "\n".join(result)
+
+    @staticmethod
+    def square(size, char="#"):
+        return Shapes.rectangle(size, size, char)
+
+    @staticmethod
+    def donut(outer_radius, inner_radius, char="#"):
+        result = []
+        for y in range(-outer_radius, outer_radius + 1):
+            row = ""
+            for x in range(-outer_radius, outer_radius + 1):
+                dist = x**2 + y**2
+                if inner_radius**2 < dist <= outer_radius**2:
+                    row += char
+                else:
+                    row += " "
+            result.append(row)
+        return "\n".join(result)

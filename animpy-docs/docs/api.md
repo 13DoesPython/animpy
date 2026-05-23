@@ -15,6 +15,13 @@
 - `fall(velocity, floor)`
 - `change_frame()`
 - `width`, `height`
+ - `set_frame(index)`
+ - `set_text(text)`
+ - `set_position(x,y)`
+ - `move_to(x,y)`
+ - `set_color(r,g,b)`
+ - `type_out(text, speed=0.05, scene=None)`
+ - `fall(velocity, floor)`
 
 ### EffectText
 
@@ -26,6 +33,10 @@ Extends `Text` and adds:
 - `fade_out_text(time, fade_rate=0.1)`
 - `lerp_text(target_x, target_y, t)`
 - `pulse_text(time, pulse_rate=0.5)`
+ - `set_velocity(vx, vy)`
+ - `reset_velocity()`
+ - `apply_force(fx, fy)`
+ - `fade_in_text(time, fade_rate=0.1)`
 
 ### Particle
 
@@ -36,6 +47,11 @@ Extends `Text` and adds:
 - `is_dead()`
 - `change_rgb_values(r, g, b)`
 - `velocity_x`, `velocity_y`
+ - `set_velocity(vx, vy)`
+ - `apply_force(fx, fy)`
+ - `set_color(r,g,b)`
+ - `reset(x,y,lifetime=None)`
+ - `is_alive()`
 
 ### Group
 
@@ -45,6 +61,9 @@ Extends `Text` and adds:
 - `position(dx, dy)`
 - `change_rgb_values(r, g, b)`
 - `change_rgb_values_one(item, r, g, b)`
+ - `clear()`
+ - `contains(item)`
+ - `find_by_color(r,g,b)`
 
 ### Coords
 
@@ -58,6 +77,7 @@ Stores target positions for path animation.
 
 - `Keychains(*keyframes)`
 - `follow_path(obj, speed=1)`
+ - `append(keyframe)`, `clear()`, `reverse_path()`, `is_complete`
 
 ## Shapes
 - `Shapes.rectangle(width, height, char="#")`
@@ -79,6 +99,9 @@ Stores target positions for path animation.
 - `clear()`
 - `shake(intensity=2)`
 - `dt`
+ - `clear_items()`
+ - `count_items()`
+ - `find_items_at(x,y)`
 
 ### PhysicsScene
 
@@ -89,6 +112,7 @@ Stores target positions for path animation.
 - `apply_physics(obj)`
 - `angular_motion(obj, angle, speed)`
 - `push(obj, force_x, force_y)`
+ - `set_floor(value)`, `set_gravity(value)`, `apply_wind(obj, wind_x)`
 
 ### InteractiveScene
 
@@ -107,6 +131,10 @@ Stores target positions for path animation.
 - `quick_exit(key="esc")`
 - `quick_exit_callback(key, callback)`
 - `wall`, `floor_ceiling`
+ - `bind_key(key, callback)`
+ - `bind_mouse(button, callback)`
+ - `set_wall(value)`, `set_floor_ceiling(value)`
+ - `is_inside_bounds(obj)`
 
 ### Audio
 
@@ -118,6 +146,7 @@ Stores target positions for path animation.
 - `set_volume(name, volume)`
 - `is_playing(name)`
 - `play_for_time(name, duration=5.0)`
+ - `pause(name)`, `resume(name)`, `fade_in(name,duration)`, `fade_out(name,duration)`
 
 ## Utility functions
 

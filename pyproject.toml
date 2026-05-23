@@ -1,6 +1,6 @@
 [project]
 name = "animpy"
-version = "2.1.1"
+version = "2.5.0"
 description = "A simple terminal animation library"
 authors = [
   {name = "Samin Riyaz"}
