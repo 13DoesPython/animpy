@@ -23,7 +23,7 @@
     
     
       
-        <title>Features - Animpy Official documentation</title>
+        <title>Features - Animpy Official documentation (v2.5.0)</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Animpy Official documentation" class="md-header__button md-logo" aria-label="Animpy Official documentation" data-md-component="logo">
+    <a href=".." title="Animpy Official documentation (v2.5.0)" class="md-header__button md-logo" aria-label="Animpy Official documentation (v2.5.0)" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -104,7 +104,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Animpy Official documentation
+            Animpy Official documentation (v2.5.0)
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -200,13 +200,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Animpy Official documentation" class="md-nav__button md-logo" aria-label="Animpy Official documentation" data-md-component="logo">
+    <a href=".." title="Animpy Official documentation (v2.5.0)" class="md-nav__button md-logo" aria-label="Animpy Official documentation (v2.5.0)" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Animpy Official documentation
+    Animpy Official documentation (v2.5.0)
   </label>
   
     <div class="md-nav__source">
@@ -437,6 +437,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Shapes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v250-additions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v2.5.0 additions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -540,6 +557,33 @@
     
   
     API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
   
 
     
@@ -698,6 +742,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Shapes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v250-additions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v2.5.0 additions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -897,6 +958,18 @@ particle.burst(scene, count=20, speed=2.0)
 <li><code>Shapes.heart(size, char)</code></li>
 <li><code>Shapes.triangle(x1, y1, x2, y2, x3, y3, char)</code></li>
 <li>`Shapes.ellipse(center_x, center_y, radius_x, radius_y, char)</li>
+</ul>
+<h3 id="v250-additions">v2.5.0 additions</h3>
+<ul>
+<li><code>Shapes.square(size,char)</code> — quick filled square builder</li>
+<li><code>Shapes.donut(outer,inner,char)</code> — ring/donut shape builder</li>
+<li><code>Coords.distance_to(other)</code> / <code>Coords.offset(dx,dy)</code></li>
+<li><code>Keyframe</code> / <code>Keychains</code> helpers for path animation (<code>append</code>, <code>clear</code>, <code>reverse_path</code>, <code>is_complete</code>)</li>
+<li>Audio: <code>pause</code>, <code>resume</code>, <code>fade_in</code>, <code>fade_out</code></li>
+<li>Group utilities: <code>clear</code>, <code>contains</code>, <code>find_by_color</code></li>
+<li>Particle utilities: <code>set_velocity</code>, <code>apply_force</code>, <code>set_color</code>, <code>reset</code>, <code>is_alive</code></li>
+<li>Scene utilities: <code>clear_items</code>, <code>count_items</code>, <code>find_items_at</code>, <code>set_gravity</code>, <code>apply_wind</code></li>
+<li>Text convenience setters: <code>set_frame</code>, <code>set_text</code>, <code>set_position</code>, <code>move_to</code>, <code>set_color</code>, plus <code>type_out</code> and <code>fall</code></li>
 </ul>
 <h2 id="groups">Groups</h2>
 <p>Group multiple text objects so they move and update together.</p>
