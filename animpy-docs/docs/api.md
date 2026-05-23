@@ -23,6 +23,27 @@
  - `type_out(text, speed=0.05, scene=None)`
  - `fall(velocity, floor)`
 
+### Coords
+
+- `Coords(x, y)` — simple coordinate holder
+- `distance_to(other)` — Euclidean distance to another `Coords`
+- `offset(dx, dy)` — return a new `Coords` offset by dx/dy
+
+### Keyframe
+
+- `Keyframe(pos)` — stores a `Coords` target
+- `set_pos(pos)` — set the keyframe target position
+- `distance_to(other)` — distance between keyframes
+
+### Keychains
+
+- `Keychains(*keyframes)` — container of `Keyframe` objects
+- `follow_path(obj, speed=1)` — move `obj` along the keyframes
+- `append(keyframe)` — add a keyframe to the chain
+- `clear()` — remove all keyframes
+- `reverse_path()` — reverse the path order
+- `is_complete` — property indicating completion
+
 ### EffectText
 
 Extends `Text` and adds:
@@ -87,6 +108,8 @@ Stores target positions for path animation.
 - `Shapes.heart(size, char="♥")`
 - `Shapes.triangle(x1, y1, x2, y2, x3, y3, char="^")`
 - `Shapes.ellipse(center_x, center_y, radius_x, radius_y, char="o")`
+ - `Shapes.square(size, char="#")` — build a filled square
+ - `Shapes.donut(outer, inner, char="#")` — build a ring shape
 
 ### Scene
 

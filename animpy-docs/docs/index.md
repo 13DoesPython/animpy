@@ -15,6 +15,14 @@ Animpy is a terminal animation library for Python. It makes it easy to animate t
 pip install animpy
 ```
 
+To install the v2.5.0 release specifically:
+
+```bash
+pip install animpy==2.5.0
+```
+
+See the [release notes](release-notes.md) for full details on changes in v2.5.0.
+
 ## Quick Start
 
 ```python

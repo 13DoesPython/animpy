@@ -1,0 +1,1057 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../features/">
+      
+      
+        <link rel="next" href="../release-notes/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>API Reference - Animpy Official documentation (v2.5.0)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Animpy Official documentation (v2.5.0)" class="md-header__button md-logo" aria-label="Animpy Official documentation (v2.5.0)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Animpy Official documentation (v2.5.0)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/13DoesPython/animpy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Animpy Official documentation (v2.5.0)" class="md-nav__button md-logo" aria-label="Animpy Official documentation (v2.5.0)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Animpy Official documentation (v2.5.0)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/13DoesPython/animpy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coords" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coords
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keyframe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keychains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keychains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#effecttext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EffectText
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#particle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Particle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coords_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coords
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyframe_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keyframe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keychains_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keychains
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shapes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shapes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#physicsscene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PhysicsScene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactivescene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InteractiveScene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Audio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utility-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Utility functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coords" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coords
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keyframe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keychains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keychains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#effecttext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EffectText
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#particle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Particle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coords_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coords
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyframe_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keyframe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keychains_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keychains
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shapes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shapes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#physicsscene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PhysicsScene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactivescene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InteractiveScene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Audio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utility-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Utility functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="api-reference">API Reference</h1>
+<h2 id="classes">Classes</h2>
+<h3 id="text">Text</h3>
+<ul>
+<li><code>Text(text, x, y, r=255, g=255, b=255, z_index=0)</code></li>
+<li><code>moveX(value)</code></li>
+<li><code>moveY(value)</code></li>
+<li><code>centerX()</code></li>
+<li><code>change_rgb_values(r, g, b)</code></li>
+<li><code>collides_with(other)</code></li>
+<li><code>on_collide_callback(other, callback)</code></li>
+<li><code>type_out(text, speed, scene)</code></li>
+<li><code>fall(velocity, floor)</code></li>
+<li><code>change_frame()</code></li>
+<li><code>width</code>, <code>height</code></li>
+<li><code>set_frame(index)</code></li>
+<li><code>set_text(text)</code></li>
+<li><code>set_position(x,y)</code></li>
+<li><code>move_to(x,y)</code></li>
+<li><code>set_color(r,g,b)</code></li>
+<li><code>type_out(text, speed=0.05, scene=None)</code></li>
+<li><code>fall(velocity, floor)</code></li>
+</ul>
+<h3 id="coords">Coords</h3>
+<ul>
+<li><code>Coords(x, y)</code> — simple coordinate holder</li>
+<li><code>distance_to(other)</code> — Euclidean distance to another <code>Coords</code></li>
+<li><code>offset(dx, dy)</code> — return a new <code>Coords</code> offset by dx/dy</li>
+</ul>
+<h3 id="keyframe">Keyframe</h3>
+<ul>
+<li><code>Keyframe(pos)</code> — stores a <code>Coords</code> target</li>
+<li><code>set_pos(pos)</code> — set the keyframe target position</li>
+<li><code>distance_to(other)</code> — distance between keyframes</li>
+</ul>
+<h3 id="keychains">Keychains</h3>
+<ul>
+<li><code>Keychains(*keyframes)</code> — container of <code>Keyframe</code> objects</li>
+<li><code>follow_path(obj, speed=1)</code> — move <code>obj</code> along the keyframes</li>
+<li><code>append(keyframe)</code> — add a keyframe to the chain</li>
+<li><code>clear()</code> — remove all keyframes</li>
+<li><code>reverse_path()</code> — reverse the path order</li>
+<li><code>is_complete</code> — property indicating completion</li>
+</ul>
+<h3 id="effecttext">EffectText</h3>
+<p>Extends <code>Text</code> and adds:</p>
+<ul>
+<li><code>gravity_text(floor=20, gravity=0.5)</code></li>
+<li><code>shaking_text(intensity=1)</code></li>
+<li><code>decaying_text(time, decay_rate=0.1)</code></li>
+<li><code>fade_out_text(time, fade_rate=0.1)</code></li>
+<li><code>lerp_text(target_x, target_y, t)</code></li>
+<li><code>pulse_text(time, pulse_rate=0.5)</code></li>
+<li><code>set_velocity(vx, vy)</code></li>
+<li><code>reset_velocity()</code></li>
+<li><code>apply_force(fx, fy)</code></li>
+<li><code>fade_in_text(time, fade_rate=0.1)</code></li>
+</ul>
+<h3 id="particle">Particle</h3>
+<ul>
+<li><code>Particle(text, x, y, r=255, g=255, b=255, lifetime=3.0)</code></li>
+<li><code>burst(scene, count=20, speed=2.0)</code></li>
+<li><code>emit(scene)</code></li>
+<li><code>update_all(delta_time)</code></li>
+<li><code>is_dead()</code></li>
+<li><code>change_rgb_values(r, g, b)</code></li>
+<li><code>velocity_x</code>, <code>velocity_y</code></li>
+<li><code>set_velocity(vx, vy)</code></li>
+<li><code>apply_force(fx, fy)</code></li>
+<li><code>set_color(r,g,b)</code></li>
+<li><code>reset(x,y,lifetime=None)</code></li>
+<li><code>is_alive()</code></li>
+</ul>
+<h3 id="group">Group</h3>
+<ul>
+<li><code>Group(*items)</code></li>
+<li><code>add(item)</code></li>
+<li><code>remove(item)</code></li>
+<li><code>position(dx, dy)</code></li>
+<li><code>change_rgb_values(r, g, b)</code></li>
+<li><code>change_rgb_values_one(item, r, g, b)</code></li>
+<li><code>clear()</code></li>
+<li><code>contains(item)</code></li>
+<li><code>find_by_color(r,g,b)</code></li>
+</ul>
+<h3 id="coords_1">Coords</h3>
+<p>Helper class for keyframe paths.</p>
+<h3 id="keyframe_1">Keyframe</h3>
+<p>Stores target positions for path animation.</p>
+<h3 id="keychains_1">Keychains</h3>
+<ul>
+<li><code>Keychains(*keyframes)</code></li>
+<li><code>follow_path(obj, speed=1)</code></li>
+<li><code>append(keyframe)</code>, <code>clear()</code>, <code>reverse_path()</code>, <code>is_complete</code></li>
+</ul>
+<h2 id="shapes">Shapes</h2>
+<ul>
+<li><code>Shapes.rectangle(width, height, char="#")</code></li>
+<li><code>Shapes.circle(radius, char="*")</code></li>
+<li><code>Shapes.polygon(points, char="*")</code></li>
+<li><code>Shapes.line(x1, y1, x2, y2, char="-")</code></li>
+<li><code>Shapes.heart(size, char="♥")</code></li>
+<li><code>Shapes.triangle(x1, y1, x2, y2, x3, y3, char="^")</code></li>
+<li><code>Shapes.ellipse(center_x, center_y, radius_x, radius_y, char="o")</code></li>
+<li><code>Shapes.square(size, char="#")</code> — build a filled square</li>
+<li><code>Shapes.donut(outer, inner, char="#")</code> — build a ring shape</li>
+</ul>
+<h3 id="scene">Scene</h3>
+<ul>
+<li><code>Scene()</code></li>
+<li><code>add(*items)</code></li>
+<li><code>remove(item)</code></li>
+<li><code>render()</code></li>
+<li><code>update(delta_time)</code></li>
+<li><code>set_bg_rgb(r, g, b)</code></li>
+<li><code>clear()</code></li>
+<li><code>shake(intensity=2)</code></li>
+<li><code>dt</code></li>
+<li><code>clear_items()</code></li>
+<li><code>count_items()</code></li>
+<li><code>find_items_at(x,y)</code></li>
+</ul>
+<h3 id="physicsscene">PhysicsScene</h3>
+<ul>
+<li><code>PhysicsScene()</code></li>
+<li><code>apply_gravity(obj)</code></li>
+<li><code>apply_friction(obj, friction=0.1)</code></li>
+<li><code>bounce(obj, bounce_factor=0.5)</code></li>
+<li><code>apply_physics(obj)</code></li>
+<li><code>angular_motion(obj, angle, speed)</code></li>
+<li><code>push(obj, force_x, force_y)</code></li>
+<li><code>set_floor(value)</code>, <code>set_gravity(value)</code>, <code>apply_wind(obj, wind_x)</code></li>
+</ul>
+<h3 id="interactivescene">InteractiveScene</h3>
+<ul>
+<li><code>InteractiveScene()</code></li>
+<li><code>key_pressed(key)</code></li>
+<li><code>key_released(key)</code></li>
+<li><code>on_key_press_callback(key, callback)</code></li>
+<li><code>on_key_release_callback(key, callback)</code></li>
+<li><code>mouse_pressed(button="left")</code></li>
+<li><code>mouse_position()</code></li>
+<li><code>on_mouse_press_callback(button, callback)</code></li>
+<li><code>mouse_release(button, callback)</code></li>
+<li><code>mouse_release_callback(button, callback)</code></li>
+<li><code>limit_to_bounds(obj)</code></li>
+<li><code>limit_group_to_bounds(group)</code></li>
+<li><code>quick_exit(key="esc")</code></li>
+<li><code>quick_exit_callback(key, callback)</code></li>
+<li><code>wall</code>, <code>floor_ceiling</code></li>
+<li><code>bind_key(key, callback)</code></li>
+<li><code>bind_mouse(button, callback)</code></li>
+<li><code>set_wall(value)</code>, <code>set_floor_ceiling(value)</code></li>
+<li><code>is_inside_bounds(obj)</code></li>
+</ul>
+<h3 id="audio">Audio</h3>
+<ul>
+<li><code>Audio()</code></li>
+<li><code>load(name, path)</code></li>
+<li><code>play(name, loop=0)</code></li>
+<li><code>stop(name)</code></li>
+<li><code>stop_all()</code></li>
+<li><code>set_volume(name, volume)</code></li>
+<li><code>is_playing(name)</code></li>
+<li><code>play_for_time(name, duration=5.0)</code></li>
+<li><code>pause(name)</code>, <code>resume(name)</code>, <code>fade_in(name,duration)</code>, <code>fade_out(name,duration)</code></li>
+</ul>
+<h2 id="utility-functions">Utility functions</h2>
+<ul>
+<li><code>lerp(start, end, t)</code></li>
+<li><code>hide_cursor()</code></li>
+<li><code>show_cursor()</code></li>
+<li><code>clear_screen()</code></li>
+<li><code>print_centered(text)</code></li>
+<li><code>print_with_color(text, r, g, b)</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

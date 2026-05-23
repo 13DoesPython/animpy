@@ -194,6 +194,21 @@ animpy.print_with_color("Colored Text", r=255, g=0, b=0)
 
 ## Version History
 
+## v2.5.0
+- Release bump to `v2.5.0` — consolidation release that adds small helpers and improves stability.
+
+- Highlights and added helpers:
+    - `Coords`: `distance_to(other)`, `offset(dx, dy)` — easy coordinate math return new `Coords`.
+    - `Keyframe` / `KeyChains`: `Keyframe.set_pos(pos)`, `Keyframe.distance_to(other)`; `KeyChains.append(keyframe)`, `clear()`, `reverse_path()`, `is_complete` — path composition and inspection.
+    - `Audio`: `pause(name)`, `resume(name)`, `fade_in(name, duration)`, `fade_out(name, duration)` — smoother playback controls.
+    - `Group`: `clear()`, `contains(item)`, `find_by_color(r,g,b)` — group management and querying.
+    - `Particle`: `set_velocity(vx,vy)`, `apply_force(fx,fy)`, `set_color(r,g,b)`, `reset(x,y,lifetime=None)`, `is_alive()` — runtime control for particle systems.
+    - `Scene` / `PhysicsScene`: `clear_items()`, `count_items()`, `find_items_at(x,y)`, `set_gravity(g)`, `apply_wind(obj, wind_x)`, plus floor/wall helpers and `bind_key`/`bind_mouse` for callbacks.
+    - `Shapes`: added `square(size,char)` and `donut(outer,inner,char)`, and fixed newline handling across shape builders.
+    - `Text` / `EffectText`: convenience setters `set_frame`, `set_text`, `set_position`, `move_to`, `set_color`, plus `type_out(text,speed,scene)` and `fall(velocity,floor)`. `EffectText` also exposes `set_velocity`, `reset_velocity`, `apply_force`, and `fade_in_text(time,fade_rate)`.
+
+For full method list see the API reference and release notes in the docs.
+
 ## v2.1.0
 - Added 4 new shapes to `Shapes` class:
     - `line(x1, y1, x2, y2, char)` for creating a line shape
@@ -204,32 +219,6 @@ animpy.print_with_color("Colored Text", r=255, g=0, b=0)
     - `clear_screen()` for clearing the terminal screen
     - `print_centered(text)` for printing text centered in the terminal
     - `print_with_color(text, r, g, b)` for printing text with custom RGB colors
-
-## v2.2.0
-- Added utility helpers across core classes to simplify usage:
-    - `Coords.distance_to(other)` — compute Euclidean distance to another `Coords`
-    - `Coords.offset(dx, dy)` — return offset coordinates
-    - `Keyframe.set_pos(pos)` and `Keyframe.distance_to(other)`
-    - `KeyChains.append(keyframe)`, `clear()`, `reverse_path()`, `is_complete` property
-    - `Audio.pause(name)`, `resume(name)`, `fade_in(name, duration)`, `fade_out(name, duration)`
-    - `Group.clear()`, `contains(item)`, `find_by_color(r,g,b)`
-    - `Particle.set_velocity(vx,vy)`, `apply_force(fx,fy)`, `set_color(r,g,b)`, `reset(x,y,lifetime)`, `is_alive()`
-    - `Scene.clear_items()`, `count_items()`, `find_items_at(x,y)`, `set_gravity(g)`, `apply_wind(obj, wind_x)`, `bind_key(key,callback)`, `bind_mouse(button,callback)`, `set_wall(value)`, `set_floor_ceiling(value)`, `is_inside_bounds(obj)`
-    - `Shapes.square(size,char)` and `Shapes.donut(outer,inner,char)`
-    - `Text` convenience methods: `set_frame`, `set_text`, `set_position`, `move_to`, `set_color`, `type_out(text,speed,scene)`, `fall(velocity,floor)`
-    - `EffectText` helpers: `set_velocity`, `reset_velocity`, `apply_force`, `fade_in_text(time,fade_rate)`
-
-## v2.5.0
-- Release bump to `v2.5.0` — consolidation release that adds small helpers and improves stability.
-
-- Highlights:
-    - Added convenience helpers on core types (`Coords`, `Keyframe`, `KeyChains`) for easier path math and manipulation.
-    - Audio gained pause/resume and fade helpers for smoother sound control.
-    - Group, Particle, and Scene classes received utility methods for clearing, querying, and force application.
-    - Shapes expanded with `square` and `donut` builders and corrected newline handling.
-    - Text and EffectText now include convenient setters (`set_text`, `set_frame`, `set_position`) and velocity/force helpers.
-
-For full method list see the API reference and release notes in the docs.
 
 ## v2.0.0
 - Added new `PhysicsScene` class for gravity, friction, bounce, and force-driven motion
